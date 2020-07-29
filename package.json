@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "file-saver": "^2.0.2",
     "nuxt": "^2.14.0",
     "nuxt-vue-select": "^0.1.4",
     "vue-select": "^3.10.7"
