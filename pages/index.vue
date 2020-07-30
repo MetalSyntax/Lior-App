@@ -1,28 +1,28 @@
 <template>
   <main class="container flex items-center flex-wrap w-full my-0 mx-auto">
-    <form class="flex flex-wrap justify-center w-full max-w-5xl my-0 mx-auto">
-      <div class="flex flex-wrap w-full mx-3 my-6">
-        <section class="w-full lg:w-full px-3 my-2 lg:my-3">
-          <label
-            class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
-            for="grid-code"
-          >Ingrese su codigo de cliente</label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-900 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-            id="grid-code"
-            type="text"
-            maxlength="7"
-            placeholder="Codigo del cliente"
-            v-model="customers.code"
-          />
-          <!--<span class="block w-full text-gray-900 text-center">Hola!, {{ customers.code }}</span>-->
-        </section>
-        <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
-          <label
-            class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
-            for="grid-product"
-          >Seleccione un producto</label>
-          <!--<select
+    <form class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto">
+      <section class="w-full lg:w-full px-3 my-2 lg:my-3">
+        <label
+          class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
+          for="grid-code"
+        >Ingrese su codigo de cliente</label>
+        <input
+          class="appearance-none block w-full bg-gray-200 text-gray-900 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+          id="grid-code"
+          name="customers.name"
+          type="text"
+          maxlength="7"
+          placeholder="Codigo del cliente"
+          v-model="customers.code"
+        />
+        <!--<span v-if="customers.code" class="block w-full text-gray-900 text-center">Hola!, {{ customers.name }}</span>-->
+      </section>
+      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
+        <label
+          class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
+          for="grid-product"
+        >Seleccione un producto</label>
+        <!--<select
             class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-product"
             name="product"
@@ -30,74 +30,98 @@
             <option selected="selected" disabled="disabled">Nombre del producto</option>
             <option>Pre - Coco 240ML</option>
             <option>Post - Coco 240 ML</option>
-          </select>-->
-          <v-select
-            class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            v-model="products.price"
-            :options="products"
-            :reduce="products => products.price"
-            :value="products.name"
-            label="name"
-            placeholder="Nombre del producto"
-          ></v-select>
-        </section>
-        <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
-          <label
-            class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
-            for="grid-code"
-          >Ingrese la cantidad de los productos</label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-900 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-            id="grid-quantity"
-            type="number"
-            placeholder="Cantidad"
-            maxlength="4"
-            min="1"
-            max="9999"
-            value="0"
-            v-model="quantity"
-          />
-        </section>
-        <section class="w-full lg:w-full px-3 my-2 lg:my-3">
-          <label
-            class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
-            for="grid-code"
-          >Resumen parcial</label>
-          <div
-            class="appearance-none block w-full bg-gray-200 text-gray-500 border rounded py-3 px-4 leading-tight"
-          >
-            <p>Precio unitario:</p>
-            <span
+        </select>-->
+        <v-select
+          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          v-model="products.price"
+          :options="products"
+          :reduce="products => products.price"
+          :value="products.name"
+          label="name"
+          placeholder="Nombre del producto"
+        ></v-select>
+      </section>
+      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
+        <label
+          class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
+          for="grid-code"
+        >Ingrese la cantidad de los productos</label>
+        <input
+          class="appearance-none block w-full bg-gray-200 text-gray-900 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+          id="grid-quantity"
+          type="number"
+          placeholder="Cantidad"
+          maxlength="4"
+          min="1"
+          max="9999"
+          value="0"
+          v-model="quantity"
+        />
+      </section>
+      <section class="w-full lg:w-full px-3 my-2 lg:my-3">
+        <label
+          class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
+          for="grid-code"
+        >Resumen parcial</label>
+        <div
+          class="appearance-none block w-full bg-gray-200 text-gray-500 border rounded py-3 px-4 leading-tight"
+        >
+          <p>Precio unitario:</p>
+          <span
             v-if="products.price > 0"
-            class="priceProduct text-xl text-gray-700">
-              {{ products.price }}$
-            </span>
-            <span
-            v-else
-            class="priceProduct text-gray-700">
-             No hay valor del producto
-            </span>
-            <br />
-            <p>Precio Total:</p>
-            <span
-              v-if="products.price > 0"
-              class="totalProducts text-xl text-gray-700">
-              {{products.price * quantity}}$
-            </span>
-            <span
-              v-else
-              class="totalProducts text-gray-700">
-              No hay un producto seleccionado
-            </span>
-          </div>
-        </section>
-      </div>
+            class="priceProduct text-lg text-gray-700"
+          >{{ products.price }}$</span>
+          <span v-else class="priceProduct text-gray-700">No hay valor del producto</span>
+          <br />
+          <p>Precio Total:</p>
+          <span
+            v-if="products.price > 0"
+            class="totalProducts text-lg text-gray-700"
+          >{{products.price * quantity}}$</span>
+          <span v-else class="totalProducts text-gray-700">No hay un producto seleccionado</span>
+        </div>
+      </section>
+      <section class="flex w-full lg:w-full px-3 my-2 lg:my-3 justify-center">
+        <button
+          class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded"
+        >Agregar producto</button>
+      </section>
     </form>
+    <section class="flex flex-wrap w-full px-2 my-2 lg:my-3 justify-center">
+      <span
+        class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
+      >Listado de productos seleccionados</span>
+      <!--<div>
+        <ul v-for="productByCustomer in productsByCustomer" :key="productByCustomer">
+          <li>{{productsByCustomer.code}}</li>
+          <li>{{productsByCustomer.name}}</li>
+          <li>{{productsByCustomer.price}}</li>
+          <li>{{productsByCustomer.quantity}}</li>
+        </ul>
+      </div>-->
+      <!--<section
+      v-for="productByCustomer in productsByCustomer"
+      v-bind:key="productByCustomer"
+      class="w-full flex flex-wrap border-gray-500 border-solid border-b-2 mx-2">
+        {{ productByCustomer }}
+        <span class="w-full text-xs">EX-0002</span>
+        <span class="w-full text-ms">Post - Coco 240 ML</span>
+        <span class="w-full text-ms">Precio: <span class="text-lg">6$</span></span>
+      </section>-->
+    </section>
   </main>
 </template>
 
 <script>
 export default {
+  data: {
+    /*code: "",
+    name: "",
+    price: "",
+    quantity: "",
+    productsByCustomer: '',
+    products: null,*/
+  },
   data() {
     return {
       quantity: "",
@@ -133,7 +157,64 @@ export default {
           name: "Jhonny",
         },
       ],
+      /*productsByCustomer: [
+        {
+          code: "",
+          name: "",
+          price: "",
+          quantity: "",
+        },
+      ],*/
     };
+  },
+  mounted() {
+    /*if (localStorage.getItem('productsByCustomer')) {
+      try {
+        this.productsByCustomer = JSON.parse(localStorage.getItem('productsByCustomer'));
+      } catch(e) {
+        localStorage.removeItem('productsByCustomer');
+      }
+    }*/
+  },
+  methods: {
+    /*addProducts: function() {
+          this.productsByCustomer.push({
+            code: this.products.code,
+            name: this.products.name,
+            price: this.products.price,
+            quantity: this.products.quantity
+        });
+      this.products.code = '';
+      this.products.name = '';
+      this.products.price = '';
+      this.products.quantity = '';
+    }*/
+    /*addProduct() {
+      if (!this.products.name) {
+        return;
+      }
+      if (!this.products.code) {
+        return;
+      }
+       if (!this.products.price) {
+        return;
+      }
+      this.productsByCustomer.push(this.products.name);
+      this.productsByCustomer.push(this.products.code);
+      this.productsByCustomer.push(this.products.price);
+      this.products.name = '',
+      this.products.code = '',
+      this.products.price = '';
+      this.saveProducts();
+    },*/
+    /*removeCat(x) {
+      this.cats.splice(x, 1);
+      this.saveCats();
+    },*/
+    /*saveProducts() {
+      const parsed = JSON.stringify(this.productsByCustomer);
+      localStorage.setItem("productsByCustomer", parsed);
+    },*/
   },
 };
 </script>
