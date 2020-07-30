@@ -1,6 +1,6 @@
 <template>
   <main class="container flex items-center flex-wrap w-full my-0 mx-auto">
-    <form class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto">
+    <form v-on:submit.prevent="addQuantity" class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto">
       <section class="w-full lg:w-full px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
@@ -9,11 +9,11 @@
         <input
           class="appearance-none block w-full bg-gray-200 text-gray-900 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
           id="grid-code"
-          name="customers.name"
+          name="customer"
           type="text"
           maxlength="7"
           placeholder="Codigo del cliente"
-          v-model="customers.code"
+          v-model="customer"
         />
         <!--<span v-if="customers.code" class="block w-full text-gray-900 text-center">Hola!, {{ customers.name }}</span>-->
       </section>
@@ -82,9 +82,10 @@
         </div>
       </section>
       <section class="flex w-full lg:w-full px-3 my-2 lg:my-3 justify-center">
-        <button
+        <input
           class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded"
-        >Agregar producto</button>
+          type="submit"
+          value="Agregar producto">
       </section>
     </form>
     <section class="flex flex-wrap w-full px-2 my-2 lg:my-3 justify-center">
@@ -114,17 +115,19 @@
 
 <script>
 export default {
-  data: {
-    /*code: "",
+  /*data: {
+    quantityByCustomer: [],
+    code: "",
     name: "",
     price: "",
     quantity: "",
     productsByCustomer: '',
-    products: null,*/
-  },
+    products: null,
+  },*/
   data() {
     return {
-      quantity: "",
+      quantity: '',
+      customer: '',
       products: [
         {
           code: "EX-0001",
@@ -168,6 +171,12 @@ export default {
     };
   },
   mounted() {
+    if (localStorage.quantity) {
+      this.quantity = localStorage.quantity;
+    }
+    if (localStorage.customer) {
+      this.customer = localStorage.customer;
+    }
     /*if (localStorage.getItem('productsByCustomer')) {
       try {
         this.productsByCustomer = JSON.parse(localStorage.getItem('productsByCustomer'));
@@ -177,6 +186,29 @@ export default {
     }*/
   },
   methods: {
+    addQuantity() {
+      if (!this.quantity) {
+        return;
+      }
+      if (!this.customer) {
+        return;
+      }
+      localStorage.quantity = this.quantity;
+      localStorage.customer = this.customer;
+      this.quantity = '';
+      this.customer = '';
+      /*this.saveProducts()*/
+    },
+    /*addQuantity: function() {
+      localStorage.quantity = newQuantity;
+    },*/
+    /*addQuantity: function () {
+      this.quantityByCustomer.push({
+        quantity: this.quantity
+      });
+      console.log(quantityByCustomer)
+      this.quantity = '';
+    }*/
     /*addProducts: function() {
           this.productsByCustomer.push({
             code: this.products.code,
@@ -212,10 +244,22 @@ export default {
       this.saveCats();
     },*/
     /*saveProducts() {
-      const parsed = JSON.stringify(this.productsByCustomer);
-      localStorage.setItem("productsByCustomer", parsed);
+      const parsed = JSON.stringify(this.customer);
+      localStorage.setItem("customer", parsed);
     },*/
   },
+  computed: {
+    /*addQuantity: function() {
+      this.quantityByCustomer.push(this.quantity);
+      console.log(quantityByCustomer)
+      this.quantity = '';
+    }*/
+  },
+  /*watch:{
+    quantity(newQuantity) {
+      localStorage.quantity = newQuantity;
+    }
+  }*/
 };
 </script>
 
