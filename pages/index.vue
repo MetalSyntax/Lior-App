@@ -33,10 +33,10 @@
         </select>-->
         <v-select
           class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          v-model="products.price"
-          :options="products"
-          :reduce="products => products.price"
-          :value="products.name"
+          v-model="productsData.price"
+          :options="productsData"
+          :reduce="productsData => productsData.price"
+          :value="productsData.name"
           label="name"
           placeholder="Nombre del producto"
         ></v-select>
@@ -68,16 +68,16 @@
         >
           <p>Precio unitario:</p>
           <span
-            v-if="products.price > 0"
+            v-if="productsData.price > 0"
             class="priceProduct text-lg text-gray-700"
-          >{{ products.price }}$</span>
+          >{{ productsData.price }}$</span>
           <span v-else class="priceProduct text-gray-700">No hay valor del producto</span>
           <br />
           <p>Precio Total:</p>
           <span
-            v-if="products.price > 0"
+            v-if="productsData.price > 0"
             class="totalProducts text-lg text-gray-700"
-          >{{products.price * quantity}}$</span>
+          >{{productsData.price * quantity}}$</span>
           <span v-else class="totalProducts text-gray-700">No hay un producto seleccionado</span>
         </div>
       </section>
@@ -100,10 +100,7 @@
           <li>{{productsByCustomer.quantity}}</li>
         </ul>
       </div>-->
-      <!--<section
-      v-for="productByCustomer in productsByCustomer"
-      v-bind:key="productByCustomer"
-      class="w-full flex flex-wrap border-gray-500 border-solid border-b-2 mx-2">
+      <!--<section v-for="" v-bind:key="" class="w-full flex flex-wrap border-gray-500 border-solid border-b-2 mx-2">
         {{ productByCustomer }}
         <span class="w-full text-xs">EX-0002</span>
         <span class="w-full text-ms">Post - Coco 240 ML</span>
@@ -114,21 +111,22 @@
 </template>
 
 <script>
+/*import customersData from '../data/customers.json'
+import productsData from '../data/products.json'*/
+
 export default {
-  /*data: {
-    quantityByCustomer: [],
-    code: "",
-    name: "",
-    price: "",
-    quantity: "",
-    productsByCustomer: '',
-    products: null,
-  },*/
   data() {
     return {
-      quantity: '',
-      customer: '',
-      products: [
+      /*customers: customersData,
+      products: productsData,*/
+      allProducts: [],
+      customer: null,
+      quantity: null,
+      quantitySelected: null,
+      customerCurrent: null,
+      unitPrice: null,
+      totalPrice: null,
+      productsData: [
         {
           code: "EX-0001",
           name: "Pre - Coco 240ML",
@@ -150,7 +148,7 @@ export default {
           price: 5,
         },
       ],
-      customers: [
+      customersData: [
         {
           code: "EA-0001",
           name: "Wonder",
@@ -160,106 +158,50 @@ export default {
           name: "Jhonny",
         },
       ],
-      /*productsByCustomer: [
-        {
-          code: "",
-          name: "",
-          price: "",
-          quantity: "",
-        },
-      ],*/
     };
   },
   mounted() {
-    if (localStorage.quantity) {
+    /*if (localStorage.quantity) {
       this.quantity = localStorage.quantity;
     }
     if (localStorage.customer) {
       this.customer = localStorage.customer;
+    }*/
+    /*if (localStorage.unitPrice) {
+      this.unitPrice = localStorage.unitPrice;
     }
-    /*if (localStorage.getItem('productsByCustomer')) {
-      try {
-        this.productsByCustomer = JSON.parse(localStorage.getItem('productsByCustomer'));
-      } catch(e) {
-        localStorage.removeItem('productsByCustomer');
-      }
+    if (localStorage.totalPrice) {
+      this.totalPrice = localStorage.totalPrice;
     }*/
   },
   methods: {
     addQuantity() {
-      if (!this.quantity) {
+      /*if (!this.quantity) {
         return;
       }
       if (!this.customer) {
         return;
-      }
-      localStorage.quantity = this.quantity;
-      localStorage.customer = this.customer;
+      }*/
+      localStorage.customerCurrent = this.customer;
+      this.allProducts.push(
+        "Name: " + this.productsData.name,
+        "Quantity: " + this.quantity,
+        "Unit Price: " + this.productsData.price,
+        "Total Price: " + this.productsData.price * this.quantity
+      );
       this.quantity = '';
-      this.customer = '';
-      /*this.saveProducts()*/
+      this.saveAll();
     },
-    /*addQuantity: function() {
-      localStorage.quantity = newQuantity;
-    },*/
-    /*addQuantity: function () {
-      this.quantityByCustomer.push({
-        quantity: this.quantity
-      });
-      console.log(quantityByCustomer)
-      this.quantity = '';
-    }*/
-    /*addProducts: function() {
-          this.productsByCustomer.push({
-            code: this.products.code,
-            name: this.products.name,
-            price: this.products.price,
-            quantity: this.products.quantity
-        });
-      this.products.code = '';
-      this.products.name = '';
-      this.products.price = '';
-      this.products.quantity = '';
-    }*/
-    /*addProduct() {
-      if (!this.products.name) {
-        return;
-      }
-      if (!this.products.code) {
-        return;
-      }
-       if (!this.products.price) {
-        return;
-      }
-      this.productsByCustomer.push(this.products.name);
-      this.productsByCustomer.push(this.products.code);
-      this.productsByCustomer.push(this.products.price);
-      this.products.name = '',
-      this.products.code = '',
-      this.products.price = '';
-      this.saveProducts();
-    },*/
-    /*removeCat(x) {
-      this.cats.splice(x, 1);
-      this.saveCats();
-    },*/
-    /*saveProducts() {
-      const parsed = JSON.stringify(this.customer);
-      localStorage.setItem("customer", parsed);
-    },*/
+    saveAll() {
+      const parsed = JSON.stringify(this.allProducts);
+      localStorage.setItem('allProducts', parsed);
+    },
   },
   computed: {
-    /*addQuantity: function() {
-      this.quantityByCustomer.push(this.quantity);
-      console.log(quantityByCustomer)
-      this.quantity = '';
-    }*/
+
   },
-  /*watch:{
-    quantity(newQuantity) {
-      localStorage.quantity = newQuantity;
-    }
-  }*/
+  watch:{
+  },
 };
 </script>
 
