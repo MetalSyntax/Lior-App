@@ -1,6 +1,9 @@
 <template>
   <main class="container flex items-center flex-wrap w-full my-0 mx-auto">
-    <form v-on:submit.prevent="addQuantity" class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto">
+    <form
+      v-on:submit.prevent="addQuantity"
+      class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto"
+    >
       <section class="w-full lg:w-full px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
@@ -85,7 +88,8 @@
         <input
           class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded"
           type="submit"
-          value="Agregar producto">
+          value="Agregar producto"
+        />
       </section>
     </form>
     <section class="flex flex-wrap w-full px-2 my-2 lg:my-3 justify-center">
@@ -100,12 +104,16 @@
           <li>{{productsByCustomer.quantity}}</li>
         </ul>
       </div>-->
-      <!--<section v-for="" v-bind:key="" class="w-full flex flex-wrap border-gray-500 border-solid border-b-2 mx-2">
-        {{ productByCustomer }}
-        <span class="w-full text-xs">EX-0002</span>
+      <section
+        v-for="allProduct in allProducts"
+        v-bind:key="allProduct"
+        class="w-full flex flex-wrap border-gray-500 border-solid border-b-2 mx-2"
+      >
+        <span class="w-full text-ms">{{allProduct}}</span>
+        <!--<span class="w-full text-xs">EX-0002</span>
         <span class="w-full text-ms">Post - Coco 240 ML</span>
-        <span class="w-full text-ms">Precio: <span class="text-lg">6$</span></span>
-      </section>-->
+        <span class="w-full text-ms">Precio: <span class="text-lg">6$</span></span>-->
+      </section>
     </section>
   </main>
 </template>
@@ -123,6 +131,8 @@ export default {
       customer: null,
       quantity: null,
       quantitySelected: null,
+      productsSelected: null,
+      productSelected: null,
       customerCurrent: null,
       unitPrice: null,
       totalPrice: null,
@@ -161,18 +171,13 @@ export default {
     };
   },
   mounted() {
-    /*if (localStorage.quantity) {
-      this.quantity = localStorage.quantity;
+    if (localStorage.getItem("allProducts")) {
+      /*try {*/
+      this.allProducts = JSON.parse(localStorage.getItem("allProducts"));
+      /*} catch(e) {
+        localStorage.removeItem('cats');
+      }*/
     }
-    if (localStorage.customer) {
-      this.customer = localStorage.customer;
-    }*/
-    /*if (localStorage.unitPrice) {
-      this.unitPrice = localStorage.unitPrice;
-    }
-    if (localStorage.totalPrice) {
-      this.totalPrice = localStorage.totalPrice;
-    }*/
   },
   methods: {
     addQuantity() {
@@ -184,24 +189,23 @@ export default {
       }*/
       localStorage.customerCurrent = this.customer;
       this.allProducts.push(
-        "Name: " + this.productsData.name,
-        "Quantity: " + this.quantity,
-        "Unit Price: " + this.productsData.price,
-        "Total Price: " + this.productsData.price * this.quantity
+        (this.productsSelected = [
+          "Name: " + this.productsData.name,
+          "Quantity: " + this.quantity,
+          "Unit Price: " + this.productsData.price,
+          "Total Price: " + this.productsData.price * this.quantity,
+        ])
       );
-      this.quantity = '';
+      this.quantity = "";
       this.saveAll();
     },
     saveAll() {
       const parsed = JSON.stringify(this.allProducts);
-      localStorage.setItem('allProducts', parsed);
+      localStorage.setItem("allProducts", parsed);
     },
   },
-  computed: {
-
-  },
-  watch:{
-  },
+  computed: {},
+  watch: {},
 };
 </script>
 
