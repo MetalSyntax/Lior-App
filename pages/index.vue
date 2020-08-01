@@ -1,10 +1,13 @@
 <template>
-  <main class="container flex items-center flex-wrap w-full my-0 mx-auto">
-    <h1 v-if="customer" class="block w-full text-gray-900 text-center text-xl bold py-2">Hola!, {{ customer }}</h1>
+  <main class="container flex items-center flex-wrap w-full my-0 mx-auto overflow-hidden">
     <form
       v-on:submit.prevent="addQuantity"
       class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto"
     >
+      <h1
+        v-if="customer"
+        class="block w-full text-gray-900 text-center text-xl bold py-2"
+      >Hola!, {{ customer }}</h1>
       <section class="w-full lg:w-full px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
@@ -87,14 +90,52 @@
       <span
         class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
       >Listado de productos seleccionados</span>
-      <section
+
+      <table class="w-full table-auto">
+        <thead>
+          <tr>
+            <th class="px-2 py-1 text-sm">Nombre</th>
+            <th class="px-2 py-1 text-sm">Cantidad</th>
+            <!--<th class="px-2 py-1 text-sm">Unitario</th>-->
+            <th class="px-2 py-1 text-sm">Total</th>
+            <th class="px-2 py-1 text-sm">Borrar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(allProduct, index) in allProducts" v-bind:key="index">
+            <td class="border px-1 py-1 text-center text-sm md:text-base">
+              Pre - Coco 240ML
+              <!--{{allProduct[index].productSelected}}-->
+            </td>
+            <td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[1]}}</td>
+            <!--<td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[2]}}$</td>-->
+            <td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[3]}}$</td>
+            <td class="border text-center px-4 py-2">
+              <button
+                class="bg-red-500 hover:bg-red-700 text-white rounded my-0 mx-auto py-1 px-2"
+                @click="removeEach(index)"
+              >X</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--<section
         v-for="(allProduct, index) in allProducts"
         v-bind:key="index"
-        class="w-full flex flex-wrap border-gray-500 border-solid py-2 border-b-2 mx-2 md:justify-between"
+        class="w-full flex flex-wrap border-gray-500 border-solid py-2 border-b-2 mx-2 justify-between"
       >
-        <p class="w-full md:w-5/6 text-ms my-2">{{allProduct.join(' \r\n')}}</p>
-        <button class="w-4/6 md:w-1/6 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded my-0 mx-auto" @click="removeEach(index)">Borrar</button>
-      </section>
+        <span class="w-full md:w-5/6 text-ms">Cantidad: {{allProduct[index].quantitySelected}}</span>
+        <span
+          class="w-full md:w-5/6 text-ms"
+        >Precio Unitario: {{allProduct[index].unitPriceSelected}}</span>
+        <span
+          class="w-full md:w-5/6 text-ms"
+        >Precio total parcial: {{allProduct[index].totalPartialPrice}}</span>
+        <button
+          class="bg-red-500 hover:bg-red-700 text-white rounded my-0 mx-auto px-1"
+          @click="removeEach(index)"
+        >Borrar</button>
+      </section>-->
     </section>
   </main>
 </template>
@@ -102,7 +143,7 @@
 <script>
 /*import customersData from '../data/customers.json'
 import productsData from '../data/products.json'*/
-
+//.join(' \r\n')
 export default {
   data() {
     return {
@@ -111,11 +152,16 @@ export default {
       allProducts: [],
       customer: null,
       quantity: null,
-      quantitySelected: null,
+
+      /*productSelected: [],
+      quantitySelected: [],
+      unitPriceSelected: [],
+      totalPartialPrice: [],*/
+
       productsSelected: null,
-      productSelected: null,
       customerCurrent: null,
       unitPrice: null,
+
       totalPrice: 0,
       productsData: [
         {
@@ -154,9 +200,9 @@ export default {
   mounted() {
     if (localStorage.getItem("allProducts")) {
       try {
-      this.allProducts = JSON.parse(localStorage.getItem("allProducts"));
-      } catch(e) {
-        localStorage.removeItem('allProducts');
+        this.allProducts = JSON.parse(localStorage.getItem("allProducts"));
+      } catch (e) {
+        localStorage.removeItem("allProducts");
       }
     }
     if (localStorage.customerCurrent) {
@@ -172,14 +218,13 @@ export default {
 
       this.allProducts.push(
         (this.productsSelected = [
-          "Nombre del Producto: " + this.productsData.name,
-          "Cantidad: " + this.quantity,
-          "Precio Unitario: " + this.productsData.price,
-          "Precio total parcial: " + this.productsData.price * this.quantity,
+          this.productsData.name,
+          parseFloat(this.quantity),
+          this.productsData.price,
+          this.productsData.price * this.quantity,
         ])
       );
-
-      this.quantity = "";
+      this.quantity = null;
 
       this.saveAll();
     },
@@ -196,7 +241,7 @@ export default {
   watch: {
     customer(customerCurrent) {
       localStorage.customerCurrent = this.customer;
-    }
+    },
   },
 };
 </script>
