@@ -1,5 +1,6 @@
 <template>
   <main class="container flex items-center flex-wrap w-full my-0 mx-auto">
+    <h1 v-if="customer" class="block w-full text-gray-900 text-center text-xl bold py-2">Hola!, {{ customer }}</h1>
     <form
       v-on:submit.prevent="addQuantity"
       class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto"
@@ -18,22 +19,12 @@
           placeholder="Codigo del cliente"
           v-model="customer"
         />
-        <!--<span v-if="customers.code" class="block w-full text-gray-900 text-center">Hola!, {{ customers.name }}</span>-->
       </section>
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
           for="grid-product"
         >Seleccione un producto</label>
-        <!--<select
-            class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-product"
-            name="product"
-          >
-            <option selected="selected" disabled="disabled">Nombre del producto</option>
-            <option>Pre - Coco 240ML</option>
-            <option>Post - Coco 240 ML</option>
-        </select>-->
         <v-select
           class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           v-model="productsData.price"
@@ -96,23 +87,13 @@
       <span
         class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
       >Listado de productos seleccionados</span>
-      <!--<div>
-        <ul v-for="productByCustomer in productsByCustomer" :key="productByCustomer">
-          <li>{{productsByCustomer.code}}</li>
-          <li>{{productsByCustomer.name}}</li>
-          <li>{{productsByCustomer.price}}</li>
-          <li>{{productsByCustomer.quantity}}</li>
-        </ul>
-      </div>-->
       <section
-        v-for="allProduct in allProducts"
-        v-bind:key="allProduct"
-        class="w-full flex flex-wrap border-gray-500 border-solid border-b-2 mx-2"
+        v-for="(allProduct, index) in allProducts"
+        v-bind:key="index"
+        class="w-full flex flex-wrap border-gray-500 border-solid py-2 border-b-2 mx-2 md:justify-between"
       >
-        <span class="w-full text-ms">{{allProduct}}</span>
-        <!--<span class="w-full text-xs">EX-0002</span>
-        <span class="w-full text-ms">Post - Coco 240 ML</span>
-        <span class="w-full text-ms">Precio: <span class="text-lg">6$</span></span>-->
+        <p class="w-full md:w-5/6 text-ms my-2">{{allProduct.join(' \r\n')}}</p>
+        <button class="w-4/6 md:w-1/6 bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded my-0 mx-auto" @click="removeEach(index)">Borrar</button>
       </section>
     </section>
   </main>
@@ -135,7 +116,7 @@ export default {
       productSelected: null,
       customerCurrent: null,
       unitPrice: null,
-      totalPrice: null,
+      totalPrice: 0,
       productsData: [
         {
           code: "EX-0001",
@@ -154,7 +135,7 @@ export default {
         },
         {
           code: "EX-0004",
-          name: "Pre - Coco 240ML",
+          name: "Post - Cayena 240ML",
           price: 5,
         },
       ],
@@ -172,40 +153,51 @@ export default {
   },
   mounted() {
     if (localStorage.getItem("allProducts")) {
-      /*try {*/
+      try {
       this.allProducts = JSON.parse(localStorage.getItem("allProducts"));
-      /*} catch(e) {
-        localStorage.removeItem('cats');
-      }*/
+      } catch(e) {
+        localStorage.removeItem('allProducts');
+      }
+    }
+    if (localStorage.customerCurrent) {
+      this.customer = localStorage.customerCurrent;
     }
   },
   methods: {
     addQuantity() {
-      /*if (!this.quantity) {
-        return;
-      }
-      if (!this.customer) {
-        return;
-      }*/
-      localStorage.customerCurrent = this.customer;
+      //localStorage.customerCurrent = this.customer;
+
+      this.totalPrice += this.productsData.price * this.quantity;
+      localStorage.totalPrice = this.totalPrice;
+
       this.allProducts.push(
         (this.productsSelected = [
-          "Name: " + this.productsData.name,
-          "Quantity: " + this.quantity,
-          "Unit Price: " + this.productsData.price,
-          "Total Price: " + this.productsData.price * this.quantity,
+          "Nombre del Producto: " + this.productsData.name,
+          "Cantidad: " + this.quantity,
+          "Precio Unitario: " + this.productsData.price,
+          "Precio total parcial: " + this.productsData.price * this.quantity,
         ])
       );
+
       this.quantity = "";
+
       this.saveAll();
     },
     saveAll() {
       const parsed = JSON.stringify(this.allProducts);
       localStorage.setItem("allProducts", parsed);
     },
+    removeEach(x) {
+      this.allProducts.splice(x, 1);
+      this.saveAll();
+    },
   },
   computed: {},
-  watch: {},
+  watch: {
+    customer(customerCurrent) {
+      localStorage.customerCurrent = this.customer;
+    }
+  },
 };
 </script>
 
