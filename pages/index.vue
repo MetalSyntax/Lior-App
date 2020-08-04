@@ -5,23 +5,23 @@
       class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto"
     >
       <h1
-        v-if="customer"
+        v-if="customer.name != null"
         class="block w-full text-gray-900 text-center text-xl bold py-2"
-      >Hola!, {{ customer }}</h1>
+      >Hola!, {{ customer.name }}</h1>
       <section class="w-full lg:w-full px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
           for="grid-code"
         >Ingrese su codigo de cliente</label>
-        <input
-          class="appearance-none block w-full bg-gray-200 text-gray-900 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-          id="grid-code"
-          name="customer"
-          type="text"
-          maxlength="7"
-          placeholder="Codigo del cliente"
+        <v-select
+          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           v-model="customer"
-        />
+          :options="customersData"
+          :value="customersData.name"
+          label="name"
+          placeholder="Nombre del cliente"
+        >
+        </v-select>
       </section>
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
@@ -30,9 +30,8 @@
         >Seleccione un producto</label>
         <v-select
           class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          v-model="productsData.price"
+          v-model="productSelected"
           :options="productsData"
-          :reduce="productsData => productsData.price"
           :value="productsData.name"
           label="name"
           placeholder="Nombre del producto"
@@ -65,16 +64,16 @@
         >
           <p>Precio unitario:</p>
           <span
-            v-if="productsData.price > 0"
+            v-if="productSelected.price > 0"
             class="priceProduct text-lg text-gray-700"
-          >{{ productsData.price }}$</span>
+          >{{ productSelected.price }}$</span>
           <span v-else class="priceProduct text-gray-700">No hay valor del producto</span>
           <br />
           <p>Precio Total:</p>
           <span
-            v-if="productsData.price > 0"
+            v-if="productSelected.price > 0"
             class="totalProducts text-lg text-gray-700"
-          >{{productsData.price * quantity}}$</span>
+          >{{productSelected.price * quantity}}$</span>
           <span v-else class="totalProducts text-gray-700">No hay un producto seleccionado</span>
         </div>
       </section>
@@ -94,7 +93,7 @@
       <table class="w-full table-auto">
         <thead>
           <tr>
-            <th class="px-2 py-1 text-sm">Nombre</th>
+            <th class="px-2 py-1 text-sm">Codigo / Nombre</th>
             <th class="px-2 py-1 text-sm">Cantidad</th>
             <!--<th class="px-2 py-1 text-sm">Unitario</th>-->
             <th class="px-2 py-1 text-sm">Total</th>
@@ -104,13 +103,14 @@
         <tbody>
           <tr v-for="(allProduct, index) in allProducts" v-bind:key="index">
             <td class="border px-1 py-1 text-center text-sm md:text-base">
-              Pre - Coco 240ML
+              <span class="w-full">{{allProduct[1]}}</span>
+              <span class="w-full">{{allProduct[0]}}</span>
               <!--{{allProduct[index].productSelected}}-->
             </td>
-            <td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[1]}}</td>
+            <td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[3]}}</td>
             <!--<td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[2]}}$</td>-->
-            <td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[3]}}$</td>
-            <td class="border text-center px-4 py-2">
+            <td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[4]}}$</td>
+            <td class="text-center px-4 py-2">
               <button
                 class="bg-red-500 hover:bg-red-700 text-white rounded my-0 mx-auto py-1 px-2"
                 @click="removeEach(index)"
@@ -149,55 +149,68 @@ export default {
     return {
       /*customers: customersData,
       products: productsData,*/
-      allProducts: [],
-      customer: null,
-      quantity: null,
-
-      /*productSelected: [],
-      quantitySelected: [],
+      /*quantitySelected: [],
       unitPriceSelected: [],
       totalPartialPrice: [],*/
-
-      productsSelected: null,
-      customerCurrent: null,
-      unitPrice: null,
-
-      totalPrice: 0,
+      allProducts: [], // Arreglo de todos los productos
+      productSelected: [], // Producto seleccionado por el cliente
+      productsSelected: null, // Productos guardados en arreglo
+      customer: [], //Cliente
+      customerCurrent: null, //Cliente guardado
+      quantity: null, // Cantidad
+      unitPrice: null, // Precio Unitario
+      totalPrice: 0, // Precio Total
       productsData: [
         {
-          code: "EX-0001",
+          code: "PT-00001",
           name: "Pre - Coco 240ML",
           price: 2,
         },
         {
-          code: "EX-0002",
+          code: "PT-00002",
           name: "Post - Coco 240 ML",
           price: 3,
         },
         {
-          code: "EX-0003",
+          code: "PT-00003",
           name: "Pre - Cayena 240ML",
           price: 4,
         },
         {
-          code: "EX-0004",
+          code: "PT-00004",
           name: "Post - Cayena 240ML",
           price: 5,
         },
-      ],
+      ], //Data de productos
       customersData: [
         {
           code: "EA-0001",
-          name: "Wonder",
+          name: "Inversiones Cosme Fulanito",
         },
         {
           code: "EA-0002",
-          name: "Jhonny",
+          name: "Inversiones Aquiles Vaesa",
         },
-      ],
+        {
+          code: "EA-0003",
+          name: "Inversiones el Barto",
+        },
+        {
+          code: "EA-0004",
+          name: "Inversiones XYZ",
+        },
+        {
+          code: "EA-0005",
+          name: "Inversiones el conejo Pepito",
+        },
+      ], //Data de clientes
+      /*search: "",
+      offset: 0,
+      limit: 3,*/
     };
   },
   mounted() {
+    //Muestra los datos seleccionados de los productos
     if (localStorage.getItem("allProducts")) {
       try {
         this.allProducts = JSON.parse(localStorage.getItem("allProducts"));
@@ -205,27 +218,42 @@ export default {
         localStorage.removeItem("allProducts");
       }
     }
+    //Muestra el nombre del cliente
     if (localStorage.customerCurrent) {
       this.customer = localStorage.customerCurrent;
     }
   },
   methods: {
     addQuantity() {
+      if (!this.productSelected.price) {
+        return;
+      }
+      if (!this.productSelected.code) {
+        return;
+      }
+      if (!this.productSelected.name) {
+        return;
+      }
+      if (!this.quantity) {
+        return;
+      }
       //localStorage.customerCurrent = this.customer;
 
-      this.totalPrice += this.productsData.price * this.quantity;
+      this.totalPrice += this.productSelected.price * this.quantity;
       localStorage.totalPrice = this.totalPrice;
 
       this.allProducts.push(
         (this.productsSelected = [
-          this.productsData.name,
-          parseFloat(this.quantity),
-          this.productsData.price,
-          this.productsData.price * this.quantity,
+          this.productSelected.name, //Nombre
+          this.productSelected.code, //Codigo
+          parseFloat(this.quantity), //Cantidad
+          this.productSelected.price, //Precio Unitario
+          this.productSelected.price * this.quantity, //Subtotal
         ])
       );
+      //Vacia el campo
       this.quantity = null;
-
+      //Guarda la data
       this.saveAll();
     },
     saveAll() {
@@ -237,10 +265,20 @@ export default {
       this.saveAll();
     },
   },
-  computed: {},
+  computed: {
+    /*filtered() {
+      return this.customersData.filter((name) =>
+        name.includes(this.search)
+      );
+    },
+    paginated() {
+      return this.filtered.slice(this.offset, this.limit + this.offset);
+    },*/
+  },
   watch: {
+    //Guarda temporalmente el nombre del cliente
     customer(customerCurrent) {
-      localStorage.customerCurrent = this.customer;
+      localStorage.customerCurrent = JSON.stringify(this.customer);
     },
   },
 };
@@ -253,5 +291,8 @@ export default {
 .vs__search,
 .vs__search:focus {
   padding: 7px;
+}
+.vs__clear {
+  display: none;
 }
 </style>
