@@ -1,10 +1,22 @@
 [
   {
     "code": "EA-0001",
-    "name": "Wonder"
+    "name": "Inversiones Cosme Fulanito"
   },
   {
     "code": "EA-0002",
-    "name": "Jhonny"
+    "name": "Inversiones Aquiles Vaesa"
+  },
+  {
+    "code": "EA-0003",
+    "name": "Inversiones el Barto"
+  },
+  {
+    "code": "EA-0004",
+    "name": "Inversiones XYZ"
+  },
+  {
+    "code": "EA-0005",
+    "name": "Inversiones el conejo Pepito"
   }
 ]

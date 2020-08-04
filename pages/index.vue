@@ -96,7 +96,7 @@
             <th class="px-2 py-1 text-sm">Codigo / Nombre</th>
             <th class="px-2 py-1 text-sm">Cantidad</th>
             <!--<th class="px-2 py-1 text-sm">Unitario</th>-->
-            <th class="px-2 py-1 text-sm">Total</th>
+            <th class="px-2 py-1 text-sm">Subtotal</th>
             <th class="px-2 py-1 text-sm">Borrar</th>
           </tr>
         </thead>
@@ -119,39 +119,17 @@
           </tr>
         </tbody>
       </table>
-      <!--<section
-        v-for="(allProduct, index) in allProducts"
-        v-bind:key="index"
-        class="w-full flex flex-wrap border-gray-500 border-solid py-2 border-b-2 mx-2 justify-between"
-      >
-        <span class="w-full md:w-5/6 text-ms">Cantidad: {{allProduct[index].quantitySelected}}</span>
-        <span
-          class="w-full md:w-5/6 text-ms"
-        >Precio Unitario: {{allProduct[index].unitPriceSelected}}</span>
-        <span
-          class="w-full md:w-5/6 text-ms"
-        >Precio total parcial: {{allProduct[index].totalPartialPrice}}</span>
-        <button
-          class="bg-red-500 hover:bg-red-700 text-white rounded my-0 mx-auto px-1"
-          @click="removeEach(index)"
-        >Borrar</button>
-      </section>-->
     </section>
   </main>
 </template>
 
 <script>
-/*import customersData from '../data/customers.json'
-import productsData from '../data/products.json'*/
-//.join(' \r\n')
+import customersDataJson from '../data/customers.json'
+import productsDataJson from '../data/products.json'
+
 export default {
   data() {
     return {
-      /*customers: customersData,
-      products: productsData,*/
-      /*quantitySelected: [],
-      unitPriceSelected: [],
-      totalPartialPrice: [],*/
       allProducts: [], // Arreglo de todos los productos
       productSelected: [], // Producto seleccionado por el cliente
       productsSelected: null, // Productos guardados en arreglo
@@ -160,7 +138,9 @@ export default {
       quantity: null, // Cantidad
       unitPrice: null, // Precio Unitario
       totalPrice: 0, // Precio Total
-      productsData: [
+      productsData: Object.values(productsDataJson), //Data de productos
+      customersData: Object.values(customersDataJson), //Data de clientes
+      /*productsData: [
         {
           code: "PT-00001",
           name: "Pre - Coco 240ML",
@@ -181,8 +161,8 @@ export default {
           name: "Post - Cayena 240ML",
           price: 5,
         },
-      ], //Data de productos
-      customersData: [
+      ],*/ //Data de productos
+      /*customersData: [
         {
           code: "EA-0001",
           name: "Inversiones Cosme Fulanito",
@@ -203,7 +183,7 @@ export default {
           code: "EA-0005",
           name: "Inversiones el conejo Pepito",
         },
-      ], //Data de clientes
+      ],*/ //Data de clientes
       /*search: "",
       offset: 0,
       limit: 3,*/
@@ -217,6 +197,9 @@ export default {
       } catch (e) {
         localStorage.removeItem("allProducts");
       }
+    }
+    if (localStorage.getItem("totalPrice")) {
+       this.totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
     }
     //Muestra el nombre del cliente
     if (localStorage.customerCurrent) {
@@ -240,7 +223,6 @@ export default {
       //localStorage.customerCurrent = this.customer;
 
       this.totalPrice += this.productSelected.price * this.quantity;
-      localStorage.totalPrice = this.totalPrice;
 
       this.allProducts.push(
         (this.productsSelected = [
@@ -251,17 +233,21 @@ export default {
           this.productSelected.price * this.quantity, //Subtotal
         ])
       );
+
       //Vacia el campo
       this.quantity = null;
       //Guarda la data
       this.saveAll();
     },
     saveAll() {
-      const parsed = JSON.stringify(this.allProducts);
-      localStorage.setItem("allProducts", parsed);
+      const storageProducts = JSON.stringify(this.allProducts);
+      localStorage.setItem("allProducts", storageProducts);
+      const totalPrice = JSON.stringify(this.totalPrice);
+      localStorage.setItem("totalPrice", totalPrice);
     },
     removeEach(x) {
-      this.allProducts.splice(x, 1);
+      this.totalPrice -= this.allProducts[x][4]
+      this.allProducts.splice(x, 1)
       this.saveAll();
     },
   },
