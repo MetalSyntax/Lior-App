@@ -2,11 +2,11 @@
   <main class="container flex items-center flex-wrap w-full my-0 mx-auto overflow-hidden">
     <form
       v-on:submit.prevent="addQuantity"
-      class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto"
+      class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full"
     >
       <h1
         v-if="customer.name != null"
-        class="block w-full text-gray-900 text-center text-xl bold py-2"
+        class="block w-full text-gray-900 text-center text-xl bold py-2 customer"
       >Hola!, {{ customer.name }}</h1>
       <section class="w-full lg:w-full px-3 my-2 lg:my-3">
         <label
@@ -14,14 +14,15 @@
           for="grid-code"
         >Ingrese su codigo de cliente</label>
         <v-select
-          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           v-model="customer"
-          :options="customersData"
-          :value="customersData.name"
+          :options="paginated"
+          @search="query => search = query"
+          :filterable="false"
           label="name"
+          :value="paginated.name"
           placeholder="Nombre del cliente"
-        >
-        </v-select>
+        ></v-select>
       </section>
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
@@ -29,7 +30,7 @@
           for="grid-product"
         >Seleccione un producto</label>
         <v-select
-          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           v-model="productSelected"
           :options="productsData"
           :value="productsData.name"
@@ -62,14 +63,14 @@
         <div
           class="appearance-none block w-full bg-gray-200 text-gray-500 border rounded py-3 px-4 leading-tight"
         >
-          <p>Precio unitario:</p>
+          <p>Precio Unitario:</p>
           <span
             v-if="productSelected.price > 0"
             class="priceProduct text-lg text-gray-700"
           >{{ productSelected.price }}$</span>
           <span v-else class="priceProduct text-gray-700">No hay valor del producto</span>
           <br />
-          <p>Precio Total:</p>
+          <p>Precio Subtotal:</p>
           <span
             v-if="productSelected.price > 0"
             class="totalProducts text-lg text-gray-700"
@@ -85,36 +86,44 @@
         />
       </section>
     </form>
-    <section class="flex flex-wrap w-full px-2 my-2 lg:my-3 justify-center">
-      <span
-        class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
-      >Listado de productos seleccionados</span>
 
+    <section v-if="allProducts.length > 0" class="flex flex-wrap w-full px-2 justify-center">
+      <div
+        class="appearance-none block w-full bg-gray-200 text-gray-500 border rounded py-2 px-2 leading-tight"
+      >
+        <span
+          class="block w-full uppercase tracking-wide text-center text-gray-900 text-lg font-bold mb-2"
+        >Pedido / Colecciones</span>
+        <span
+          class="block w-full uppercase tracking-wide text-center text-gray-900 text-3xl font-bold"
+        >{{totalPrice}}$ / {{collections}}</span>
+      </div>
+      <span
+        class="block uppercase tracking-wide text-gray-900 text-sm font-bold my-3"
+      >Listado de productos seleccionados</span>
       <table class="w-full table-auto">
-        <thead>
+        <thead class="border bg-gray-200">
           <tr>
-            <th class="px-2 py-1 text-sm">Codigo / Nombre</th>
+            <th class="px-2 py-1 text-sm">Nombre</th>
             <th class="px-2 py-1 text-sm">Cantidad</th>
             <!--<th class="px-2 py-1 text-sm">Unitario</th>-->
             <th class="px-2 py-1 text-sm">Subtotal</th>
             <th class="px-2 py-1 text-sm">Borrar</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="(allProduct, index) in allProducts" v-bind:key="index">
-            <td class="border px-1 py-1 text-center text-sm md:text-base">
-              <span class="w-full">{{allProduct[1]}}</span>
-              <span class="w-full">{{allProduct[0]}}</span>
+        <tbody class="border">
+          <tr v-for="(allProduct, index) in allProducts" v-bind:key="index" class="my-2">
+            <td class="px-1 py-1 text-center text-sm md:text-base">
+              <span class="w-full">{{allProduct[0].toLowerCase()}}</span>
               <!--{{allProduct[index].productSelected}}-->
             </td>
-            <td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[3]}}</td>
+            <td class="px-4 py-2 text-center text-sm md:text-base">{{allProduct[2]}}</td>
             <!--<td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[2]}}$</td>-->
-            <td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[4]}}$</td>
-            <td class="text-center px-4 py-2">
-              <button
-                class="bg-red-500 hover:bg-red-700 text-white rounded my-0 mx-auto py-1 px-2"
-                @click="removeEach(index)"
-              >X</button>
+            <td class="px-4 py-2 text-center text-sm md:text-base">{{allProduct[4]}}$</td>
+            <td class="text-center">
+              <button class="text-white rounded my-0 mx-auto py-1 px-3" @click="removeEach(index)">
+                <img src="../static/delete.png" alt="Delete" class="w-8 h-auto" />
+              </button>
             </td>
           </tr>
         </tbody>
@@ -124,8 +133,8 @@
 </template>
 
 <script>
-import customersDataJson from '../data/customers.json'
-import productsDataJson from '../data/products.json'
+import customersDataJson from "../data/customers.json";
+import productsDataJson from "../data/products.json";
 
 export default {
   data() {
@@ -138,55 +147,12 @@ export default {
       quantity: null, // Cantidad
       unitPrice: null, // Precio Unitario
       totalPrice: 0, // Precio Total
+      collections: 0, //Precio Total
       productsData: Object.values(productsDataJson), //Data de productos
       customersData: Object.values(customersDataJson), //Data de clientes
-      /*productsData: [
-        {
-          code: "PT-00001",
-          name: "Pre - Coco 240ML",
-          price: 2,
-        },
-        {
-          code: "PT-00002",
-          name: "Post - Coco 240 ML",
-          price: 3,
-        },
-        {
-          code: "PT-00003",
-          name: "Pre - Cayena 240ML",
-          price: 4,
-        },
-        {
-          code: "PT-00004",
-          name: "Post - Cayena 240ML",
-          price: 5,
-        },
-      ],*/ //Data de productos
-      /*customersData: [
-        {
-          code: "EA-0001",
-          name: "Inversiones Cosme Fulanito",
-        },
-        {
-          code: "EA-0002",
-          name: "Inversiones Aquiles Vaesa",
-        },
-        {
-          code: "EA-0003",
-          name: "Inversiones el Barto",
-        },
-        {
-          code: "EA-0004",
-          name: "Inversiones XYZ",
-        },
-        {
-          code: "EA-0005",
-          name: "Inversiones el conejo Pepito",
-        },
-      ],*/ //Data de clientes
-      /*search: "",
+      search: '',
       offset: 0,
-      limit: 3,*/
+      limit: 3,
     };
   },
   mounted() {
@@ -198,13 +164,18 @@ export default {
         localStorage.removeItem("allProducts");
       }
     }
+    // Muestra el precio total
     if (localStorage.getItem("totalPrice")) {
-       this.totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+      this.totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+    }
+    // Muestra las colecciones
+    if (localStorage.getItem("collections")) {
+      this.collections = JSON.parse(localStorage.getItem("collections"));
     }
     //Muestra el nombre del cliente
-    if (localStorage.customerCurrent) {
+    /*if (localStorage.customerCurrent) {
       this.customer = localStorage.customerCurrent;
-    }
+    }*/
   },
   methods: {
     addQuantity() {
@@ -221,9 +192,8 @@ export default {
         return;
       }
       //localStorage.customerCurrent = this.customer;
-
       this.totalPrice += this.productSelected.price * this.quantity;
-
+      this.collections = this.totalPrice / 50;
       this.allProducts.push(
         (this.productsSelected = [
           this.productSelected.name, //Nombre
@@ -233,7 +203,6 @@ export default {
           this.productSelected.price * this.quantity, //Subtotal
         ])
       );
-
       //Vacia el campo
       this.quantity = null;
       //Guarda la data
@@ -244,22 +213,23 @@ export default {
       localStorage.setItem("allProducts", storageProducts);
       const totalPrice = JSON.stringify(this.totalPrice);
       localStorage.setItem("totalPrice", totalPrice);
+      const collections = JSON.stringify(this.collections);
+      localStorage.setItem("collections", collections);
     },
     removeEach(x) {
-      this.totalPrice -= this.allProducts[x][4]
-      this.allProducts.splice(x, 1)
+      this.totalPrice -= this.allProducts[x][4];
+      this.collections = this.totalPrice / 50;
+      this.allProducts.splice(x, 1);
       this.saveAll();
     },
   },
   computed: {
-    /*filtered() {
-      return this.customersData.filter((name) =>
-        name.includes(this.search)
-      );
+    filtered() {
+      return this.customersData.filter(customer => customer.name.match(new RegExp(this.search,"gi")));
     },
     paginated() {
       return this.filtered.slice(this.offset, this.limit + this.offset);
-    },*/
+    },
   },
   watch: {
     //Guarda temporalmente el nombre del cliente
@@ -280,5 +250,14 @@ export default {
 }
 .vs__clear {
   display: none;
+}
+.customer {
+  text-transform: lowercase;
+}
+.customer:first-letter {
+  text-transform: capitalize;
+}
+tr:nth-child(even) {
+  background-color: #edf2f7;
 }
 </style>

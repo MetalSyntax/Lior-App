@@ -1,22 +1,46 @@
 [
   {
-    "code": "EA-0001",
-    "name": "Inversiones Cosme Fulanito"
+    "code": "CEA-004",
+    "name": "INVERSIONES CEPORT, C.A."
   },
   {
-    "code": "EA-0002",
-    "name": "Inversiones Aquiles Vaesa"
+    "code": "CEA-005",
+    "name": "NOVEDADES Y PUNTO SANTA BARBARA, F.P"
   },
   {
-    "code": "EA-0003",
-    "name": "Inversiones el Barto"
+    "code": "CEA-006",
+    "name": "VARIEDADES HEYMAR, F.P"
   },
   {
-    "code": "EA-0004",
-    "name": "Inversiones XYZ"
+    "code": "CEA-008",
+    "name": "VILLA-BEL, C.A."
   },
   {
-    "code": "EA-0005",
-    "name": "Inversiones el conejo Pepito"
+    "code": "CEA-009",
+    "name": "PAOLA IMPORT COLECCIONS, C.A."
+  },
+  {
+    "code": "CEA-010",
+    "name": "COMERCIALIZADORA Y BODEGON YULUIS, C.A."
+  },
+  {
+    "code": "CEA-011",
+    "name": "INVERSIONES MARI'G 2017, F.P."
+  },
+  {
+    "code": "CEA-012",
+    "name": "INVERSIONES R.G BENDICIONES,C.A"
+  },
+  {
+    "code": "CEA-013",
+    "name": "INVERSIONES FRANCYBEL. C.A"
+  },
+  {
+    "code": "CEA-014",
+    "name": "NANCY´SPA ESTETICA Y COSMETOLOGIA C.A"
+  },
+  {
+    "code": "CEA-015",
+    "name": "CENTRO DE BELLEZA Y ESTETICA VICTORY·S DE LIGIA PEREZ, F.P"
   }
 ]

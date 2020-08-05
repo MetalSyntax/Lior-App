@@ -1,22 +1,42 @@
 [
   {
-    "code":"EX-0001",
-    "name":"Pre - Coco 240ML",
-    "price":2
+    "code":"PT-00001",
+    "name":"PRE TRATAMIENTO NATURAL CAYENA 400 cc",
+    "price":4.50
   },
   {
-    "code":"EX-0002",
-    "name":"Post - Coco 240 ML",
-    "price":3
+    "code":"PT-00002",
+    "name":"POST TRATAMIENTO NATURAL CAYENA 400 cc",
+    "price":4.50
   },
   {
-    "code":"EX-0003",
-    "name":"Pre - Cayena 240ML",
-    "price":4
+    "code":"PT-00003",
+    "name":"BAÑO CREMA NATURAL CAYENA 250 g",
+    "price":3.90
   },
   {
-    "code":"EX-0004",
-    "name":"Pre - Coco 240ML",
-    "price":5
+    "code":"PT-00004",
+    "name":"CREMA PEINAR NATURAL CAYENA 120 cc",
+    "price":2.90
+  },
+  {
+    "code":"PT-00005",
+    "name":"CREMA PEINAR NATURAL CAYENA 120 cc",
+    "price":4.50
+  },
+  {
+    "code":"PT-00006",
+    "name":"CREMA PEINAR NATURAL CAYENA 120 cc",
+    "price":4.50
+  },
+  {
+    "code":"PT-00007",
+    "name":"CREMA PEINAR NATURAL CAYENA 120 cc",
+    "price":3.90
+  },
+  {
+    "code":"PT-00008",
+    "name":"CREMA PEINAR NATURAL CAYENA 120 cc",
+    "price":2.90
   }
 ]
