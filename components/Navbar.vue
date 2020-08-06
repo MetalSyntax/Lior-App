@@ -1,6 +1,8 @@
 <template>
-  <nav class="flex items-center flex-wrap bg-pink-400 px-6 py-4 shadow-lg w-full z-10 sticky top-0 justify-center">
-    <img src="../assets/img/logo.png" class="logo h-16" alt="logo">
+  <nav class="flex items-center flex-wrap bg-blue-800 px-6 py-2 shadow-lg w-full z-10 sticky top-0 justify-center">
+    <span class="text-white text-4xl w-full text-center h-10">LIOR</span>
+    <span class="text-white text-md w-full text-center">PEDIDOS</span>
+    <!--<img src="../assets/img/logo.png" class="logo h-16" alt="logo">-->
     <!--<div class="flex items-center flex-shrink-0 text-white mr-6">
       <span class="font-semibold text-xl tracking-tight">Lior Cosmetics</span>
     </div>
@@ -40,4 +42,5 @@ export default {
 </script>
 
 <style>
+
 </style>

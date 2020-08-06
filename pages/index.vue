@@ -1,29 +1,9 @@
 <template>
   <main class="container flex items-center flex-wrap w-full my-0 mx-auto overflow-hidden">
-    <form
-      v-on:submit.prevent="addQuantity"
-      class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full"
-    >
-      <h1
-        v-if="customer.name != null"
-        class="block w-full text-gray-900 text-center text-xl bold py-2 customer"
-      >Hola!, {{ customer.name }}</h1>
-      <section class="w-full lg:w-full px-3 my-2 lg:my-3">
-        <label
-          class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
-          for="grid-code"
-        >Ingrese su codigo de cliente</label>
-        <v-select
-          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          v-model="customer"
-          :options="paginated"
-          @search="query => search = query"
-          :filterable="false"
-          label="name"
-          :value="paginated.name"
-          placeholder="Nombre del cliente"
-        ></v-select>
-      </section>
+    <form class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full">
+
+      <Customers />
+
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
@@ -35,7 +15,8 @@
           :options="productsData"
           :value="productsData.name"
           label="name"
-          placeholder="Nombre del producto"
+          placeholder="NOMBRE DEL PRODUCTO"
+          :selectable="productsData => !productsData.name.includes(allProducts.forEach((allProduct) => {allProduct[0]}))"
         ></v-select>
       </section>
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
@@ -47,7 +28,7 @@
           class="appearance-none block w-full bg-gray-200 text-gray-900 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
           id="grid-quantity"
           type="number"
-          placeholder="Cantidad"
+          placeholder="CANTIDAD"
           maxlength="4"
           min="1"
           max="9999"
@@ -63,40 +44,44 @@
         <div
           class="appearance-none block w-full bg-gray-200 text-gray-500 border rounded py-3 px-4 leading-tight"
         >
-          <p>Precio Unitario:</p>
+          <p class="text-sm uppercase">Precio Unitario:</p>
           <span
             v-if="productSelected.price > 0"
-            class="priceProduct text-lg text-gray-700"
+            class="priceProduct text-xl text-gray-700"
           >{{ productSelected.price }}$</span>
-          <span v-else class="priceProduct text-gray-700">No hay valor del producto</span>
+          <span v-else class="priceProduct text-md text-gray-700">No hay valor del producto</span>
           <br />
-          <p>Precio Subtotal:</p>
+          <p class="text-sm uppercase">Precio Subtotal:</p>
           <span
             v-if="productSelected.price > 0"
-            class="totalProducts text-lg text-gray-700"
+            class="totalProducts text-xl text-gray-700"
           >{{productSelected.price * quantity}}$</span>
-          <span v-else class="totalProducts text-gray-700">No hay un producto seleccionado</span>
+          <span v-else class="totalProducts text-md text-gray-700">No hay un producto seleccionado</span>
         </div>
       </section>
       <section class="flex w-full lg:w-full px-3 my-2 lg:my-3 justify-center">
-        <input
-          class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded"
-          type="submit"
-          value="Agregar producto"
-        />
+        <button
+          class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded cursor-pointer uppercase text-sm"
+          @click.prevent="addQuantity"
+        >Agregar producto</button>
       </section>
     </form>
 
     <section v-if="allProducts.length > 0" class="flex flex-wrap w-full px-2 justify-center">
       <div
-        class="appearance-none block w-full bg-gray-200 text-gray-500 border rounded py-2 px-2 leading-tight"
+        class="appearance-none flex flex-wrap w-full bg-gray-200 text-gray-500 border rounded py-2 px-2 leading-tight"
       >
         <span
-          class="block w-full uppercase tracking-wide text-center text-gray-900 text-lg font-bold mb-2"
-        >Pedido / Colecciones</span>
-        <span
-          class="block w-full uppercase tracking-wide text-center text-gray-900 text-3xl font-bold"
-        >{{totalPrice}}$ / {{collections}}</span>
+          class="block w-full uppercase tracking-wide text-center text-gray-900 text-xl font-bold mb-2"
+        >Resumen del Pedido</span>
+        <span class="block w-1/2 uppercase text-center text-gray-900 text-xs font-bold">
+          Total:
+          <span class="text-2xl">{{totalPrice}}$</span>
+        </span>
+        <span class="block w-1/2 uppercase text-center text-gray-900 text-xs font-bold">
+          Colecciones:
+          <span class="text-2xl">{{collections.toFixed(2)}}</span>
+        </span>
       </div>
       <span
         class="block uppercase tracking-wide text-gray-900 text-sm font-bold my-3"
@@ -104,24 +89,22 @@
       <table class="w-full table-auto">
         <thead class="border bg-gray-200">
           <tr>
-            <th class="px-2 py-1 text-sm">Nombre</th>
-            <th class="px-2 py-1 text-sm">Cantidad</th>
-            <!--<th class="px-2 py-1 text-sm">Unitario</th>-->
-            <th class="px-2 py-1 text-sm">Subtotal</th>
-            <th class="px-2 py-1 text-sm">Borrar</th>
+            <th class="px-2 py-1 text-sm uppercase">Producto</th>
+            <th class="px-2 py-1 text-sm uppercase">Borrar</th>
           </tr>
         </thead>
         <tbody class="border">
           <tr v-for="(allProduct, index) in allProducts" v-bind:key="index" class="my-2">
             <td class="px-1 py-1 text-center text-sm md:text-base">
-              <span class="w-full">{{allProduct[0].toLowerCase()}}</span>
-              <!--{{allProduct[index].productSelected}}-->
+              <span class="w-full block">{{allProduct[0]}}</span>
+              <span class="w-full uppercase">Unidades: {{allProduct[2]}} - </span>
+              <span class="w-full uppercase">Subtotal: {{allProduct[4]}}$</span>
             </td>
-            <td class="px-4 py-2 text-center text-sm md:text-base">{{allProduct[2]}}</td>
-            <!--<td class="border px-4 py-2 text-center text-sm md:text-base">{{allProduct[2]}}$</td>-->
-            <td class="px-4 py-2 text-center text-sm md:text-base">{{allProduct[4]}}$</td>
             <td class="text-center">
-              <button class="text-white rounded my-0 mx-auto py-1 px-3" @click="removeEach(index)">
+              <button
+                class="text-white rounded my-0 mx-auto py-1 px-3 cursor-pointer"
+                @click="removeEach(index)"
+              >
                 <img src="../static/delete.png" alt="Delete" class="w-8 h-auto" />
               </button>
             </td>
@@ -133,7 +116,6 @@
 </template>
 
 <script>
-import customersDataJson from "../data/customers.json";
 import productsDataJson from "../data/products.json";
 
 export default {
@@ -142,17 +124,11 @@ export default {
       allProducts: [], // Arreglo de todos los productos
       productSelected: [], // Producto seleccionado por el cliente
       productsSelected: null, // Productos guardados en arreglo
-      customer: [], //Cliente
-      customerCurrent: null, //Cliente guardado
       quantity: null, // Cantidad
       unitPrice: null, // Precio Unitario
       totalPrice: 0, // Precio Total
       collections: 0, //Precio Total
       productsData: Object.values(productsDataJson), //Data de productos
-      customersData: Object.values(customersDataJson), //Data de clientes
-      search: '',
-      offset: 0,
-      limit: 3,
     };
   },
   mounted() {
@@ -173,9 +149,9 @@ export default {
       this.collections = JSON.parse(localStorage.getItem("collections"));
     }
     //Muestra el nombre del cliente
-    /*if (localStorage.customerCurrent) {
-      this.customer = localStorage.customerCurrent;
-    }*/
+    if (localStorage.getItem("customerName")) {
+      this.customerName = JSON.parse(localStorage.getItem("customerName"));
+    }
   },
   methods: {
     addQuantity() {
@@ -224,18 +200,10 @@ export default {
     },
   },
   computed: {
-    filtered() {
-      return this.customersData.filter(customer => customer.name.match(new RegExp(this.search,"gi")));
-    },
-    paginated() {
-      return this.filtered.slice(this.offset, this.limit + this.offset);
-    },
+
   },
   watch: {
-    //Guarda temporalmente el nombre del cliente
-    customer(customerCurrent) {
-      localStorage.customerCurrent = JSON.stringify(this.customer);
-    },
+
   },
 };
 </script>
@@ -250,12 +218,6 @@ export default {
 }
 .vs__clear {
   display: none;
-}
-.customer {
-  text-transform: lowercase;
-}
-.customer:first-letter {
-  text-transform: capitalize;
 }
 tr:nth-child(even) {
   background-color: #edf2f7;
