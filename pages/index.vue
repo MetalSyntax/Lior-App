@@ -76,7 +76,7 @@
         >Resumen del Pedido</span>
         <span class="block w-1/2 uppercase text-center text-gray-900 text-xs font-bold">
           Total:
-          <span class="text-2xl">{{totalPrice}}$</span>
+          <span class="text-2xl">{{totalPrice.toFixed(2)}}$</span>
         </span>
         <span class="block w-1/2 uppercase text-center text-gray-900 text-xs font-bold">
           Colecciones:
