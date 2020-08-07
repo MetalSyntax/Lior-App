@@ -1,9 +1,7 @@
 <template>
   <main class="container flex items-center flex-wrap w-full my-0 mx-auto overflow-hidden">
     <form class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full">
-
       <Customers />
-
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
@@ -16,7 +14,6 @@
           :value="productsData.name"
           label="name"
           placeholder="NOMBRE DEL PRODUCTO"
-          :selectable="productsData => !productsData.name.includes(allProducts.forEach((allProduct) => {allProduct[0]}))"
         ></v-select>
       </section>
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
@@ -55,7 +52,7 @@
           <span
             v-if="productSelected.price > 0"
             class="totalProducts text-xl text-gray-700"
-          >{{productSelected.price * quantity}}$</span>
+          >{{(productSelected.price * quantity).toFixed(2)}}$</span>
           <span v-else class="totalProducts text-md text-gray-700">No hay un producto seleccionado</span>
         </div>
       </section>
@@ -96,9 +93,9 @@
         <tbody class="border">
           <tr v-for="(allProduct, index) in allProducts" v-bind:key="index" class="my-2">
             <td class="px-1 py-1 text-center text-sm md:text-base">
-              <span class="w-full block">{{allProduct[0]}}</span>
-              <span class="w-full uppercase">Unidades: {{allProduct[2]}} - </span>
-              <span class="w-full uppercase">Subtotal: {{allProduct[4]}}$</span>
+              <span class="w-full block">{{allProduct[1]}}</span>
+              <span class="w-full uppercase">Unidades: {{allProduct[3]}} -</span>
+              <span class="w-full uppercase">Subtotal: {{allProduct[5].toFixed(2)}}$</span>
             </td>
             <td class="text-center">
               <button
@@ -111,12 +108,18 @@
           </tr>
         </tbody>
       </table>
+      <button
+        class="bg-green-500 hover:bg-green-700 text-white my-4 py-2 px-4 rounded cursor-pointer uppercase text-sm"
+        @click.prevent="saveArchivetxt"
+      >Guardar archivo</button>
     </section>
   </main>
 </template>
 
 <script>
 import productsDataJson from "../data/products.json";
+import { saveAs } from "file-saver";
+const FileSaver = require("file-saver");
 
 export default {
   data() {
@@ -129,6 +132,9 @@ export default {
       totalPrice: 0, // Precio Total
       collections: 0, //Precio Total
       productsData: Object.values(productsDataJson), //Data de productos
+      file: null, //
+      customerName: "",
+      customerCode: "",
     };
   },
   mounted() {
@@ -148,9 +154,13 @@ export default {
     if (localStorage.getItem("collections")) {
       this.collections = JSON.parse(localStorage.getItem("collections"));
     }
-    //Muestra el nombre del cliente
+    // Guarda el nombre del cliente
     if (localStorage.getItem("customerName")) {
       this.customerName = JSON.parse(localStorage.getItem("customerName"));
+    }
+    // Guarda el codigo del cliente
+    if (localStorage.getItem("customerCode")) {
+      this.customerCode = JSON.parse(localStorage.getItem("customerCode"));
     }
   },
   methods: {
@@ -172,7 +182,7 @@ export default {
       this.collections = this.totalPrice / 50;
       this.allProducts.push(
         (this.productsSelected = [
-          this.productSelected.name, //Nombre
+          "\n", this.productSelected.name, //Nombre
           this.productSelected.code, //Codigo
           parseFloat(this.quantity), //Cantidad
           this.productSelected.price, //Precio Unitario
@@ -197,6 +207,20 @@ export default {
       this.collections = this.totalPrice / 50;
       this.allProducts.splice(x, 1);
       this.saveAll();
+    },
+    saveArchivetxt() {
+      this.file = new File(
+        [
+          "Cliente:\n" + this.customerName,
+          "\nCodigo:\n" + this.customerCode,
+          "\nProductos:" + this.allProducts,
+          "\nPrecio Total:\n" + this.totalPrice,
+          "\nColecciones:\n" + this.collections,
+        ],
+        "Pedido.csv",
+        { type: "data:text/csv;charset=utf-8" }
+      );
+      FileSaver.saveAs(this.file);
     },
   },
   computed: {

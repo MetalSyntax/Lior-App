@@ -45,6 +45,11 @@ export default {
       limit: 3, //Limite de clientes visibles
     };
   },
+  mounted() {
+    if (localStorage.getItem("customerName")) {
+      this.customerName = JSON.parse(localStorage.getItem("customerName"));
+    }
+  },
   methods: {
     addCustomer() {
       (this.customerCode = this.customer.code),
