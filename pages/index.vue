@@ -89,7 +89,6 @@
         >Agregar producto</button>
       </section>
     </form>
-
     <section v-if="allProducts.length > 0" class="flex flex-wrap w-full px-2 justify-center">
       <div
         class="appearance-none flex flex-wrap w-full bg-gray-200 text-gray-500 border rounded py-2 px-2 leading-tight"
@@ -230,6 +229,10 @@ export default {
       }
       this.totalPrice += this.productSelected.price * this.quantity;
       this.collections = this.totalPrice / 50;
+
+      this.totalPrice.toFixed(2)
+      this.collections.toFixed(2)
+
       this.allProducts.push(
         (this.productsSelected = [
           "\n",
@@ -271,8 +274,8 @@ export default {
             "\nPrecio Total:\n" + this.totalPrice,
             "\nColecciones:\n" + this.collections,
           ],
-          "Pedido.csv",
-          { type: "data:text/csv;charset=utf-8" }
+          "Pedido de " + this.customerCode + ".csv",
+          { type: "data:text/csv;charset=utf-8,%EF%BB%BF" }
         );
         FileSaver.saveAs(this.file);
         //Borrar Visual
@@ -283,6 +286,8 @@ export default {
         this.totalPrice = 0;
         this.collections= 0;
         this.quantity = null;
+        this.customerName = '';
+        this.customerCode = '';
         //Salvar los valores reestrablecidos
         this.saveAll();
       } else {
@@ -295,7 +300,7 @@ export default {
             "\nColecciones:\n" + this.collections,
           ],
           "Pedido de " + this.customerCode + ".csv",
-          { type: "data:text/csv;charset=utf-8" }
+          { type: "data:text/csv;charset=utf-8,%EF%BB%BF" }
         );
         FileSaver.saveAs(this.file);
       }
