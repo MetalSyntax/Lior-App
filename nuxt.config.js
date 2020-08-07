@@ -47,6 +47,7 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
+    ['@nuxtjs/pwa', { icon: false }],
   ],
   /*
   ** Nuxt.js modules
@@ -54,6 +55,18 @@ export default {
   modules: [
     'nuxt-vue-select',
   ],
+  /*
+  *
+  */
+ pwa: {
+  manifest: {
+    name: 'Lior Cosmetic - Pedidos',
+    short_name: 'Lior Cosmetic PWA',
+    background_color: "#000",
+    description: "Aplicacion web para generar pedidos de Lior Cosmetic.",
+    display: 'standalone',
+    }
+  },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

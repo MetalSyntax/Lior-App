@@ -149,6 +149,18 @@ import { saveAs } from "file-saver";
 const FileSaver = require("file-saver");
 
 export default {
+  head() {
+    return {
+      title: "Lior Cosmetic - Pedidos",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Aplicacion web para generar pedidos de Lior Cosmetic"
+        }
+      ]
+    };
+  },
   data() {
     return {
       allProducts: [], // Arreglo de todos los productos
