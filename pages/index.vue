@@ -212,7 +212,7 @@ export default {
       totalPrice: 0, // Precio Total
       collections: 0, //Precio Total
       productsData: Object.values(productsDataJson), //Data de productos
-      file: null, //
+      file: null, //Data del Archivo
       customer: [], //Cliente
       customerName: "", //Cliente Seleccionado
       customerCode: "", //Cliente guardado
@@ -239,10 +239,11 @@ export default {
     if (localStorage.getItem("collections")) {
       this.collections = JSON.parse(localStorage.getItem("collections"));
     }
-    // Guarda el nombre del cliente
+    // Muestra el nombre del cliente
     if (localStorage.getItem("customerName")) {
       this.customerName = JSON.parse(localStorage.getItem("customerName"));
     }
+    // Muestra el codigo del cliente
     if (localStorage.getItem("customerCode")) {
       this.customerCode = JSON.parse(localStorage.getItem("customerCode"));
     }
@@ -274,6 +275,7 @@ export default {
       }
       this.totalPrice += this.productSelected.price * this.quantity;
       this.collections = this.totalPrice / 50;
+
       this.allProducts.push({
         name: this.productSelected.name,
         code: this.productSelected.code,
@@ -322,8 +324,8 @@ export default {
             "Cliente:\n" + this.customerName,
             "\nCodigo:\n" + this.customerCode,
             "\nProductos:" + this.productsSelected,
-            "\nPrecio Total:\n" + this.totalPrice,
-            "\nColecciones:\n" + this.collections
+            "\nPrecio Total:\n" + parseFloat(this.totalPrice).toFixed(2),
+            "\nColecciones:\n" + parseFloat(this.collections).toFixed(2)
           ],
           "Pedido de " + this.customerCode + ".csv",
           { type: "data:text/csv;charset=utf-8,%EF%BB%BF" }
@@ -347,8 +349,8 @@ export default {
             "Cliente:\n" + this.customerName,
             "\nCodigo:\n" + this.customerCode,
             "\nProductos:" + this.productsSelected,
-            "\nPrecio Total:\n" + this.totalPrice,
-            "\nColecciones:\n" + this.collections
+            "\nPrecio Total:\n" + parseFloat(this.totalPrice).toFixed(2),
+            "\nColecciones:\n" + parseFloat(this.collections).toFixed(2)
           ],
           "Pedido de " + this.customerCode + ".csv",
           { type: "data:text/csv;charset=utf-8,%EF%BB%BF" }
