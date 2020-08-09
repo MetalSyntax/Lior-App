@@ -5,6 +5,7 @@
     <form
       class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full"
     >
+      <!--Cliente-->
       <section class="flex flex-wrap w-full px-3 my-2 lg:my-3">
         <h1
           v-if="customerName.length > 0"
@@ -34,6 +35,7 @@
           @click.prevent="addCustomer"
         >Guardar cliente</button>
       </section>
+      <!--Producto-->
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
@@ -50,6 +52,7 @@
           placeholder="NOMBRE DEL PRODUCTO"
         ></v-select>
       </section>
+      <!--Cantidad-->
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
@@ -68,6 +71,7 @@
           v-model="quantity"
         />
       </section>
+      <!--Resumen Temporal-->
       <section class="w-full lg:w-full px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
@@ -91,13 +95,14 @@
           <span
             v-if="productSelected.price > 0"
             class="text-xl text-gray-700"
-            >{{ (productSelected.price * quantity).toFixed(2) }}$</span
+            >{{ productSelected.price * quantity }}$</span
           >
           <span v-else class="text-md text-gray-700"
             >No hay un producto seleccionado</span
           >
         </div>
       </section>
+      <!--Envio-->
       <section class="flex w-full lg:w-full px-3 my-2 lg:my-3 justify-center">
         <button
           class="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded cursor-pointer uppercase text-sm"
@@ -107,6 +112,7 @@
         </button>
       </section>
     </form>
+    <!--Resumen-->
     <section
       v-if="allProducts.length > 0"
       class="flex flex-wrap w-full px-2 justify-center"
@@ -115,31 +121,31 @@
         class="appearance-none flex flex-wrap w-full bg-gray-200 text-gray-500 border rounded py-2 px-2 leading-tight"
       >
         <span
-          class="block w-full uppercase tracking-wide text-center text-gray-900 text-xl font-bold mb-2"
+          class="block w-full uppercase tracking-wide text-center text-gray-900 text-lg font-bold mb-2"
           >Resumen del Pedido</span
         >
         <span
           class="block w-1/2 uppercase text-center text-gray-900 text-xs font-bold"
         >
           Total:
-          <span class="text-2xl">{{ parseFloat(totalPrice).toFixed(2) }}$</span>
+          <span class="text-2xl">{{ totalPriceFormatted }}$</span>
         </span>
         <span
           class="block w-1/2 uppercase text-center text-gray-900 text-xs font-bold"
         >
           Colecciones:
-          <span class="text-2xl">{{ parseFloat(collections).toFixed(2) }}</span>
+          <span class="text-2xl">{{ collectionsFormatted }}</span>
         </span>
       </div>
       <span
         class="block uppercase tracking-wide text-gray-900 text-sm font-bold my-3"
-        >Listado de productos seleccionados</span
+        >Listado de productos</span
       >
       <table class="w-full table-auto">
         <thead class="border bg-gray-200">
           <tr>
-            <th class="px-2 py-1 text-sm uppercase">Producto</th>
-            <th class="px-2 py-1 text-sm uppercase">Borrar</th>
+            <th class="px-2 py-1 text-xs md:text-sm uppercase">Producto</th>
+            <th class="px-2 py-1 text-xs md:text-sm uppercase"></th>
           </tr>
         </thead>
         <tbody class="border">
@@ -148,18 +154,26 @@
             v-bind:key="index"
             class="my-2"
           >
-            <td class="px-1 py-1 text-center text-sm md:text-base">
-              <span class="w-full block">{{ allProduct.name }}</span>
+            <td class="px-1 py-1 text-left text-xs md:text-sm">
+              <span class="w-full block font-bold">
+                {{ allProduct.name }}
+                </span>
               <span class="w-full uppercase"
                 >Unidades: {{ allProduct.quantity }} -</span
               >
               <span class="w-full uppercase"
-                >Subtotal: {{ allProduct.subtotal.toFixed(2) }}$</span
+                >Subtotal: {{ allProduct.subtotal }}$</span
               >
+              <!--<button
+                class="rounded my-0 mx-auto py-1 px-3 cursor-pointer text-lg text-red-500 font-bold"
+                @click="removeEach(index)"
+              >
+                X
+              </button>-->
             </td>
             <td class="text-center">
               <button
-                class="rounded my-0 mx-auto py-1 px-3 cursor-pointer text-2xl text-black bold"
+                class="rounded my-0 mx-auto py-1 px-3 cursor-pointer text-lg text-red-500 font-bold"
                 @click="removeEach(index)"
               >
                 <!--<img
@@ -209,8 +223,11 @@ export default {
       productsSelected: [], // Productos guardados en arreglo
       quantity: null, // Cantidad
       unitPrice: null, // Precio Unitario
+      subtotal: null, // Subtotal
       totalPrice: 0, // Precio Total
+      totalPriceFormatted: 0, //
       collections: 0, //Precio Total
+      collectionsFormatted: 0, //
       productsData: Object.values(productsDataJson), //Data de productos
       file: null, //Data del Archivo
       customer: [], //Cliente
@@ -235,9 +252,15 @@ export default {
     if (localStorage.getItem("totalPrice")) {
       this.totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
     }
+    if (localStorage.getItem("totalPriceFormatted")) {
+      this.totalPriceFormatted = JSON.parse(localStorage.getItem("totalPriceFormatted"));
+    }
     // Muestra las colecciones
     if (localStorage.getItem("collections")) {
       this.collections = JSON.parse(localStorage.getItem("collections"));
+    }
+     if (localStorage.getItem("collectionsFormatted")) {
+      this.collectionsFormatted = JSON.parse(localStorage.getItem("collectionsFormatted"));
     }
     // Muestra el nombre del cliente
     if (localStorage.getItem("customerName")) {
@@ -275,13 +298,16 @@ export default {
       }
       this.totalPrice += this.productSelected.price * this.quantity;
       this.collections = this.totalPrice / 50;
+      this.totalPriceFormatted = parseFloat(this.totalPrice).toFixed(2);
+      this.collectionsFormatted = parseFloat(this.collections).toFixed(2);
 
       this.allProducts.push({
         name: this.productSelected.name,
         code: this.productSelected.code,
         quantity: parseInt(this.quantity),
         unitedPrice: parseFloat(this.productSelected.price),
-        subtotal: parseFloat(this.productSelected.price * this.quantity)
+        subtotal: parseFloat(this.productSelected.price * this.quantity),
+        subtotalformatted: parseFloat(this.productSelected.price * this.quantity).toFixed(2)
       });
       this.productsSelected.push([
         "\n",
@@ -305,10 +331,16 @@ export default {
       localStorage.setItem("totalPrice", totalPrice);
       const collections = JSON.stringify(this.collections);
       localStorage.setItem("collections", collections);
+      const totalPriceFormatted = JSON.stringify(this.totalPriceFormatted);
+      localStorage.setItem("totalPriceFormatted", totalPriceFormatted);
+      const collectionsFormatted = JSON.stringify(this.collectionsFormatted);
+      localStorage.setItem("collectionsFormatted", collectionsFormatted);
     },
     removeEach(x) {
       this.totalPrice -= parseFloat(this.allProducts[x].subtotal);
+      this.totalPriceFormatted -= parseFloat(this.allProducts[x].subtotal).toFixed(2);
       this.collections = this.totalPrice / 50;
+      this.collectionsFormatted = parseFloat(this.totalPrice / 50).toFixed(2);
       this.productsSelected.splice(x, 1);
       this.allProducts.splice(x, 1);
       this.saveAll();
