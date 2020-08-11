@@ -1,31 +1,31 @@
 <template>
   <section class="flex flex-wrap w-full px-3 my-2 lg:my-3">
-    <h1
-      v-if="customerName.length > 0"
-      class="block w-full text-gray-900 text-center text-lg bold py-2 uppercase"
-    >
-      Bienvenido!,
-      <span class="block w-full">{{ customerName }}</span>
-    </h1>
     <label
-      class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
+      class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-4"
       for="grid-code"
     >Ingrese su nombre de cliente</label>
     <v-select
-      class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4"
+      class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-6 p-2"
       v-model="customer"
       :options="paginated"
       @search="query => (search = query)"
       :filterable="false"
+      :clearable="false"
       label="name"
       :value="paginated.name"
       placeholder="NOMBRE DEL CLIENTE"
     ></v-select>
     <button
-      class="block bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+     v-if="customerName.length == 0"
+      class="block bg-button text-white hover:bg-white color-button border-button border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
       @click.prevent="addCustomer"
-    >Guardar cliente
-  </button>
+    >Guardar cliente</button>
+    <nuxt-link
+     v-if="customerName.length > 0"
+    class="block bg-button text-white hover:bg-white color-button border-button border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+    to="/form">
+    Continuar
+    </nuxt-link>
   </section>
 </template>
 
@@ -44,11 +44,6 @@ export default {
       offset: 0,
       limit: 3, //Limite de clientes visibles
     };
-  },
-  mounted() {
-    if (localStorage.getItem("customerName")) {
-      this.customerName = JSON.parse(localStorage.getItem("customerName"));
-    }
   },
   methods: {
     addCustomer() {
@@ -77,4 +72,16 @@ export default {
 </script>
 
 <style>
+.bg-button {
+  background: #94c11e;
+}
+.color-button:hover {
+  color: #94c11e;
+}
+.border-button:hover {
+  border: 1px solid #94c11e;
+}
+.vs__dropdown-toggle {
+  border: 0px solid rgba(0, 0, 0, 0);
+}
 </style>

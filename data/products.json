@@ -1,12 +1,12 @@
 [{
     "code": "PT-00001",
     "name": "PRE TRATAMIENTO NAT CAYENA 400 cc",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00002",
     "name": "POST TRATAMIENTO NAT CAYENA 400 cc",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00003",
@@ -21,12 +21,12 @@
   {
     "code": "PT-00005",
     "name": "PRE- TRATAMIENTO NAT SABILA 400 cc",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00006",
     "name": "POST- TRATAMIENTO NAT SABILA 400 cc",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00007",
@@ -81,7 +81,7 @@
   {
     "code": "PT-00023",
     "name": "SILICONA COLOR  40 cc",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00025",
@@ -96,7 +96,7 @@
   {
     "code": "PT-00028",
     "name": "SPLASH CORPORAL MAGNOLIA 250 cc",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00029",
@@ -111,7 +111,7 @@
   {
     "code": "PT-00031",
     "name": "SPLASH CORPORAL GARDENIA 250 cc",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00032",
@@ -136,7 +136,7 @@
   {
     "code": "PT-00044",
     "name": "ARNICA ACEITE CREMOSO 240ML",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00045",
@@ -166,12 +166,12 @@
   {
     "code": "PT-00056",
     "name": "PRE-TRATAMIENTO MIEL CON GERMEN DE TRIGO 400 cc",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00057",
     "name": "POST-TRATAMIENTO MIEL CON GERMEN DE TRIGO 400 cc",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00058",
@@ -226,12 +226,12 @@
   {
     "code": "PT-00080",
     "name": "PRE-TRATAMIENTO ROMERO CON ACEITE  400 gr",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00081",
     "name": "POST-TRATAMIENTO ROMERO CON ACEITE 400 gr",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00082",
@@ -296,12 +296,12 @@
   {
     "code": "PT-00102",
     "name": "PRE- TRATAMIENTO COCO ALMENDRAS 400 gr",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00103",
     "name": "POST-TRATAMIENTO COCO ALMENDRAS 400 gr",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00104",
@@ -346,7 +346,7 @@
   {
     "code": "PT-00116",
     "name": "SPLASH CORPORAL MAGNOLIA - COCO",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00118",
@@ -356,7 +356,7 @@
   {
     "code": "PT-00119",
     "name": "SPLASH CORPORAL ROSA GARDENIA",
-    "price": 4
+    "price": 4.5
   },
   {
     "code": "PT-00120",
