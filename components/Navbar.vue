@@ -10,7 +10,8 @@
     </div>-->
     <div class="flex lg:hidden">
       <button
-        class="flex items-center px-3 py-2 border rounded text-white border-white hover:text-white hover:border-white"
+        @click="toggle"
+        class="flex items-center px-3 py-2 border rounded text-white border-white hover:text-white hover:border-white focus:outline-none hove:outline-none"
       >
         <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <title>Menu</title>
@@ -18,7 +19,8 @@
         </svg>
       </button>
     </div>
-    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+    <div :class="open ? 'block': 'hidden'"
+          class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
       <div class="text-sm lg:flex-grow">
         <nuxt-link to="/" class="text-white float-right">
         Nuevo Cliente</nuxt-link>
@@ -30,6 +32,21 @@
 <script>
 export default {
   name: "NavBar",
+  data() {
+    return {
+      open: false,
+    }
+  },
+  methods: {
+    toggle() {
+      this.open = !this.open;
+    }
+  },
+  watch: {
+    '$route' () {
+      this.open = false
+    }
+  }
 };
 </script>
 

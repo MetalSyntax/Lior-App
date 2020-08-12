@@ -14,11 +14,13 @@
         <v-select
           class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 p-2"
           v-model="productSelected"
-          :options="productsData"
-          :value="productsData.name"
+          :options="paginated"
+          @search="query => (search = query)"
+          :filterable="false"
+          :value="paginated.name"
           :clearable="false"
           label="name"
-          placeholder="NOMBRE DEL PRODUCTO"
+          placeholder="INGRESE NOMBRE"
         ></v-select>
       </section>
       <!--Cantidad-->
@@ -28,10 +30,10 @@
           for="grid-code"
         >Ingrese cantidad</label>
         <input
-          class="appearance-none block w-full bg-gray-200 text-gray-900 text-xs border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+          class="appearance-none block w-full bg-gray-200 text-gray-900 text-sm border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
           id="grid-quantity"
           type="number"
-          placeholder="CANTIDAD"
+          placeholder="0"
           maxlength="4"
           min="1"
           max="9999"
@@ -63,9 +65,6 @@
           <span v-else class="text-md text-gray-700"></span>
         </div>
       </section>
-      <!--Envio
-      <section class="flex w-full lg:w-full px-3 my-2 lg:my-3 justify-center">
-      </section>-->
     </form>
     <!--Resumen-->
     <section v-if="allProducts.length > 0" class="flex flex-wrap w-full px-2 justify-center pb-20">
@@ -90,7 +89,7 @@
       <table class="w-full table-auto">
         <thead class="border bg-gray-200">
           <tr>
-            <th class="px-2 py-1 text-xs md:text-sm uppercase">Producto</th>
+            <th class="px-2 py-1 text-xs md:text-sm uppercase text-left">Producto</th>
             <th class="px-2 py-1 text-xs md:text-sm uppercase"></th>
           </tr>
         </thead>
@@ -111,13 +110,13 @@
         </tbody>
       </table>
     </section>
-    <section class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between">
+    <section class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200">
       <button
-        class="bg-white color-button-green border-button-green hover:border-transparent border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none "
+        class="bg-white color-button-green border-button-green hover:border-transparent border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="saveArchive"
       >Guardar</button>
       <button
-          class="bg-button text-white border-button border-white hover:border-transparent border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+          class="bg-button text-white border-button border-white hover:border-transparent border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
           @click.prevent="addQuantity"
         >Agregar</button>
     </section>
@@ -145,6 +144,9 @@ export default {
       collectionsFormatted: 0, //
       quantity: null, // Cantidad
       file: null, //Data del Archivo
+      search: "",
+      offset: 0,
+      limit: 10, //Limite de clientes visibles
     };
   },
   mounted() {
@@ -264,8 +266,11 @@ export default {
             "\nPrecio Total:\n" + parseFloat(this.totalPrice).toFixed(2),
             "\nColecciones:\n" + parseFloat(this.collections).toFixed(2),
           ],
-          "Pedido de " + this.customerCode + ".csv",
-          { type: "data:text/csv;charset=utf-8,%EF%BB%BF" }
+          "Pedido de " + this.customerCode + ".txt",
+          {
+            type: "text/plain;charset=utf-8"
+            //type: "data:text/csv;charset=utf-8,%EF%BB%BF"
+          }
         );
         FileSaver.saveAs(this.file);
         //Borrar Visual
@@ -274,9 +279,9 @@ export default {
         this.totalPrice = 0;
         this.collections = 0;
         this.quantity = null;
-        this.productsSelected = null;
-        this.collectionsFormatted = null;
-        this.totalPriceFormatted = null;
+        this.productsSelected = [];
+        this.collectionsFormatted = 0;
+        this.totalPriceFormatted = 0;
         //Salvar los valores reestrablecidos
         this.saveAll();
       } else {
@@ -295,7 +300,16 @@ export default {
       }
     },
   },
-  computed: {},
+  computed: {
+    filtered() {
+      return this.productsData.filter((productSelected) =>
+        productSelected.name.match(new RegExp(this.search, "gi"))
+      );
+    },
+    paginated() {
+      return this.filtered.slice(this.offset, this.limit + this.offset);
+    },
+  },
 };
 </script>
 

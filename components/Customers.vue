@@ -3,7 +3,8 @@
     <label
       class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-4"
       for="grid-code"
-    >Ingrese su nombre</label>
+      >Ingrese su nombre</label
+    >
     <v-select
       class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-6 p-2"
       v-model="customer"
@@ -16,16 +17,18 @@
       placeholder="NOMBRE DEL CLIENTE"
     ></v-select>
     <button
-     v-if="customerName.length == 0"
+      v-if="customerName.length == 0"
       class="block bg-button text-white hover:bg-white color-button border-button border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
       @click.prevent="addCustomer"
-    >Guardar cliente</button>
+    >
+      Guardar cliente
+    </button>
     <nuxt-link
-     v-if="customerName.length > 0"
-    class="block bg-button text-white hover:bg-white color-button border-button border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
-    to="/form">
-    Continuar
-    </nuxt-link>
+      v-if="customerName.length > 0"
+      class="block bg-button text-white hover:bg-white color-button border-button border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+      to="/form"
+      >Continuar</nuxt-link
+    >
   </section>
 </template>
 
@@ -45,10 +48,13 @@ export default {
       limit: 3, //Limite de clientes visibles
     };
   },
+  mounted() {
+  },
   methods: {
     addCustomer() {
-      (this.customerCode = this.customer.code),
-        (this.customerName = this.customer.name);
+      localStorage.clear();
+      this.customerCode = this.customer.code;
+      this.customerName = this.customer.name;
       this.saveCustomer();
     },
     saveCustomer() {
@@ -56,18 +62,18 @@ export default {
       localStorage.setItem("customerName", customerName);
       const customerCode = JSON.stringify(this.customerCode);
       localStorage.setItem("customerCode", customerCode);
-    },
+    }
   },
   computed: {
     filtered() {
-      return this.customersData.filter((customer) =>
+      return this.customersData.filter(customer =>
         customer.name.match(new RegExp(this.search, "gi"))
       );
     },
     paginated() {
       return this.filtered.slice(this.offset, this.limit + this.offset);
-    },
-  },
+    }
+  }
 };
 </script>
 
