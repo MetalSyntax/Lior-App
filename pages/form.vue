@@ -2,7 +2,7 @@
   <main class="container flex items-center flex-wrap w-full my-0 mx-auto overflow-hidden">
     <h1 class="block w-full text-gray-900 text-center text-lg bold py-2 uppercase">
       Bienvenido!,
-      <span class="block w-full">{{ customerName }}</span>
+      <span class="block w-full font-bold">{{ customerName }}</span>
     </h1>
     <form class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full">
       <!--Producto-->
@@ -12,7 +12,7 @@
           for="grid-product"
         >Seleccione un producto</label>
         <v-select
-          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 p-2"
+          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 p-2"
           v-model="productSelected"
           :options="productsData"
           :value="productsData.name"
@@ -26,9 +26,9 @@
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
           for="grid-code"
-        >Ingrese la cantidad de los productos</label>
+        >Ingrese cantidad</label>
         <input
-          class="appearance-none block w-full bg-gray-200 text-gray-900 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+          class="appearance-none block w-full bg-gray-200 text-gray-900 text-xs border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
           id="grid-quantity"
           type="number"
           placeholder="CANTIDAD"
@@ -40,7 +40,7 @@
         />
       </section>
       <!--Resumen Temporal-->
-      <section class="w-full lg:w-full px-3 my-2 lg:my-3">
+      <section class="w-full lg:w-full px-3 mt-2 mb-16 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
           for="grid-code"
@@ -53,31 +53,27 @@
             v-if="productSelected.price > 0"
             class="priceProduct text-xl text-gray-700"
           >{{ productSelected.price }}$</span>
-          <span v-else class="text-md text-gray-700">No hay valor del producto</span>
+          <span v-else class="text-md text-gray-700"></span>
           <br />
           <p class="text-sm uppercase">Precio Subtotal:</p>
           <span
             v-if="productSelected.price > 0"
             class="text-xl text-gray-700"
           >{{ productSelected.price * quantity }}$</span>
-          <span v-else class="text-md text-gray-700">No hay un producto seleccionado</span>
+          <span v-else class="text-md text-gray-700"></span>
         </div>
       </section>
-      <!--Envio-->
+      <!--Envio
       <section class="flex w-full lg:w-full px-3 my-2 lg:my-3 justify-center">
-        <button
-          class="bg-button text-white hover:bg-white color-button border-button border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
-          @click.prevent="addQuantity"
-        >Agregar producto</button>
-      </section>
+      </section>-->
     </form>
     <!--Resumen-->
     <section v-if="allProducts.length > 0" class="flex flex-wrap w-full px-2 justify-center pb-20">
       <div
-        class="appearance-none flex flex-wrap w-full bg-gray-200 text-gray-500 border rounded py-2 px-2 leading-tight"
+        class="appearance-none flex flex-wrap w-full bg-white text-gray-500 border rounded py-2 px-2 leading-tight"
       >
         <span
-          class="block w-full uppercase tracking-wide text-center text-gray-900 text-lg font-bold mb-2"
+          class="block w-full uppercase tracking-wide text-center color-button-blue text-lg font-bold mb-2 "
         >Resumen del Pedido</span>
         <span class="block w-1/2 uppercase text-center text-gray-900 text-xs font-bold">
           Total:
@@ -115,11 +111,15 @@
         </tbody>
       </table>
     </section>
-    <section class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl">
+    <section class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between">
       <button
-        class="block bg-button text-white hover:bg-white color-button border-button border-transparent border my-4 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none "
+        class="bg-white color-button-green border-button-green hover:border-transparent border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none "
         @click.prevent="saveArchive"
-      >Guardar archivo</button>
+      >Guardar</button>
+      <button
+          class="bg-button text-white border-button border-white hover:border-transparent border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+          @click.prevent="addQuantity"
+        >Agregar</button>
     </section>
   </main>
 </template>
@@ -303,10 +303,22 @@ export default {
 .bg-button {
   background: #94c11e;
 }
+.bg-button-hover:hover {
+  background: #94c11e;
+}
+.color-button-green {
+  color: #94c11e;
+}
+.color-button-blue {
+  color:#244a8b
+}
 .color-button:hover {
   color: #94c11e;
 }
 .border-button:hover {
+  border: 1px solid #94c11e;
+}
+.border-button-green {
   border: 1px solid #94c11e;
 }
 .vs__dropdown-toggle {

@@ -3,9 +3,9 @@
     <label
       class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-4"
       for="grid-code"
-    >Ingrese su nombre de cliente</label>
+    >Ingrese su nombre</label>
     <v-select
-      class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-6 p-2"
+      class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-6 p-2"
       v-model="customer"
       :options="paginated"
       @search="query => (search = query)"
