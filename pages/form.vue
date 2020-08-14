@@ -12,16 +12,30 @@
           for="grid-product"
         >Seleccione un producto</label>
         <v-select
-          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 p-2"
+          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4 p-2"
           v-model="productSelected"
           :options="paginated"
           @search="query => (search = query)"
           :filterable="false"
           :value="paginated.name"
           :clearable="false"
+          :selectable="option => option.value != false"
           label="name"
           placeholder="INGRESE NOMBRE"
-        ></v-select>
+        >
+          <li slot="list-footer" class="flex">
+            <button
+              class="flex-grow hover:pointer"
+              @click.prevent="offset -= 5"
+              :disabled="!hasPrevPage"
+            >Previo</button>
+            <button
+              class="flex-grow hover:pointer"
+              @click.prevent="offset += 5"
+              :disabled="!hasNextPage"
+            >Siguiente</button>
+          </li>
+        </v-select>
       </section>
       <!--Cantidad-->
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
@@ -48,40 +62,47 @@
           for="grid-code"
         >Resumen parcial</label>
         <div
-          class="appearance-none block w-full bg-gray-200 text-gray-500 border rounded py-3 px-4 leading-tight"
+          class="appearance-none flex w-full bg-gray-200 text-gray-500 border rounded py-3 px-4 leading-tight"
         >
-          <p class="text-sm uppercase">Precio Unitario:</p>
-          <span
-            v-if="productSelected.price > 0"
-            class="priceProduct text-xl text-gray-700"
-          >{{ productSelected.price }}$</span>
-          <span v-else class="text-md text-gray-700"></span>
-          <br />
-          <p class="text-sm uppercase">Precio Subtotal:</p>
-          <span
-            v-if="productSelected.price > 0"
-            class="text-xl text-gray-700"
-          >{{ productSelected.price * quantity }}$</span>
-          <span v-else class="text-md text-gray-700"></span>
+          <div class="flex flex-wrap w-1/2">
+            <p class="text-sm uppercase">Precio Unitario:</p>
+            <span
+              v-if="productSelected.price > 0"
+              class="text-xl text-gray-700"
+            >{{ unitPriceFormat }}$</span>
+            <span v-else class="text-md text-gray-700"></span>
+          </div>
+          <div class="flex flex-wrap w-1/2">
+            <p class="text-sm uppercase">Precio Subtotal:</p>
+            <span
+              v-if="productSelected.price > 0"
+              class="text-xl text-gray-700"
+            >{{ subtotalFormat }}$</span>
+            <span v-else class="text-md text-gray-700"></span>
+          </div>
         </div>
       </section>
     </form>
     <!--Resumen-->
     <section v-if="allProducts.length > 0" class="flex flex-wrap w-full px-2 justify-center pb-20">
       <div
-        class="appearance-none flex flex-wrap w-full bg-white text-gray-500 border rounded py-2 px-2 leading-tight"
+        class="appearance-none flex flex-wrap w-full bg-white text-gray-500 border rounded py-2 px-2 leading-tight shadow-sm"
       >
         <span
-          class="block w-full uppercase tracking-wide text-center color-button-blue text-lg font-bold mb-2 "
+          class="block w-full uppercase tracking-wide text-center color-button-blue text-lg font-bold mb-2"
         >Resumen del Pedido</span>
-        <span class="block w-1/2 uppercase text-center text-gray-900 text-xs font-bold">
-          Total:
-          <span class="text-2xl">{{ totalPriceFormatted }}$</span>
-        </span>
-        <span class="block w-1/2 uppercase text-center text-gray-900 text-xs font-bold">
-          Colecciones:
-          <span class="text-2xl">{{ collectionsFormatted }}</span>
-        </span>
+        <div class="block w-1/2 text-center">
+          <span class="uppercase text-gray-900 text-xs font-bold">
+            Total:
+            <span class="text-2xl">{{ totalPriceFormatted }}$</span>
+          </span>
+        </div>
+        <div class="block w-1/2 text-center">
+          <span class="uppercase text-gray-900 text-xs font-bold">
+            Colecciones:
+            <span class="text-2xl">{{ collectionsFormatted }}</span>
+          </span>
+        </div>
       </div>
       <span
         class="block uppercase tracking-wide text-gray-900 text-sm font-bold my-3"
@@ -98,7 +119,7 @@
             <td class="px-1 py-1 text-left text-xs md:text-sm">
               <span class="w-full block font-bold">{{ allProduct.name }}</span>
               <span class="w-full uppercase">Unidades: {{ allProduct.quantity }} -</span>
-              <span class="w-full uppercase">Subtotal: {{ allProduct.subtotal }}$</span>
+              <span class="w-full uppercase">Subtotal: {{ allProduct.subtotalformatted }}$</span>
             </td>
             <td class="text-center">
               <button
@@ -110,15 +131,18 @@
         </tbody>
       </table>
     </section>
-    <section class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200">
+    <!--Botones-->
+    <section
+      class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200"
+    >
       <button
         class="bg-white color-button-green border-button-green hover:border-transparent border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="saveArchive"
       >Guardar</button>
       <button
-          class="bg-button text-white border-button border-white hover:border-transparent border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
-          @click.prevent="addQuantity"
-        >Agregar</button>
+        class="bg-button text-white border-button border-white hover:border-transparent border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        @click.prevent="addQuantity"
+      >Agregar</button>
     </section>
   </main>
 </template>
@@ -146,7 +170,7 @@ export default {
       file: null, //Data del Archivo
       search: "",
       offset: 0,
-      limit: 10, //Limite de clientes visibles
+      limit: 5, //Limite de clientes visibles
     };
   },
   mounted() {
@@ -207,6 +231,7 @@ export default {
       this.allProducts.push({
         name: this.productSelected.name,
         code: this.productSelected.code,
+        //value: this.productSelected.value = false,
         quantity: parseInt(this.quantity),
         unitedPrice: parseFloat(this.productSelected.price),
         subtotal: parseFloat(this.productSelected.price * this.quantity),
@@ -219,13 +244,14 @@ export default {
         this.productSelected.name,
         this.productSelected.code,
         parseInt(this.quantity),
-        this.productSelected.price,
-        this.productSelected.price * this.quantity,
+        parseFloat(this.productSelected.price).toFixed(2),
+        parseFloat(this.productSelected.price * this.quantity).toFixed(2),
       ]);
       //Vacia el campo
       this.quantity = null;
       //Guarda la data
       this.saveAll();
+      //console.log(this.productsData);
     },
     saveAll() {
       const allProducts = JSON.stringify(this.allProducts);
@@ -243,6 +269,9 @@ export default {
     },
     removeEach(x) {
       this.totalPrice -= parseFloat(this.allProducts[x].subtotal);
+      //this.productsData[x].value = true
+      //this.allProducts[x].value = true;
+      //this.productsSelected[x].value = true;
       this.totalPriceFormatted -= parseFloat(
         this.allProducts[x].subtotal
       ).toFixed(2);
@@ -251,24 +280,30 @@ export default {
       this.productsSelected.splice(x, 1);
       this.allProducts.splice(x, 1);
       this.saveAll();
+      //console.log(this.productsData);
     },
     saveArchive(x) {
-      if (
-        confirm(
-          "¿Deseas guardar y borrar?"
-        )
-      ) {
+      if (confirm("¿Deseas guardar y borrar?")) {
         this.file = new File(
           [
-            "Cliente:\n" + this.customerName,
-            "\nCodigo:\n" + this.customerCode,
-            "\nProductos:" + this.productsSelected,
-            "\nPrecio Total:\n" + parseFloat(this.totalPrice).toFixed(2),
-            "\nColecciones:\n" + parseFloat(this.collections).toFixed(2),
+            ",Cliente\n," + this.customerName,
+            "\n,Código\n," + this.customerCode,
+            "\n,Productos,Código,Cantidad,Precio Unitario,Subtotal" +
+              this.productsSelected,
+            "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
+            "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
           ],
-          "Pedido de " + this.customerCode + ".txt",
+          "Pedido de " +
+            this.customerCode +
+            " del " +
+            new Date().getDate() +
+            "-" +
+            new Date().getMonth() +
+            "-" +
+            new Date().getFullYear() +
+            ".txt",
           {
-            type: "text/plain;charset=utf-8"
+            type: "text/plain;charset=utf-8",
             //type: "data:text/csv;charset=utf-8,%EF%BB%BF"
           }
         );
@@ -309,7 +344,26 @@ export default {
     paginated() {
       return this.filtered.slice(this.offset, this.limit + this.offset);
     },
+    hasNextPage() {
+      const nextOffset = this.offset + 5;
+      return Boolean(
+        this.filtered.slice(nextOffset, this.limit + nextOffset).length
+      );
+    },
+    hasPrevPage() {
+      const prevOffset = this.offset - 5;
+      return Boolean(
+        this.filtered.slice(prevOffset, this.limit + prevOffset).length
+      );
+    },
+    unitPriceFormat() {
+      return parseFloat(this.productSelected.price).toFixed(2);
+    },
+    subtotalFormat() {
+      return (this.productSelected.price * this.quantity).toFixed(2);
+    },
   },
+  watch: {},
 };
 </script>
 
@@ -324,7 +378,7 @@ export default {
   color: #94c11e;
 }
 .color-button-blue {
-  color:#244a8b
+  color: #244a8b;
 }
 .color-button:hover {
   color: #94c11e;
