@@ -68,15 +68,15 @@
             <p class="text-sm uppercase">Precio Unitario:</p>
             <span
               v-if="productSelected.price > 0"
-              class="text-xl text-gray-700"
+              class="text-xl text-gray-700 w-full"
             >{{ unitPriceFormat }}$</span>
             <span v-else class="text-md text-gray-700"></span>
           </div>
           <div class="flex flex-wrap w-1/2">
-            <p class="text-sm uppercase">Precio Subtotal:</p>
+            <p class="text-sm uppercase">Subtotal:</p>
             <span
               v-if="productSelected.price > 0"
-              class="text-xl text-gray-700"
+              class="text-xl text-gray-700 w-full"
             >{{ subtotalFormat }}$</span>
             <span v-else class="text-md text-gray-700"></span>
           </div>
@@ -241,8 +241,8 @@ export default {
       });
       this.productsSelected.push([
         "\n",
-        this.productSelected.name,
         this.productSelected.code,
+        this.productSelected.name,
         parseInt(this.quantity),
         parseFloat(this.productSelected.price).toFixed(2),
         parseFloat(this.productSelected.price * this.quantity).toFixed(2),
@@ -288,7 +288,7 @@ export default {
           [
             ",Cliente\n," + this.customerName,
             "\n,Código\n," + this.customerCode,
-            "\n,Productos,Código,Cantidad,Precio Unitario,Subtotal" +
+            "\n,Código,Productos,Cantidad,Precio Unitario,Subtotal" +
               this.productsSelected,
             "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
             "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
@@ -303,7 +303,7 @@ export default {
             new Date().getFullYear() +
             ".txt",
           {
-            type: "text/plain;charset=utf-8",
+            type: "text/html;charset=utf-8",
             //type: "data:text/csv;charset=utf-8,%EF%BB%BF"
           }
         );
