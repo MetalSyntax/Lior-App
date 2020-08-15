@@ -19,7 +19,7 @@
           :filterable="false"
           :value="paginated.name"
           :clearable="false"
-          :selectable="option => option.value != false"
+          :selectable="options => options.value != false"
           label="name"
           placeholder="INGRESE NOMBRE"
         >
@@ -68,7 +68,7 @@
             <p class="text-sm uppercase">Precio Unitario:</p>
             <span
               v-if="productSelected.price > 0"
-              class="text-xl text-gray-700 w-full"
+              class="text-xl text-gray-700 w-full font-bold"
             >{{ unitPriceFormat }}$</span>
             <span v-else class="text-md text-gray-700"></span>
           </div>
@@ -76,7 +76,7 @@
             <p class="text-sm uppercase">Subtotal:</p>
             <span
               v-if="productSelected.price > 0"
-              class="text-xl text-gray-700 w-full"
+              class="text-xl text-gray-700 w-full font-bold"
             >{{ subtotalFormat }}$</span>
             <span v-else class="text-md text-gray-700"></span>
           </div>
@@ -91,16 +91,16 @@
         <span
           class="block w-full uppercase tracking-wide text-center color-button-blue text-lg font-bold mb-2"
         >Resumen del Pedido</span>
-        <div class="block w-1/2 text-center">
-          <span class="uppercase text-gray-900 text-xs font-bold">
-            Total:
-            <span class="text-2xl">{{ totalPriceFormatted }}$</span>
-          </span>
+        <div class="flex flex-wrap w-1/2 text-center">
+          <span class="uppercase text-gray-900 text-xs font-bold w-full">Total:</span>
+          <span class="text-gray-900 font-bold text-2xl w-full">{{ totalPriceFormatted }}$</span>
         </div>
-        <div class="block w-1/2 text-center">
-          <span class="uppercase text-gray-900 text-xs font-bold">
-            Colecciones:
-            <span class="text-2xl">{{ collectionsFormatted }}</span>
+        <div class="flex flex-wrap w-1/2 text-center">
+          <span class="uppercase text-gray-900 text-xs font-bold w-full">Colecciones:</span>
+          <span class="text-gray-900 font-bold text-2xl w-full">
+            {{
+            collectionsFormatted
+            }}
           </span>
         </div>
       </div>
@@ -229,9 +229,9 @@ export default {
       this.collectionsFormatted = parseFloat(this.collections).toFixed(2);
 
       this.allProducts.push({
-        name: this.productSelected.name,
         code: this.productSelected.code,
-        //value: this.productSelected.value = false,
+        name: this.productSelected.name,
+        value: (this.productSelected.value = false),
         quantity: parseInt(this.quantity),
         unitedPrice: parseFloat(this.productSelected.price),
         subtotal: parseFloat(this.productSelected.price * this.quantity),
@@ -251,7 +251,6 @@ export default {
       this.quantity = null;
       //Guarda la data
       this.saveAll();
-      //console.log(this.productsData);
     },
     saveAll() {
       const allProducts = JSON.stringify(this.allProducts);
@@ -268,10 +267,12 @@ export default {
       localStorage.setItem("collectionsFormatted", collectionsFormatted);
     },
     removeEach(x) {
+      this.productsData.forEach((data) => {
+        if (data.code == this.allProducts[x].code) {
+          data.value = true;
+        }
+      });
       this.totalPrice -= parseFloat(this.allProducts[x].subtotal);
-      //this.productsData[x].value = true
-      //this.allProducts[x].value = true;
-      //this.productsSelected[x].value = true;
       this.totalPriceFormatted -= parseFloat(
         this.allProducts[x].subtotal
       ).toFixed(2);
@@ -280,7 +281,6 @@ export default {
       this.productsSelected.splice(x, 1);
       this.allProducts.splice(x, 1);
       this.saveAll();
-      //console.log(this.productsData);
     },
     saveArchive(x) {
       if (confirm("¿Deseas guardar y borrar?")) {
@@ -317,21 +317,13 @@ export default {
         this.productsSelected = [];
         this.collectionsFormatted = 0;
         this.totalPriceFormatted = 0;
+        this.productsData.forEach((data) => {
+           data.value = true;
+        });
         //Salvar los valores reestrablecidos
         this.saveAll();
       } else {
-        /*this.file = new File(
-          [
-            "Cliente:\n" + this.customerName,
-            "\nCodigo:\n" + this.customerCode,
-            "\nProductos:" + this.productsSelected,
-            "\nPrecio Total:\n" + parseFloat(this.totalPrice).toFixed(2),
-            "\nColecciones:\n" + parseFloat(this.collections).toFixed(2),
-          ],
-          "Pedido de " + this.customerCode + ".csv",
-          { type: "data:text/csv;charset=utf-8,%EF%BB%BF" }
-        );
-        FileSaver.saveAs(this.file);*/
+        console.log("Tu pedido no se ha generado");
       }
     },
   },
