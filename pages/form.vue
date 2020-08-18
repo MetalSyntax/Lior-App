@@ -1,21 +1,16 @@
 <template>
-  <main
-    class="container flex items-center flex-wrap w-full my-0 mx-auto overflow-hidden"
-  >
-    <h1
-      class="block w-full text-gray-900 text-center text-lg bold py-2 uppercase"
-    >
+  <main class="container flex items-center flex-wrap w-full my-0 mx-auto overflow-hidden">
+    <h1 class="block w-full text-gray-900 text-center text-lg bold py-2 uppercase">
       Bienvenido!,
       <span class="block w-full font-bold">{{ customerName }}</span>
     </h1>
-    <form class="flex-box py-4 w-full max-w-8xl my-0 mx-auto h-full">
+    <form class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full">
       <!--Producto-->
-      <section class="lg:w-1/2 px-3 my-2 lg:my-3">
+      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
           for="grid-product"
-          >Seleccione un producto</label
-        >
+        >Seleccione un producto</label>
         <v-select
           class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4 p-2"
           v-model="productSelected"
@@ -33,26 +28,21 @@
               class="flex-grow hover:pointer"
               @click.prevent="offset -= 5"
               :disabled="!hasPrevPage"
-            >
-              Previo
-            </button>
+            >Previo</button>
             <button
               class="flex-grow hover:pointer"
               @click.prevent="offset += 5"
               :disabled="!hasNextPage"
-            >
-              Siguiente
-            </button>
+            >Siguiente</button>
           </li>
         </v-select>
       </section>
       <!--Cantidad-->
-      <section class="lg:w-1/2 px-3 my-2 lg:my-3">
+      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
           for="grid-code"
-          >Ingrese cantidad</label
-        >
+        >Ingrese cantidad</label>
         <input
           class="appearance-none block w-full bg-gray-200 text-gray-900 text-sm border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
           id="grid-quantity"
@@ -66,12 +56,11 @@
         />
       </section>
       <!--Resumen Temporal-->
-      <section class="px-3 mt-2 mb-16 lg:my-3">
+      <section class="w-full lg:w-full px-3 mt-2 mb-16 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
           for="grid-code"
-          >Resumen parcial</label
-        >
+        >Resumen parcial</label>
         <div
           class="appearance-none flex w-full bg-gray-200 text-gray-500 border rounded py-3 px-4 leading-tight"
         >
@@ -80,8 +69,7 @@
             <span
               v-if="productSelected.price > 0"
               class="text-xl text-gray-700 w-full font-bold"
-              >{{ unitPriceFormat }}$</span
-            >
+            >{{ unitPriceFormat }}$</span>
             <span v-else class="text-md text-gray-700"></span>
           </div>
           <div class="flex flex-wrap w-1/2">
@@ -89,74 +77,55 @@
             <span
               v-if="productSelected.price > 0"
               class="text-xl text-gray-700 w-full font-bold"
-              >{{ subtotalFormat }}$</span
-            >
+            >{{ subtotalFormat }}$</span>
             <span v-else class="text-md text-gray-700"></span>
           </div>
         </div>
       </section>
     </form>
     <!--Resumen-->
-    <section v-if="allProducts.length > 0" class="flex-box w-full px-2 pb-20">
+    <section v-if="allProducts.length > 0" class="flex flex-wrap w-full px-2 justify-center pb-20">
       <div
         class="appearance-none flex flex-wrap w-full bg-white text-gray-500 border rounded py-2 px-2 leading-tight shadow-sm"
       >
         <span
           class="block w-full uppercase tracking-wide text-center color-button-blue text-lg font-bold mb-2"
-          >Resumen del Pedido</span
-        >
+        >Resumen del Pedido</span>
         <div class="flex flex-wrap w-1/2 text-center">
-          <span class="uppercase text-gray-900 text-xs font-bold w-full"
-            >Total:</span
-          >
-          <span class="text-gray-900 font-bold text-2xl w-full"
-            >{{ totalPriceFormatted }}$</span
-          >
+          <span class="uppercase text-gray-900 text-xs font-bold w-full">Total:</span>
+          <span class="text-gray-900 font-bold text-2xl w-full">{{ totalPriceFormatted }}$</span>
         </div>
         <div class="flex flex-wrap w-1/2 text-center">
-          <span class="uppercase text-gray-900 text-xs font-bold w-full"
-            >Colecciones:</span
-          >
+          <span class="uppercase text-gray-900 text-xs font-bold w-full">Colecciones:</span>
           <span class="text-gray-900 font-bold text-2xl w-full">
-            {{ collectionsFormatted }}
+            {{
+            collectionsFormatted
+            }}
           </span>
         </div>
       </div>
       <span
         class="block uppercase tracking-wide text-gray-900 text-sm font-bold my-3"
-        >Listado de productos</span
-      >
+      >Listado de productos</span>
       <table class="w-full table-auto">
         <thead class="border bg-gray-200">
           <tr>
-            <th class="px-2 py-1 text-xs md:text-sm uppercase text-left">
-              Producto
-            </th>
+            <th class="px-2 py-1 text-xs md:text-sm uppercase text-left">Producto</th>
             <th class="px-2 py-1 text-xs md:text-sm uppercase"></th>
           </tr>
         </thead>
         <tbody class="border">
-          <tr
-            v-for="(allProduct, index) in allProducts"
-            v-bind:key="index"
-            class="my-2"
-          >
+          <tr v-for="(allProduct, index) in allProducts" v-bind:key="index" class="my-2">
             <td class="px-1 py-1 text-left text-xs md:text-sm">
               <span class="w-full block font-bold">{{ allProduct.name }}</span>
-              <span class="w-full uppercase"
-                >Unidades: {{ allProduct.quantity }} -</span
-              >
-              <span class="w-full uppercase"
-                >Subtotal: {{ allProduct.subtotalformatted }}$</span
-              >
+              <span class="w-full uppercase">Unidades: {{ allProduct.quantity }} -</span>
+              <span class="w-full uppercase">Subtotal: {{ allProduct.subtotalformatted }}$</span>
             </td>
             <td class="text-center">
               <button
                 class="rounded my-0 mx-auto py-1 px-3 cursor-pointer text-lg text-red-500 hover:text-red-700 font-bold"
                 @click="removeEach(index)"
-              >
-                X
-              </button>
+              >X</button>
             </td>
           </tr>
         </tbody>
@@ -164,26 +133,22 @@
     </section>
     <!--Botones-->
     <section
-      class="flex-box px-2 fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200"
+      class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200"
     >
       <button
         class="bg-white color-button-green border-button-green hover:border-transparent border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="saveArchive"
-      >
-        Guardar
-      </button>
+      >Guardar</button>
       <button
         class="bg-button text-white border-button border-white hover:border-transparent border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="addQuantity"
-      >
-        Agregar
-      </button>
+      >Agregar</button>
     </section>
   </main>
 </template>
 
 <script>
-import productsDataJson from "../data/products.test.json";
+import productsDataJson from "../data/products.json";
 import { saveAs } from "file-saver";
 const FileSaver = require("file-saver");
 
@@ -205,7 +170,7 @@ export default {
       file: null, //Data del Archivo
       search: "",
       offset: 0,
-      limit: 5 //Limite de clientes visibles
+      limit: 5, //Limite de clientes visibles
     };
   },
   mounted() {
@@ -272,7 +237,7 @@ export default {
         subtotal: parseFloat(this.productSelected.price * this.quantity),
         subtotalformatted: parseFloat(
           this.productSelected.price * this.quantity
-        ).toFixed(2)
+        ).toFixed(2),
       });
       this.productsSelected.push([
         "\n",
@@ -280,7 +245,7 @@ export default {
         this.productSelected.name,
         parseInt(this.quantity),
         parseFloat(this.productSelected.price).toFixed(2),
-        parseFloat(this.productSelected.price * this.quantity).toFixed(2)
+        parseFloat(this.productSelected.price * this.quantity).toFixed(2),
       ]);
       //Vacia el campo
       this.quantity = null;
@@ -302,7 +267,7 @@ export default {
       localStorage.setItem("collectionsFormatted", collectionsFormatted);
     },
     removeEach(x) {
-      this.productsData.forEach(data => {
+      this.productsData.forEach((data) => {
         if (data.code == this.allProducts[x].code) {
           data.value = true;
         }
@@ -326,7 +291,7 @@ export default {
             "\n,Código,Productos,Cantidad,Precio Unitario,Subtotal" +
               this.productsSelected,
             "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
-            "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2)
+            "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
           ],
           "Pedido de " +
             this.customerCode +
@@ -338,7 +303,7 @@ export default {
             new Date().getFullYear() +
             ".txt",
           {
-            type: "text/html;charset=utf-8"
+            type: "text/html;charset=utf-8",
             //type: "data:text/csv;charset=utf-8,%EF%BB%BF"
           }
         );
@@ -352,19 +317,19 @@ export default {
         this.productsSelected = [];
         this.collectionsFormatted = 0;
         this.totalPriceFormatted = 0;
-        this.productsData.forEach(data => {
-          data.value = true;
+        this.productsData.forEach((data) => {
+           data.value = true;
         });
         //Salvar los valores reestrablecidos
         this.saveAll();
       } else {
         console.log("Tu pedido no se ha generado");
       }
-    }
+    },
   },
   computed: {
     filtered() {
-      return this.productsData.filter(productSelected =>
+      return this.productsData.filter((productSelected) =>
         productSelected.name.match(new RegExp(this.search, "gi"))
       );
     },
@@ -388,46 +353,36 @@ export default {
     },
     subtotalFormat() {
       return (this.productSelected.price * this.quantity).toFixed(2);
-    }
+    },
   },
-  watch: {}
+  watch: {},
 };
 </script>
 
 <style>
-:root {
-  --color-primary: #94c11e;
-  --color-secondary: #244a8b;
-}
-section {
-  @apply w-full;
-}
-.flex-box {
-  @apply flex flex-wrap justify-center;
-}
 .bg-button {
-  background: var(--color-primary);
+  background: #94c11e;
 }
 .bg-button-hover:hover {
-  background: var(--color-primary);
+  background: #94c11e;
 }
 .color-button-green {
-  color: var(--color-primary);
+  color: #94c11e;
 }
 .color-button-blue {
-  color: var(--color-secondary);
+  color: #244a8b;
 }
 .color-button:hover {
-  color: var(--color-primary);
+  color: #94c11e;
 }
 .border-button:hover {
-  border: 1px solid var(--color-primary);
+  border: 1px solid #94c11e;
 }
 .border-button-green {
-  border: 1px solid var(--color-primary);
+  border: 1px solid #94c11e;
 }
 .vs__dropdown-toggle {
-  border: 0px solid black;
+  border: 0px solid rgba(0, 0, 0, 0);
 }
 tr:nth-child(even) {
   background-color: #edf2f7;

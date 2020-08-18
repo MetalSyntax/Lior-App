@@ -148,6 +148,6 @@ export default {
 
 <style>
 .vs__dropdown-toggle {
-  border: 0px solid black;
+  border: 0px solid rgba(0, 0, 0, 0);
 }
 </style>
