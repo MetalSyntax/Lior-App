@@ -1,42 +1,42 @@
 [
   {
-    "code":"PT-00001",
-    "name":"PRE TRATAMIENTO NATURAL CAYENA 400 cc",
-    "price":4.50
+    "code":"XYZ-00001",
+    "name":"PRODUCT 1",
+    "price": 1
   },
   {
-    "code":"PT-00002",
-    "name":"POST TRATAMIENTO NATURAL CAYENA 400 cc",
-    "price":4.50
+    "code":"XYZ-00002",
+    "name":"PRODUCT 2",
+    "price": 1.1
   },
   {
-    "code":"PT-00003",
-    "name":"BAÑO CREMA NATURAL CAYENA 250 g",
-    "price":3.90
+    "code":"XYZ-00003",
+    "name":"PRODUCT 3",
+    "price": 1.2
   },
   {
-    "code":"PT-00004",
-    "name":"CREMA PEINAR NATURAL CAYENA 120 cc",
-    "price":2.90
+    "code":"XYZ-00004",
+    "name":"PRODUCT 3",
+    "price": 1.3
   },
   {
-    "code":"PT-00005",
-    "name":"PRE- TRATAMIENTO NAT SABILA 400 cc",
-    "price":4.50
+    "code":"XYZ-00005",
+    "name":"PRODUCT 4",
+    "price": 1.4
   },
   {
-    "code":"PT-00006",
-    "name":"POST- TRATAMIENTO NAT SABILA 400 cc",
-    "price":4.50
+    "code":"XYZ-00006",
+    "name":"PRODUCT 5",
+    "price": 1.5
   },
   {
-    "code":"PT-00007",
-    "name":"BAÑO CREMA NAT SABILA 250 g",
-    "price":3.90
+    "code":"XYZ-00007",
+    "name":"PRODUCT 6",
+    "price": 1.5
   },
   {
-    "code":"PT-00008",
-    "name":"CREMA PEINAR NAT SABILA120 cc",
-    "price":2.90
+    "code":"XYZ-00008",
+    "name":"PRODUCT 7",
+    "price":  1.6
   }
 ]

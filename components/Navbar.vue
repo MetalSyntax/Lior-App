@@ -4,10 +4,6 @@
       <span class="block w-full text-white text-3xl text-center h-8">LIOR</span>
       <span class="block w-full text-white text-sm text-center">PEDIDOS</span>
     </nuxt-link>
-    <!--<img src="../assets/img/logo.png" class="logo h-16" alt="logo">-->
-    <!--<div class="flex items-center flex-shrink-0 text-white mr-6">
-      <span class="font-semibold text-xl tracking-tight">Lior Cosmetics</span>
-    </div>-->
     <div class="flex lg:hidden">
       <button
         @click="toggle"
@@ -52,6 +48,6 @@ export default {
 
 <style>
 .bg-blue-legacy {
-  background: #244a8b;
+  background: var(--color-secondary);
 }
 </style>

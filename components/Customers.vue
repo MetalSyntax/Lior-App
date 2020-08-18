@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import customersDataJson from "../data/customers.json";
+import customersDataJson from "../data/customers.test.json";
 
 export default {
   name: "Customers",
@@ -79,15 +79,15 @@ export default {
 
 <style>
 .bg-button {
-  background: #94c11e;
+  background: var(--color-primary);
 }
 .color-button:hover {
-  color: #94c11e;
+  color: var(--color-primary);
 }
 .border-button:hover {
-  border: 1px solid #94c11e;
+  border: 1px solid var(--color-primary);
 }
 .vs__dropdown-toggle {
-  border: 0px solid rgba(0, 0, 0, 0);
+  border: 0px solid black;
 }
 </style>
