@@ -18,14 +18,14 @@
     ></v-select>
     <button
       v-if="customerName.length == 0"
-      class="block bg-button text-white hover:bg-white color-button border-button border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+      class="block bg-green-custom text-white border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
       @click.prevent="addCustomer"
     >
       Guardar cliente
     </button>
     <nuxt-link
       v-if="customerName.length > 0"
-      class="block bg-button text-white hover:bg-white color-button border-button border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+      class="block bg-green-custom  text-white border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
       to="/form"
       >Continuar</nuxt-link
     >
@@ -51,7 +51,13 @@ export default {
   mounted() {
   },
   methods: {
-    addCustomer() {
+      addCustomer() {
+      if (!this.customer.name) {
+        return;
+      }
+      if (!this.customer.code) {
+        return;
+      }
       localStorage.clear();
       this.customerCode = this.customer.code;
       this.customerName = this.customer.name;
@@ -78,14 +84,8 @@ export default {
 </script>
 
 <style>
-.bg-button {
+.bg-green-custom {
   background: #94c11e;
-}
-.color-button:hover {
-  color: #94c11e;
-}
-.border-button:hover {
-  border: 1px solid #94c11e;
 }
 .vs__dropdown-toggle {
   border: 0px solid rgba(0, 0, 0, 0);

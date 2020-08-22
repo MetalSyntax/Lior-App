@@ -44,7 +44,7 @@
           for="grid-code"
         >Ingrese cantidad</label>
         <input
-          class="appearance-none block w-full bg-gray-200 text-gray-900 text-sm border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+          class="appearance-none block w-full bg-gray-200 text-gray-900 text-sm border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white  mb-4"
           id="grid-quantity"
           type="number"
           placeholder="0"
@@ -56,7 +56,7 @@
         />
       </section>
       <!--Resumen Temporal-->
-      <section class="w-full lg:w-full px-3 mt-2 mb-16 lg:my-3">
+      <section class="w-full lg:w-full px-3 mt-2 mb-16 lg:mb-8 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
           for="grid-code"
@@ -84,12 +84,12 @@
       </section>
     </form>
     <!--Resumen-->
-    <section v-if="allProducts.length > 0" class="flex flex-wrap w-full px-2 justify-center pb-20">
+    <section v-if="allProducts.length > 0" class="flex flex-wrap w-full lg:w-4/5 px-2 justify-center pb-20 my-0 mx-auto">
       <div
         class="appearance-none flex flex-wrap w-full bg-white text-gray-500 border rounded py-2 px-2 leading-tight shadow-sm"
       >
         <span
-          class="block w-full uppercase tracking-wide text-center color-button-blue text-lg font-bold mb-2"
+          class="block w-full uppercase tracking-wide text-center color-blue-custom text-lg font-bold mb-2"
         >Resumen del Pedido</span>
         <div class="flex flex-wrap w-1/2 text-center">
           <span class="uppercase text-gray-900 text-xs font-bold w-full">Total:</span>
@@ -104,8 +104,25 @@
           </span>
         </div>
       </div>
+      <div
+        class="appearance-none flex flex-wrap w-full bg-white text-gray-500 py-2 px-2 leading-tight mt-4 mb-4"
+      >
       <span
-        class="block uppercase tracking-wide text-gray-900 text-sm font-bold my-3"
+          class="block w-full uppercase tracking-wide text-center color-blue-custom text-sm font-bold mb-2"
+        >Calculo de colecciones</span>
+        <div class="flex flex-wrap w-full text-center justify-center">
+          <span class="uppercase text-gray-900 text-sm font-semibold pr-1 pb-1">Sobrante: </span>
+          <span class="text-gray-900 text-sm font-bold">{{surplusFormatted}}$</span>
+        </div>
+        <div class="flex flex-wrap w-full text-center justify-center">
+          <span class="uppercase text-gray-900 text-sm font-semibold pr-1 pb-1">Proxima:</span>
+          <span class="text-gray-900 text-sm font-bold">
+            {{nextFormatted}}$
+          </span>
+      </div>
+      </div>
+      <span
+        class="block uppercase tracking-wide text-gray-900 text-lg font-bold my-3"
       >Listado de productos</span>
       <table class="w-full table-auto">
         <thead class="border bg-gray-200">
@@ -116,10 +133,15 @@
         </thead>
         <tbody class="border">
           <tr v-for="(allProduct, index) in allProducts" v-bind:key="index" class="my-2">
-            <td class="px-1 py-1 text-left text-xs md:text-sm">
+            <td class="flex px-1 py-1 text-left text-xs md:text-sm">
+              <div class="flex justify-center self-center w-2/12 lg:w-1/12 ">
+              <img class="rounded-full border h-10 lg:h-12 bg-green-custom" src="../assets/img/icons/cosmetics.png" :alt="allProduct.name">
+              </div>
+              <div class="w-10/12 lg:w-11/12 ml-1">
               <span class="w-full block font-bold">{{ allProduct.name }}</span>
               <span class="w-full uppercase">Unidades: {{ allProduct.quantity }} -</span>
               <span class="w-full uppercase">Subtotal: {{ allProduct.subtotalformatted }}$</span>
+              </div>
             </td>
             <td class="text-center">
               <button
@@ -136,11 +158,11 @@
       class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200"
     >
       <button
-        class="bg-white color-button-green border-button-green hover:border-transparent border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        class="bg-white color-green-custom border-green-custom hover:border-transparent border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="saveArchive"
       >Guardar</button>
       <button
-        class="bg-button text-white border-button border-white hover:border-transparent border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        class="bg-green-custom text-white border-green-custom border-white hover:border-transparent border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="addQuantity"
       >Agregar</button>
     </section>
@@ -166,6 +188,10 @@ export default {
       totalPriceFormatted: 0, //
       collections: 0, //Precio Total
       collectionsFormatted: 0, //
+      next: 0, //
+      nextFormatted: 0, //
+      surplus: 0, //
+      surplusFormatted: 0, //
       quantity: null, // Cantidad
       file: null, //Data del Archivo
       search: "",
@@ -200,6 +226,24 @@ export default {
         localStorage.getItem("collectionsFormatted")
       );
     }
+    // Muestra el precio total
+    if (localStorage.getItem("next")) {
+      this.next = JSON.parse(localStorage.getItem("next"));
+    }
+    if (localStorage.getItem("nextFormatted")) {
+      this.nextFormatted = JSON.parse(
+        localStorage.getItem("nextFormatted")
+      );
+    }
+    // Muestra el precio total
+    if (localStorage.getItem("surplus")) {
+      this.surplus = JSON.parse(localStorage.getItem("surplus"));
+    }
+    if (localStorage.getItem("surplusFormatted")) {
+      this.surplusFormatted = JSON.parse(
+        localStorage.getItem("surplusFormatted")
+      );
+    }
     // Muestra el nombre del cliente
     if (localStorage.getItem("customerName")) {
       this.customerName = JSON.parse(localStorage.getItem("customerName"));
@@ -228,9 +272,16 @@ export default {
       this.totalPriceFormatted = parseFloat(this.totalPrice).toFixed(2);
       this.collectionsFormatted = parseFloat(this.collections).toFixed(2);
 
+      this.next = (1-(this.collections-parseInt(this.collections)))*50;
+      this.nextFormatted = ((1-(this.collections-parseInt(this.collections)))*50).toFixed(2);
+
+      this.surplus = (this.collections-parseInt(this.collections))*50;
+      this.surplusFormatted = ((this.collections-parseInt(this.collections))*50).toFixed(2);
+
       this.allProducts.push({
         code: this.productSelected.code,
         name: this.productSelected.name,
+        img: this.productSelected.img,
         value: (this.productSelected.value = false),
         quantity: parseInt(this.quantity),
         unitedPrice: parseFloat(this.productSelected.price),
@@ -257,14 +308,26 @@ export default {
       localStorage.setItem("allProducts", allProducts);
       const productsSelected = JSON.stringify(this.productsSelected);
       localStorage.setItem("productsSelected", productsSelected);
+
       const totalPrice = JSON.stringify(this.totalPrice);
       localStorage.setItem("totalPrice", totalPrice);
-      const collections = JSON.stringify(this.collections);
-      localStorage.setItem("collections", collections);
       const totalPriceFormatted = JSON.stringify(this.totalPriceFormatted);
       localStorage.setItem("totalPriceFormatted", totalPriceFormatted);
+
+      const collections = JSON.stringify(this.collections);
+      localStorage.setItem("collections", collections);
       const collectionsFormatted = JSON.stringify(this.collectionsFormatted);
       localStorage.setItem("collectionsFormatted", collectionsFormatted);
+
+      const next = JSON.stringify(this.next);
+      localStorage.setItem("next", next);
+      const nextFormatted = JSON.stringify(this.nextFormatted);
+      localStorage.setItem("nextFormatted", nextFormatted);
+
+      const surplus = JSON.stringify(this.surplus);
+      localStorage.setItem("surplus", surplus);
+      const surplusFormatted = JSON.stringify(this.surplusFormatted);
+      localStorage.setItem("surplusFormatted", surplusFormatted);
     },
     removeEach(x) {
       this.productsData.forEach((data) => {
@@ -272,12 +335,21 @@ export default {
           data.value = true;
         }
       });
+
       this.totalPrice -= parseFloat(this.allProducts[x].subtotal);
       this.totalPriceFormatted -= parseFloat(
         this.allProducts[x].subtotal
       ).toFixed(2);
+
       this.collections = this.totalPrice / 50;
       this.collectionsFormatted = parseFloat(this.totalPrice / 50).toFixed(2);
+
+      this.next = (1-(this.collections-parseInt(this.collections)))*50;
+      this.nextFormatted = ((1-(this.collections-parseInt(this.collections)))*50).toFixed(2);
+
+      this.surplus = (this.collections-parseInt(this.collections))*50;
+      this.surplusFormatted = ((this.collections-parseInt(this.collections))*50).toFixed(2);
+
       this.productsSelected.splice(x, 1);
       this.allProducts.splice(x, 1);
       this.saveAll();
@@ -292,6 +364,8 @@ export default {
               this.productsSelected,
             "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
             "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
+            "\n,Proxima Colección\n," + (this.next).toFixed(2),
+            "\n,Sobrante\n," + (this.surplus).toFixed(2),
           ],
           "Pedido de " +
             this.customerCode +
@@ -313,10 +387,14 @@ export default {
         //Restablecer Valores
         this.totalPrice = 0;
         this.collections = 0;
+        this.next = 50;
+        this.surplus = 0;
         this.quantity = null;
         this.productsSelected = [];
         this.collectionsFormatted = 0;
         this.totalPriceFormatted = 0;
+        this.nextFormatted = 50;
+        this.surplusFormatted = 0;
         this.productsData.forEach((data) => {
            data.value = true;
         });
@@ -360,25 +438,34 @@ export default {
 </script>
 
 <style>
-.bg-button {
+.bg-blue-custom {
+  background: #244a8b;
+}
+.bg-blue-custom-hover:hover {
+  background: #244a8b;
+}
+.bg-green-custom {
   background: #94c11e;
 }
-.bg-button-hover:hover {
+.bg-green-custom-hover:hover {
   background: #94c11e;
 }
-.color-button-green {
+.color-blue-custom {
+   color: #244a8b;
+}
+.color-green-custom {
   color: #94c11e;
 }
-.color-button-blue {
-  color: #244a8b;
+.color-blue-custom-hover:hover {
+   color: #244a8b;
 }
-.color-button:hover {
+.color-green-custom-hover:hover {
   color: #94c11e;
 }
-.border-button:hover {
+.border-green-custom {
   border: 1px solid #94c11e;
 }
-.border-button-green {
+.border-green-custom:hover {
   border: 1px solid #94c11e;
 }
 .vs__dropdown-toggle {

@@ -107,6 +107,12 @@
     "value": true
   },
   {
+    "code": "PT-00026",
+    "name": "SHOWER GEL MAGNOLIA 250 cc",
+    "price": 4,
+    "value": true
+  },
+  {
     "code": "PT-00027",
     "name": "BODY LOTION MAGNOLIA 250 cc",
     "price": 3.9,
@@ -194,6 +200,12 @@
     "code": "PT-00049",
     "name": "MASCARILLA ORO ACEITE DE ARGAN, Y KERATINA 140 G",
     "price": 3.1,
+    "value": true
+  },
+  {
+    "code": "PT-00055",
+    "name": "COLONIA PARA DAMA EDICION ESPECIAL 30 ML",
+    "price": 5.5,
     "value": true
   },
   {
