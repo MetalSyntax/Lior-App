@@ -1,7 +1,7 @@
 <template>
   <main class="container flex flex-wrap items-center content-center self-center w-full my-0 mx-auto overflow-hidden">
     <form class="flex flex-wrap justify-center items-start content-start self-start lg:self-center lg:items-center lg:content-center w-full my-0 mx-auto h-full height-screen">
-      <img class="h-56 w-56" src="../assets/img/LC-Logo.png"/>
+      <img class="h-40 w-40" src="../assets/img/LC-Logo.png"/>
       <Customers />
     </form>
     <footer class="w-full text-center text-xs uppercase bottom-0 p-1">
