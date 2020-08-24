@@ -43,4 +43,7 @@ export default {
 .height-screen {
   height: 90vh;
 }
+.color-blue-custom {
+   color: #244a8b;
+}
 </style>

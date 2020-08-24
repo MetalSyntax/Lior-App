@@ -47,5 +47,7 @@ export default {
 </script>
 
 <style>
-
+.bg-blue-custom {
+  background: #244a8b;
+}
 </style>
