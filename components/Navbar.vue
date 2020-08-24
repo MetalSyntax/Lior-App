@@ -1,13 +1,9 @@
 <template>
-  <nav class="flex items-center flex-wrap bg-blue-legacy px-6 pt-0 pb-2 shadow-lg w-full z-10 sticky top-0 justify-between lg:justify-center">
+  <nav class="flex items-center flex-wrap bg-blue-custom px-6 pt-0 pb-2 shadow-lg w-full z-10 sticky top-0 justify-between lg:justify-center">
     <nuxt-link to="/">
       <span class="block w-full text-white text-3xl text-center h-8">LIOR</span>
       <span class="block w-full text-white text-sm text-center">PEDIDOS</span>
     </nuxt-link>
-    <!--<img src="../assets/img/logo.png" class="logo h-16" alt="logo">-->
-    <!--<div class="flex items-center flex-shrink-0 text-white mr-6">
-      <span class="font-semibold text-xl tracking-tight">Lior Cosmetics</span>
-    </div>-->
     <div class="flex lg:hidden">
       <button
         @click="toggle"
@@ -51,7 +47,5 @@ export default {
 </script>
 
 <style>
-.bg-blue-legacy {
-  background: #244a8b;
-}
+
 </style>

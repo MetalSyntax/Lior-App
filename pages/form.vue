@@ -134,8 +134,8 @@
         <tbody class="border">
           <tr v-for="(allProduct, index) in allProducts" v-bind:key="index" class="my-2">
             <td class="flex px-1 py-1 text-left text-xs md:text-sm">
-              <div class="flex justify-center self-center w-2/12 lg:w-1/12 ">
-              <img class="rounded-full border h-10 lg:h-12 bg-green-custom" src="../assets/img/icons/cosmetics.png" :alt="allProduct.name">
+              <div class="flex justify-center self-center w-2/12 lg:w-1/12">
+              <img class="rounded-full border h-10 lg:h-12 image-bg" src="../assets/img/icons/cosmetics.png" :alt="allProduct.name">
               </div>
               <div class="w-10/12 lg:w-11/12 ml-1">
               <span class="w-full block font-bold">{{ allProduct.name }}</span>
@@ -473,5 +473,11 @@ export default {
 }
 tr:nth-child(even) {
   background-color: #edf2f7;
+}
+tr:nth-child(even) img {
+  background-color: #94c11e;
+}
+tr:nth-child(odd) img {
+  background: #244a8b;
 }
 </style>
