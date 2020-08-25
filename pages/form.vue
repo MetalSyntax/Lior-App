@@ -200,6 +200,9 @@ export default {
     };
   },
   mounted() {
+    this.productsData.forEach((data) => {
+      data.value = true;
+    })
     //Muestra los datos seleccionados de los productos
     if (localStorage.getItem("allProducts")) {
       try {
