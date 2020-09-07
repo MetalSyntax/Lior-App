@@ -1,13 +1,13 @@
 <template>
-  <nav class="flex items-center flex-wrap bg-blue-custom px-6 pt-0 pb-2 shadow-lg w-full z-10 sticky top-0 justify-between lg:justify-center">
+  <nav class="flex items-center flex-wrap bg-brown-200 px-6 pt-0 pb-2 shadow-lg w-full z-10 sticky top-0 justify-between lg:justify-center">
     <nuxt-link to="/">
-      <span class="block w-full text-white text-3xl text-center h-8">LIOR</span>
-      <span class="block w-full text-white text-sm text-center">PEDIDOS</span>
+      <span class="block w-full text-brown-800 text-3xl text-center h-8">LIOR</span>
+      <span class="block w-full text-brown-800 text-xs text-center">COSMETICS</span>
     </nuxt-link>
     <div class="flex lg:hidden">
       <button
         @click="toggle"
-        class="flex items-center px-3 py-2 border rounded text-white border-white hover:text-white hover:border-white focus:outline-none hove:outline-none"
+        class="flex items-center px-3 py-2 border rounded text-brown-800 border-brown-800 hover:text-brown-400 hover:border-brown-400 focus:outline-none hove:outline-none"
       >
         <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <title>Menu</title>
@@ -18,7 +18,7 @@
     <div :class="open ? 'block': 'hidden'"
           class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
       <div class="text-sm lg:flex-grow">
-        <nuxt-link to="/" class="text-white float-right">
+        <nuxt-link to="/" class="text-brown-800 float-right">
         Nuevo Cliente</nuxt-link>
       </div>
     </div>
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style>
-.bg-blue-custom {
+/*.bg-blue-custom {
   background: #244a8b;
-}
+}*/
 </style>

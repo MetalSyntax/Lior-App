@@ -1,12 +1,12 @@
 <template>
   <section class="flex flex-wrap w-full px-3 my-2 lg:my-3">
     <label
-      class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-4"
+      class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-4"
       for="grid-code"
       >Ingrese su nombre</label
     >
     <v-select
-      class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-6 p-2"
+      class="block appearance-none w-full bg-brown-200 border border-brown-200 text-white text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-brown-400 focus:text-white mb-6 p-2"
       v-model="customer"
       :options="paginated"
       @search="query => (search = query)"
@@ -18,14 +18,14 @@
     ></v-select>
     <button
       v-if="customerName.length == 0"
-      class="block bg-green-custom text-white border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+      class="block bg-brown-800 text-white border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
       @click.prevent="addCustomer"
     >
       Guardar cliente
     </button>
     <nuxt-link
       v-if="customerName.length > 0"
-      class="block bg-green-custom  text-white border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+      class="block bg-brown-800  text-white border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
       to="/form"
       >Continuar</nuxt-link
     >
@@ -84,8 +84,11 @@ export default {
 </script>
 
 <style>
-.bg-green-custom {
+/*.bg-green-custom {
   background: #94c11e;
+}*/
+.vs__selected {
+  color: white;
 }
 .vs__dropdown-toggle {
   border: 0px solid rgba(0, 0, 0, 0);
