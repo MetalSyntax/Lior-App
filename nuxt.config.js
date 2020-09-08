@@ -58,8 +58,8 @@ export default {
   pwa: {
     manifest: {
       name: "Lior Cosmetic - Pedidos",
-      short_name: "Lior Cosmetic PWA",
-      background_color: "#fff",
+      short_name: "Pedidos",
+      background_color: "#604728",
       description: "Aplicacion web para generar pedidos de Lior Cosmetic.",
       display: "standalone"
     },

@@ -4,7 +4,7 @@
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
           class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
-          for="grid-product"
+          for="product"
         >Seleccione un producto</label>
         <v-select
           class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 p-2"
@@ -14,6 +14,8 @@
           :clearable="false"
           label="name"
           placeholder="NOMBRE DEL PRODUCTO"
+          id="product"
+          name="product"
         ></v-select>
       </section>
       <!--Cantidad-->

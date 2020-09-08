@@ -1,6 +1,6 @@
 <template>
   <main class="container flex items-center flex-wrap w-full my-0 mx-auto overflow-hidden">
-    <h1 class="block w-full text-gray-900 text-center text-lg bold py-2 uppercase">
+    <h1 class="block w-full text-brown-800 text-center text-lg bold py-2 uppercase">
       Bienvenido!,
       <span class="block w-full font-bold">{{ customerName }}</span>
     </h1>
@@ -8,11 +8,11 @@
       <!--Producto-->
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
-          class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
-          for="grid-product"
+          class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2"
+          for="product"
         >Seleccione un producto</label>
         <v-select
-          class="block appearance-none w-full bg-gray-200 border border-gray-300 text-gray-900 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 mb-4 p-2"
+          class="block appearance-none w-full bg-brown-200 border  font-semibold border-brown-800 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-brown-400 mb-4 p-2"
           v-model="productSelected"
           :options="paginated"
           @search="query => (search = query)"
@@ -22,15 +22,17 @@
           :selectable="options => options.value != false"
           label="name"
           placeholder="INGRESE NOMBRE"
+          id="product"
+          name="product"
         >
           <li slot="list-footer" class="flex">
             <button
-              class="flex-grow hover:pointer"
+              class="flex-grow hover:pointer text-brown-800 p-1 font-semibold"
               @click.prevent="offset -= 5"
               :disabled="!hasPrevPage"
             >Previo</button>
             <button
-              class="flex-grow hover:pointer"
+              class="flex-grow hover:pointer text-brown-800 p-1 font-semibold"
               @click.prevent="offset += 5"
               :disabled="!hasNextPage"
             >Siguiente</button>
@@ -40,12 +42,12 @@
       <!--Cantidad-->
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
         <label
-          class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
-          for="grid-code"
+          class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2"
+          for="quantity"
         >Ingrese cantidad</label>
         <input
-          class="appearance-none block w-full bg-gray-200 text-gray-900 text-sm border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white  mb-4"
-          id="grid-quantity"
+          class="appearance-none block w-full bg-brown-200 text-brown-800 text-sm border rounded py-3 px-4 leading-tight focus:outline-none font-semibold  border-brown-400 focus:bg-brown-200 focus:text-brown-800 mb-4"
+          id="quantity"
           type="number"
           placeholder="0"
           maxlength="4"
@@ -53,32 +55,33 @@
           max="9999"
           value="0"
           v-model="quantity"
+          name="quantity"
         />
       </section>
       <!--Resumen Temporal-->
       <section class="w-full lg:w-full px-3 mt-2 mb-16 lg:mb-8 lg:my-3">
         <label
-          class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
+          class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2"
           for="grid-code"
         >Resumen parcial</label>
         <div
-          class="appearance-none flex w-full bg-gray-200 text-gray-500 border rounded py-3 px-4 leading-tight"
+          class="appearance-none flex w-full bg-brown-400 text-brown-200 border rounded py-3 px-4 leading-tight"
         >
           <div class="flex flex-wrap w-1/2">
             <p class="text-sm uppercase">Precio Unitario:</p>
             <span
               v-if="productSelected.price > 0"
-              class="text-xl text-gray-700 w-full font-bold"
+              class="text-xl text-white w-full font-bold"
             >{{ unitPriceFormat }}$</span>
-            <span v-else class="text-md text-gray-700"></span>
+            <span v-else class="text-xl text-white w-full font-bold">0$</span>
           </div>
           <div class="flex flex-wrap w-1/2">
             <p class="text-sm uppercase">Subtotal:</p>
             <span
               v-if="productSelected.price > 0"
-              class="text-xl text-gray-700 w-full font-bold"
+              class="text-xl text-white w-full font-bold"
             >{{ subtotalFormat }}$</span>
-            <span v-else class="text-md text-gray-700"></span>
+            <span v-else class="text-xl text-white w-full font-bold">0$</span>
           </div>
         </div>
       </section>
@@ -86,18 +89,18 @@
     <!--Resumen-->
     <section v-if="allProducts.length > 0" class="flex flex-wrap w-full lg:w-4/5 px-2 justify-center pb-20 my-0 mx-auto">
       <div
-        class="appearance-none flex flex-wrap w-full bg-white text-gray-500 border rounded py-2 px-2 leading-tight shadow-sm"
+        class="appearance-none flex flex-wrap w-full bg-white text-brown-800 border border-brown-200 rounded py-2 px-2 leading-tight shadow-md"
       >
         <span
           class="block w-full uppercase tracking-wide text-center color-blue-custom text-lg font-bold mb-2"
         >Resumen del Pedido</span>
         <div class="flex flex-wrap w-1/2 text-center">
-          <span class="uppercase text-gray-900 text-xs font-bold w-full">Total:</span>
-          <span class="text-gray-900 font-bold text-2xl w-full">{{ totalPriceFormatted }}$</span>
+          <span class="uppercase text-brown-800  text-xs font-bold w-full">Total:</span>
+          <span class="text-brown-400  font-bold text-2xl w-full">{{ totalPriceFormatted }}$</span>
         </div>
         <div class="flex flex-wrap w-1/2 text-center">
-          <span class="uppercase text-gray-900 text-xs font-bold w-full">Colecciones:</span>
-          <span class="text-gray-900 font-bold text-2xl w-full">
+          <span class="uppercase text-brown-800  text-xs font-bold w-full">Colecciones:</span>
+          <span class="text-brown-400  font-bold text-2xl w-full">
             {{
             collectionsFormatted
             }}
@@ -105,48 +108,49 @@
         </div>
       </div>
       <div
-        class="appearance-none flex flex-wrap w-full bg-white text-gray-500 py-2 px-2 leading-tight mt-4 mb-4"
+        class="appearance-none flex flex-wrap w-full bg-white text-brown-800 py-2 px-2 leading-tight mt-4 mb-4"
       >
       <span
           class="block w-full uppercase tracking-wide text-center color-blue-custom text-sm font-bold mb-2"
         >Calculo de colecciones</span>
         <div class="flex flex-wrap w-full text-center justify-center">
-          <span class="uppercase text-gray-900 text-sm font-semibold pr-1 pb-1">Sobrante: </span>
-          <span class="text-gray-900 text-sm font-bold">{{surplusFormatted}}$</span>
+          <span class="uppercase text-brown-400 text-sm font-semibold pr-1 pb-1">Sobrante: </span>
+          <span class="text-brown-400 text-sm font-bold">{{surplusFormatted}}$</span>
         </div>
         <div class="flex flex-wrap w-full text-center justify-center">
-          <span class="uppercase text-gray-900 text-sm font-semibold pr-1 pb-1">Proxima:</span>
-          <span class="text-gray-900 text-sm font-bold">
+          <span class="uppercase text-brown-400 text-sm font-semibold pr-1 pb-1">Proxima:</span>
+          <span class="text-brown-400 text-sm font-bold">
             {{nextFormatted}}$
           </span>
       </div>
       </div>
       <span
-        class="block uppercase tracking-wide text-gray-900 text-lg font-bold my-3"
+        class="block uppercase tracking-wide text-brown-800 text-lg font-bold my-3"
       >Listado de productos</span>
-      <table class="w-full table-auto">
-        <thead class="border bg-gray-200">
+      <table name="listado" class="w-full table-auto">
+        <thead class="border border-brown-400 bg-brown-400">
           <tr>
-            <th class="px-2 py-1 text-xs md:text-sm uppercase text-left">Producto</th>
+            <th class="px-2 py-1 text-xs md:text-sm uppercase text-left text-white">Producto</th>
             <th class="px-2 py-1 text-xs md:text-sm uppercase"></th>
           </tr>
         </thead>
-        <tbody class="border">
+        <tbody class="border border-brown-400">
           <tr v-for="(allProduct, index) in allProducts" v-bind:key="index" class="my-2">
             <td class="flex px-1 py-1 text-left text-xs md:text-sm">
               <div class="flex justify-center self-center w-2/12 lg:w-1/12">
               <img class="rounded-full border h-10 lg:h-12 image-bg" src="../assets/img/icons/cosmetics.png" :alt="allProduct.name">
               </div>
               <div class="w-10/12 lg:w-11/12 ml-1">
-              <span class="w-full block font-bold">{{ allProduct.name }}</span>
-              <span class="w-full uppercase">Unidades: {{ allProduct.quantity }} -</span>
-              <span class="w-full uppercase">Subtotal: {{ allProduct.subtotalformatted }}$</span>
+              <span class="w-full block font-bold text-brown-800">{{ allProduct.name }}</span>
+              <span class="w-full uppercase text-brown-800">Unidades: {{ allProduct.quantity }} -</span>
+              <span class="w-full uppercase text-brown-800">Subtotal: {{ allProduct.subtotalformatted }}$</span>
               </div>
             </td>
             <td class="text-center">
               <button
                 class="rounded my-0 mx-auto py-1 px-3 cursor-pointer text-lg text-red-500 hover:text-red-700 font-bold"
                 @click="removeEach(index)"
+                title="eliminar"
               >X</button>
             </td>
           </tr>
@@ -158,12 +162,14 @@
       class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200"
     >
       <button
-        class="bg-white color-green-custom border-green-custom hover:border-transparent border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        class="bg-white text-brown-800 border-brown-800 hover:text-brown-400 hover:border-brown-400 border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="saveArchive"
+        title="Guardar"
       >Guardar</button>
       <button
-        class="bg-green-custom text-white border-green-custom border-white hover:border-transparent border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        class="bg-brown-800 text-white border-brown-400 hover:border-brown-200  border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="addQuantity"
+        title="Agregar"
       >Agregar</button>
     </section>
   </main>
@@ -441,7 +447,23 @@ export default {
 </script>
 
 <style>
-.bg-blue-custom {
+input::placeholder {
+  color: #3A2A1A;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.vs__dropdown-toggle {
+  border: 0px solid rgba(0, 0, 0, 0);
+}
+tr:nth-child(even) img {
+  background-color: #604728;
+}
+tr:nth-child(odd) img {
+  background: #D09666;
+}
+/*.bg-blue-custom {
   background: #244a8b;
 }
 .bg-blue-custom-hover:hover {
@@ -470,17 +492,8 @@ export default {
 }
 .border-green-custom:hover {
   border: 1px solid #94c11e;
-}
-.vs__dropdown-toggle {
-  border: 0px solid rgba(0, 0, 0, 0);
-}
-tr:nth-child(even) {
+}*/
+/*tr:nth-child(even) {
   background-color: #edf2f7;
-}
-tr:nth-child(even) img {
-  background-color: #94c11e;
-}
-tr:nth-child(odd) img {
-  background: #244a8b;
-}
+}*/
 </style>
