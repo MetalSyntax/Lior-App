@@ -12,7 +12,7 @@
           for="product"
         >Seleccione un producto</label>
         <v-select
-          class="block appearance-none w-full bg-brown-200 border  font-semibold border-brown-800 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-brown-400 mb-4 p-2"
+          class="block appearance-none w-full bg-brown-200 border  font-semibold border-brown-800 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-brown-400 mb-4 p-2 z-10"
           v-model="productSelected"
           :options="paginated"
           @search="query => (search = query)"
@@ -167,7 +167,7 @@
         title="Guardar"
       >Guardar</button>
       <button
-        class="bg-brown-700 text-white border-brown-700 hover:border-brown-400  border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        class="bg-brown-700 text-brown-300 border-brown-700 hover:border-brown-400  border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="addQuantity"
         title="Agregar"
       >Agregar</button>
