@@ -17,14 +17,14 @@
       id="code"
       name="code"
     ></v-select>
-    <button
+    <button title="Guardar cliente"
       v-if="customerName.length == 0"
-      class="block bg-brown-800 text-white border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+      class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
       @click.prevent="addCustomer"
     >Guardar cliente</button>
-    <nuxt-link
+    <nuxt-link title="Continuar"
       v-if="customerName.length > 0"
-      class="block bg-brown-800 text-white border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+      class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
       to="/form"
     >Continuar</nuxt-link>
   </section>

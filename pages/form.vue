@@ -65,7 +65,7 @@
           for="grid-code"
         >Resumen parcial</label>
         <div
-          class="appearance-none flex w-full bg-brown-400 text-brown-200 border rounded py-3 px-4 leading-tight"
+          class="appearance-none flex w-full bg-brown-700 text-brown-300 border rounded py-3 px-4 leading-tight"
         >
           <div class="flex flex-wrap w-1/2">
             <p class="text-sm uppercase">Precio Unitario:</p>
@@ -95,12 +95,12 @@
           class="block w-full uppercase tracking-wide text-center color-blue-custom text-lg font-bold mb-2"
         >Resumen del Pedido</span>
         <div class="flex flex-wrap w-1/2 text-center">
-          <span class="uppercase text-brown-800  text-xs font-bold w-full">Total:</span>
-          <span class="text-brown-400  font-bold text-2xl w-full">{{ totalPriceFormatted }}$</span>
+          <span class="uppercase text-brown-400  text-xs font-bold w-full">Total:</span>
+          <span class="text-brown-700  font-bold text-2xl w-full">{{ totalPriceFormatted }}$</span>
         </div>
         <div class="flex flex-wrap w-1/2 text-center">
-          <span class="uppercase text-brown-800  text-xs font-bold w-full">Colecciones:</span>
-          <span class="text-brown-400  font-bold text-2xl w-full">
+          <span class="uppercase text-brown-400  text-xs font-bold w-full">Colecciones:</span>
+          <span class="text-brown-700  font-bold text-2xl w-full">
             {{
             collectionsFormatted
             }}
@@ -108,18 +108,18 @@
         </div>
       </div>
       <div
-        class="appearance-none flex flex-wrap w-full bg-white text-brown-800 py-2 px-2 leading-tight mt-4 mb-4"
+        class="appearance-none flex flex-wrap w-full bg-white text-brown-700 py-2 px-2 leading-tight mt-4 mb-4"
       >
       <span
-          class="block w-full uppercase tracking-wide text-center color-blue-custom text-sm font-bold mb-2"
+          class="block w-full uppercase tracking-wide text-center text-sm font-bold mb-2"
         >Calculo de colecciones</span>
         <div class="flex flex-wrap w-full text-center justify-center">
           <span class="uppercase text-brown-400 text-sm font-semibold pr-1 pb-1">Sobrante: </span>
-          <span class="text-brown-400 text-sm font-bold">{{surplusFormatted}}$</span>
+          <span class="text-brown-700 text-sm font-bold">{{surplusFormatted}}$</span>
         </div>
         <div class="flex flex-wrap w-full text-center justify-center">
           <span class="uppercase text-brown-400 text-sm font-semibold pr-1 pb-1">Proxima:</span>
-          <span class="text-brown-400 text-sm font-bold">
+          <span class="text-brown-700 text-sm font-bold">
             {{nextFormatted}}$
           </span>
       </div>
@@ -128,7 +128,7 @@
         class="block uppercase tracking-wide text-brown-800 text-lg font-bold my-3"
       >Listado de productos</span>
       <table name="listado" class="w-full table-auto">
-        <thead class="border border-brown-400 bg-brown-400">
+        <thead class="border border-brown-800 bg-brown-800">
           <tr>
             <th class="px-2 py-1 text-xs md:text-sm uppercase text-left text-white">Producto</th>
             <th class="px-2 py-1 text-xs md:text-sm uppercase"></th>
@@ -148,7 +148,7 @@
             </td>
             <td class="text-center">
               <button
-                class="rounded my-0 mx-auto py-1 px-3 cursor-pointer text-lg text-red-500 hover:text-red-700 font-bold"
+                class="rounded my-0 mx-auto py-1 px-3 cursor-pointer text-lg text-red-500 hover:text-red-700 font-bold focus:border-0 hover:border-0"
                 @click="removeEach(index)"
                 title="eliminar"
               >X</button>
@@ -162,12 +162,12 @@
       class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200"
     >
       <button
-        class="bg-white text-brown-800 border-brown-800 hover:text-brown-400 hover:border-brown-400 border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        class="bg-white text-brown-700 border-brown-700 hover:text-brown-800 hover:border-brown-800 border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="saveArchive"
         title="Guardar"
       >Guardar</button>
       <button
-        class="bg-brown-800 text-white border-brown-400 hover:border-brown-200  border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        class="bg-brown-700 text-white border-brown-700 hover:border-brown-400  border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="addQuantity"
         title="Agregar"
       >Agregar</button>
