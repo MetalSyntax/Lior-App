@@ -6,9 +6,9 @@
     </h1>
     <form class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full">
       <!--Producto-->
-      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
+      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3 z-10">
         <label
-          class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2"
+          class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2 z-10"
           for="product"
         >Seleccione un producto</label>
         <v-select
@@ -27,12 +27,12 @@
         >
           <li slot="list-footer" class="flex">
             <button
-              class="flex-grow hover:pointer text-brown-800 p-1 font-semibold"
+              class="flex-grow hover:pointer text-brown-800 py-1 font-semibold"
               @click.prevent="offset -= 5"
               :disabled="!hasPrevPage"
             >Previo</button>
             <button
-              class="flex-grow hover:pointer text-brown-800 p-1 font-semibold"
+              class="flex-grow hover:pointer text-brown-800 py-1 font-semibold"
               @click.prevent="offset += 5"
               :disabled="!hasNextPage"
             >Siguiente</button>
@@ -138,7 +138,7 @@
           <tr v-for="(allProduct, index) in allProducts" v-bind:key="index" class="my-2">
             <td class="flex px-1 py-1 text-left text-xs md:text-sm">
               <div class="flex justify-center self-center w-2/12 lg:w-1/12">
-              <img class="rounded-full border h-10 lg:h-12 image-bg" src="../assets/img/icons/cosmetics.png" :alt="allProduct.name">
+              <img class="rounded-full border h-10 lg:h-12" src="../assets/img/icons/cosmetics.png" :alt="allProduct.name">
               </div>
               <div class="w-10/12 lg:w-11/12 ml-1">
               <span class="w-full block font-bold text-brown-800">{{ allProduct.name }}</span>
@@ -162,12 +162,12 @@
       class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200"
     >
       <button
-        class="bg-white text-brown-700 border-brown-700 hover:text-brown-800 hover:border-brown-800 border mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        class="bg-white text-brown-700 border-brown-700 hover:text-brown-400 hover:border-brown-400 border-2 mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="saveArchive"
         title="Guardar"
       >Guardar</button>
       <button
-        class="bg-brown-700 text-brown-300 border-brown-700 hover:border-brown-400  border mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        class="bg-brown-700 text-brown-300 border-brown-700 hover:border-brown-200  border-2 mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="addQuantity"
         title="Agregar"
       >Agregar</button>
@@ -448,52 +448,25 @@ export default {
 
 <style>
 input::placeholder {
-  color: #3A2A1A;
+  @apply text-brown-800;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+   @apply appearance-none;
 }
 .vs__dropdown-toggle {
-  border: 0px solid rgba(0, 0, 0, 0);
+  @apply border-0;
+}
+.vs__actions {
+ @apply hidden;
+}
+.vs__dropdown-menu {
+   @apply z-20;
 }
 tr:nth-child(even) img {
-  background-color: #604728;
+   @apply bg-brown-400;
 }
 tr:nth-child(odd) img {
-  background: #D09666;
+  @apply bg-brown-200;
 }
-/*.bg-blue-custom {
-  background: #244a8b;
-}
-.bg-blue-custom-hover:hover {
-  background: #244a8b;
-}
-.bg-green-custom {
-  background: #94c11e;
-}
-.bg-green-custom-hover:hover {
-  background: #94c11e;
-}
-.color-blue-custom {
-   color: #244a8b;
-}
-.color-green-custom {
-  color: #94c11e;
-}
-.color-blue-custom-hover:hover {
-   color: #244a8b;
-}
-.color-green-custom-hover:hover {
-  color: #94c11e;
-}
-.border-green-custom {
-  border: 1px solid #94c11e;
-}
-.border-green-custom:hover {
-  border: 1px solid #94c11e;
-}*/
-/*tr:nth-child(even) {
-  background-color: #edf2f7;
-}*/
 </style>

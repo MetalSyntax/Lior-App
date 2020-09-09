@@ -5,7 +5,7 @@
       for="code"
     >Ingrese su nombre</label>
     <v-select
-      class="block appearance-none w-full bg-brown-200 border border-brown-200 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white border-brown-400 font-semibold focus:border-brown-400 focus:text-brown-800 mb-6 p-2"
+      class="block appearance-none w-full bg-brown-200 border border-brown-200 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white font-semibold focus:border-brown-400 focus:text-brown-800 mb-6 p-2"
       v-model="customer"
       :options="paginated"
       @search="query => (search = query)"
@@ -17,16 +17,12 @@
       id="code"
       name="code"
     ></v-select>
-    <button title="Guardar cliente"
+    <button
+      title="Guardar cliente"
       v-if="customerName.length == 0"
       class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
       @click.prevent="addCustomer"
-    >Guardar cliente</button>
-    <nuxt-link title="Continuar"
-      v-if="customerName.length > 0"
-      class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
-      to="/form"
-    >Continuar</nuxt-link>
+    ><nuxt-link to="/form" >Guardar cliente</nuxt-link></button>
   </section>
 </template>
 
@@ -81,13 +77,7 @@ export default {
 </script>
 
 <style>
-/*.bg-green-custom {
-  background: #94c11e;
-}*/
-/*.vs__selected {
-  color: white;
-}*/
 .vs__dropdown-toggle {
-  border: 0px solid rgba(0, 0, 0, 0);
+   @apply border-0;
 }
 </style>
