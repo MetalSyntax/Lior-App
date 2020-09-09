@@ -22,7 +22,12 @@
       v-if="customerName.length == 0"
       class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
       @click.prevent="addCustomer"
-    ><nuxt-link to="/form" >Guardar cliente</nuxt-link></button>
+    >Guardar cliente</button>
+    <nuxt-link title="Continuar"
+      v-if="customerName.length > 0"
+      class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+      to="/form"
+    >Continuar</nuxt-link>
   </section>
 </template>
 

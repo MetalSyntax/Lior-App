@@ -138,7 +138,9 @@
           <tr v-for="(allProduct, index) in allProducts" v-bind:key="index" class="my-2">
             <td class="flex px-1 py-1 text-left text-xs md:text-sm">
               <div class="flex justify-center self-center w-2/12 lg:w-1/12">
-              <img class="rounded-full border h-10 lg:h-12" src="../assets/img/icons/cosmetics.png" :alt="allProduct.name">
+              <img class="rounded-full border h-10 lg:h-12"
+              :src="require(`@/assets/img/icons/${allProduct.img}`)"
+              :alt="allProduct.name">
               </div>
               <div class="w-10/12 lg:w-11/12 ml-1">
               <span class="w-full block font-bold text-brown-800">{{ allProduct.name }}</span>
