@@ -17,7 +17,7 @@
     "name": "BAÑO DE CREMA NAT CAYENA 250 g",
     "price": 3.9,
     "value": true,
-    "img": "wellness.png"
+    "img": "beauty.png"
   },
   {
     "code": "PT-00004",
@@ -45,7 +45,7 @@
     "name": "BAÑO CREMA NAT SABILA 250 g",
     "price": 3.9,
     "value": true,
-    "img": "wellness.png"
+    "img": "beauty.png"
   },
   {
     "code": "PT-00008",
@@ -59,147 +59,147 @@
     "name": "BAÑO CREMA ANTICAIDA 250 g",
     "price": 4.1,
     "value": true,
-    "img": "wellness.png"
+    "img": "beauty.png"
   },
   {
     "code": "PT-00013",
     "name": "CREMA HUMECTANTE LC BABY 250 cc",
     "price": 3.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00014",
     "name": "COLONIA LC BABY 250 cc",
     "price": 3.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "cologne.png"
   },
   {
     "code": "PT-00015",
     "name": "CREMA PAÑALITIS LC BABY 120 g",
     "price": 3.6,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00017",
     "name": "CREMA DE MANOS CON SILICONA 120 g",
     "price": 2.9,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00018",
     "name": "LOCION PRIMAVERA 250 cm3",
     "price": 3.3,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "shampoo.png"
   },
   {
     "code": "PT-00020",
     "name": "LOCION PRIMAVERA MANDARINA 250 cm3",
     "price": 3.3,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "shampoo.png"
   },
   {
     "code": "PT-00022",
     "name": "TONICO CAPILAR 120 cc",
     "price": 3.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "capilar.png"
   },
   {
     "code": "PT-00023",
     "name": "SILICONA COLOR  40 cc",
     "price": 4.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "capilar.png"
   },
   {
     "code": "PT-00025",
     "name": "GEL ANTI BACTERIAL 130 cc",
     "price": 3,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "capilar.png"
   },
   {
     "code": "PT-00026",
     "name": "SHOWER GEL MAGNOLIA 250 cc",
     "price": 4,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "shower-gel.png"
   },
   {
     "code": "PT-00027",
     "name": "BODY LOTION MAGNOLIA 250 cc",
     "price": 3.9,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "shower-gel.png"
   },
   {
     "code": "PT-00028",
     "name": "SPLASH CORPORAL MAGNOLIA 250 cc",
     "price": 4.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "spray-bottle.png"
   },
   {
     "code": "PT-00029",
     "name": "SHOWER GEL GARDENIA 250 cc",
     "price": 4,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "shower-gel.png"
   },
   {
     "code": "PT-00030",
     "name": "BODY LOTION GARDENIA 200 cc",
     "price": 3.9,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "shower-gel.png"
   },
   {
     "code": "PT-00031",
     "name": "SPLASH CORPORAL GARDENIA 250 cc",
     "price": 4.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "spray-bottle.png"
   },
   {
     "code": "PT-00032",
     "name": "CREMA PIES RELAX 250 cc",
     "price": 4.3,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00033",
     "name": "CREMA EXFOLIADORA RELAX 250 g",
     "price": 4,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00037",
     "name": "GEL ARNICA DESCONGESTIONANTE 250 cc",
     "price": 4.2,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "gel.png"
   },
   {
     "code": "PT-00039",
     "name": "CREMA HIDRATANTE ALOE VERA 100 g",
     "price": 3.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00044",
     "name": "ARNICA ACEITE CREMOSO 240ML",
     "price": 4.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "gel.png"
   },
   {
     "code": "PT-00045",
@@ -220,7 +220,7 @@
     "name": "BAÑO DE CREMA ORO LIQUIDO",
     "price": 4.1,
     "value": true,
-    "img": "wellness.png"
+    "img": "beauty.png"
   },
   {
     "code": "PT-00048",
@@ -234,7 +234,7 @@
     "name": "MASCARILLA ORO ACEITE DE ARGAN, Y KERATINA 140 G",
     "price": 3.1,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00055",
@@ -262,7 +262,7 @@
     "name": "BAÑO DE CREMA MIEL CON GERMEN DE TRIGO",
     "price": 3.9,
     "value": true,
-    "img": "wellness.png"
+    "img": "beauty.png"
   },
   {
     "code": "PT-00059",
@@ -276,42 +276,42 @@
     "name": "ANTITRANSPIRANTE DE DAMA BIO ACTIVO 90GR",
     "price": 2.2,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "deodorant.png"
   },
   {
     "code": "PT-00061",
     "name": "ANTITRANSPIRANTE CABALLERO BIO ACTIVO 90GR",
     "price": 2.2,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "deodorant.png"
   },
   {
     "code": "PT-00062",
     "name": "ANTITRANSPIRANTE TEEN GIRLS 90GR",
     "price": 2.2,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "deodorant.png"
   },
   {
     "code": "PT-00063",
     "name": "ANTITRANSPIRANTE TEEN BOYS 90GR",
     "price": 2.2,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "deodorant.png"
   },
   {
     "code": "PT-00064",
     "name": "COLONIA TEEN GIRL 55ML",
     "price": 4.9,
     "value": true,
-    "img": "perfume.png"
+    "img": "cologne.png"
   },
   {
     "code": "PT-00065",
     "name": "COLONIA TEEN BOY 55ML",
     "price": 4.9,
     "value": true,
-    "img": "perfume.png"
+    "img": "cologne.png"
   },
   {
     "code": "PT-00066",
@@ -325,7 +325,7 @@
     "name": "SOLUCION JABONOSA INTIMA",
     "price": 3.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "conditioner.png"
   },
   {
     "code": "PT-00080",
@@ -346,7 +346,7 @@
     "name": "BAÑO DE CREMA ROMERO CON ACEITE DE OLIVA",
     "price": 3.9,
     "value": true,
-    "img": "wellness.png"
+    "img": "beauty.png"
   },
   {
     "code": "PT-00083",
@@ -360,7 +360,7 @@
     "name": "BAÑO DE ESPUMA PARA BEBES 250 CC",
     "price": 3.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "spray-bottle.png"
   },
   {
     "code": "PT-00085",
@@ -388,21 +388,21 @@
     "name": "LOCION CORPORAL PERFUMADA 100 G",
     "price": 2.9,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "cream.png"
   },
   {
     "code": "PT-00090",
     "name": "GEL CREMA PIERNAS CANSADAS",
     "price": 3,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00091",
     "name": "LOCION PARA DESPUES DE AFEITAR LIOR",
     "price": 2.78,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00094",
@@ -423,7 +423,7 @@
     "name": "COLONIA DE CABALLERO 10ML HOME IN MOTION",
     "price": 3,
     "value": true,
-    "img": "perfume.png"
+    "img": "cologne.png"
   },
   {
     "code": "PT-00102",
@@ -444,7 +444,7 @@
     "name": "BAÑO DE CREMA COCO CON ACEITE DE ALMENDRAS",
     "price": 3.9,
     "value": true,
-    "img": "wellness.png"
+    "img": "beauty.png"
   },
   {
     "code": "PT-00105",
@@ -458,7 +458,7 @@
     "name": "ANTITRANSPIRANTE CLINICAL LIOR",
     "price": 2.9,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "styling-cream.png"
   },
   {
     "code": "PT-00109",
@@ -479,49 +479,49 @@
     "name": "SPORT ICE(GEL MENTOLADO)",
     "price": 2.6,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00114",
     "name": "GEL DE BAÑO MAGNOLIA - COCO",
     "price": 3.9,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "shower-gel.png"
   },
   {
     "code": "PT-00115",
     "name": "BODY LOTION MAGNOLIA - COCO",
     "price": 3.9,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "shower-gel.png"
   },
   {
     "code": "PT-00116",
     "name": "SPLASH CORPORAL MAGNOLIA - COCO",
     "price": 4.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "spray-bottle.png"
   },
   {
     "code": "PT-00118",
     "name": "LOCION CORPORAL ROSA GARDENIA",
     "price": 3.9,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "shower-gel.png"
   },
   {
     "code": "PT-00119",
     "name": "SPLASH CORPORAL ROSA GARDENIA",
     "price": 4.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "spray-bottle.png"
   },
   {
     "code": "PT-00120",
     "name": "ANTITRANSPIRANTE CLINICAL CON ALOE DE VERA",
     "price": 2.9,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "styling-cream.png"
   },
   {
     "code": "PT-00121",
@@ -542,21 +542,21 @@
     "name": "COLONIA DE DAMA 10ML (CHANNEL NO 5)",
     "price": 3,
     "value": true,
-    "img": "perfume.png"
+    "img": "cologne.png"
   },
   {
     "code": "PT-00126",
     "name": "BARRA DERMOLIMPIADORA DE TOCADOR (NEUTRO)",
     "price": 1.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "soap.png"
   },
   {
     "code": "PT-00127",
     "name": "BARRA DERMOLIMPIADORA DE TOCADOR (ALOE VERA)",
     "price": 1.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "soap.png"
   },
   {
     "code": "PT-00128",
@@ -570,14 +570,14 @@
     "name": "BODY LOTION FOR WOMAN 100 GR EN TUBO COLAPSIBLE",
     "price": 3,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "shower-gel.png"
   },
   {
     "code": "PT-00130",
     "name": "AFTER SHAVE FOR MEN 100 GR EN TUBO COLAPSIBLE",
     "price": 2.9,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "hand-cream.png"
   },
   {
     "code": "PT-00131",
@@ -626,28 +626,28 @@
     "name": "EDICION ESPECIAL FOR WOMAN",
     "price": 7,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "special.png"
   },
   {
     "code": "PT-00138",
     "name": "EDICION ESPECIAL FOR MAN",
     "price": 7,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "special.png"
   },
   {
     "code": "PT-00143",
     "name": "BARRA DE JABON 90 GR CAYENA",
     "price": 1.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "soap.png"
   },
   {
     "code": "PT-00144",
     "name": "BARRA DE JABON 90 GR SABILA",
     "price": 1.5,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "soap.png"
   },
   {
     "code": "PT-00145",
@@ -668,7 +668,7 @@
     "name": "BAÑO DE CREMA ORO LIQUIDO NEW",
     "price": 4.1,
     "value": true,
-    "img": "wellness.png"
+    "img": "beauty.png"
   },
   {
     "code": "PT-00148",
@@ -682,7 +682,7 @@
     "name": "MASCARILLA ORO LIQUIDO NEW",
     "price": 3.1,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "styling-cream.png"
   },
   {
     "code": "PT-00150",
@@ -696,20 +696,20 @@
     "name": "COLONIA CABALLERO BIG PON 10 ML",
     "price": 3,
     "value": true,
-    "img": "perfume.png"
+    "img": "cologne.png"
   },
   {
     "code": "PT-00153",
     "name": "ESTUCHE DE DAMA EDICION ESPECIAL",
     "price": 10,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "special.png"
   },
   {
     "code": "PT-00154",
     "name": "ESTUCHE DE CABALLERO EDICION ESPECIAL",
     "price": 10,
     "value": true,
-    "img": "cosmetics.png"
+    "img": "special.png"
   }
 ]

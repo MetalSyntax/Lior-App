@@ -40,13 +40,13 @@
         </v-select>
       </section>
       <!--Cantidad-->
-      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3">
+      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3 z-10">
         <label
-          class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2"
+          class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2 z-10"
           for="quantity"
         >Ingrese cantidad</label>
         <input
-          class="appearance-none block w-full bg-brown-200 text-brown-800 text-sm border rounded py-3 px-4 leading-tight focus:outline-none font-semibold  border-brown-400 focus:bg-brown-200 focus:text-brown-800 mb-4"
+          class="appearance-none block w-full bg-brown-200 text-brown-800 text-sm border rounded py-3 px-4 leading-tight focus:outline-none font-semibold  border-brown-400 focus:bg-brown-200 focus:text-brown-800 mb-4 z-10"
           id="quantity"
           type="number"
           placeholder="0"
@@ -65,7 +65,7 @@
           for="grid-code"
         >Resumen parcial</label>
         <div
-          class="appearance-none flex w-full bg-brown-700 text-brown-300 border rounded py-3 px-4 leading-tight"
+          class="appearance-none flex w-full bg-brown-700 text-brown-300 border rounded py-3 px-4 leading-tight border-brown-300"
         >
           <div class="flex flex-wrap w-1/2">
             <p class="text-sm uppercase">Precio Unitario:</p>
@@ -114,11 +114,11 @@
           class="block w-full uppercase tracking-wide text-center text-sm font-bold mb-2"
         >Calculo de colecciones</span>
         <div class="flex flex-wrap w-full text-center justify-center">
-          <span class="uppercase text-brown-400 text-sm font-semibold pr-1 pb-1">Sobrante: </span>
+          <span class="uppercase text-brown-200 text-sm font-semibold pr-1 pb-1">Sobrante: </span>
           <span class="text-brown-700 text-sm font-bold">{{surplusFormatted}}$</span>
         </div>
         <div class="flex flex-wrap w-full text-center justify-center">
-          <span class="uppercase text-brown-400 text-sm font-semibold pr-1 pb-1">Proxima:</span>
+          <span class="uppercase text-brown-200 text-sm font-semibold pr-1 pb-1">Proxima:</span>
           <span class="text-brown-700 text-sm font-bold">
             {{nextFormatted}}$
           </span>
@@ -183,6 +183,18 @@ import { saveAs } from "file-saver";
 const FileSaver = require("file-saver");
 
 export default {
+  head() {
+    return {
+      title: "Lior Cosmetics | Pedidos | Formulario",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "Formulario para generar pedidos en Lior Cosmetics",
+        },
+      ],
+    };
+  },
   data() {
     return {
       allProducts: [], // Arreglo de todos los productos

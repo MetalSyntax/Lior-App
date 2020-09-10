@@ -2,8 +2,8 @@
   <main class="container flex flex-wrap items-center content-center self-center w-full my-0 mx-auto overflow-hidden">
     <form class="flex flex-wrap justify-center items-center content-start self-center lg:self-center lg:items-center lg:content-center w-full my-0 mx-auto h-full">
       <!--<img class="h-40 w-40" src="../assets/img/LC-Logo.png"/>-->
-      <h1 class="text-center block w-full text-6xl h-20 text-brown-700 mt-10">LIOR</h1>
-      <h2 class="text-center block w-full text-lg pb-6 text-brown-700">COSMETICS</h2>
+      <h1 class="text-center block w-full text-6xl h-20 text-brown-700 mt-10 z-10">LIOR</h1>
+      <h2 class="text-center block w-full text-lg pb-6 text-brown-700 z-10">COSMETICS</h2>
       <Customers />
     </form>
     <footer class="absolute left-0 w-full text-center text-xs uppercase bottom-0 p-1 text-brown-800 content-end self-end ">
@@ -16,7 +16,7 @@
 export default {
   head() {
     return {
-      title: "Lior Cosmetics - Pedidos",
+      title: "Lior Cosmetics | Pedidos",
       meta: [
         {
           hid: "description",

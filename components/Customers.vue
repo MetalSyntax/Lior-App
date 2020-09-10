@@ -1,11 +1,11 @@
 <template>
-  <section class="flex flex-wrap w-full px-3 my-2 lg:my-3">
+  <section class="flex flex-wrap w-full px-3 my-2 lg:my-3 z-10">
     <label
-      class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-4"
+      class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-4 z-10"
       for="code"
     >Ingrese su nombre</label>
     <v-select
-      class="block appearance-none w-full bg-brown-200 border border-brown-200 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white font-semibold focus:border-brown-400 focus:text-brown-800 mb-6 p-2"
+      class="block appearance-none w-full bg-brown-200 border border-brown-200 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white font-semibold focus:border-brown-400 focus:text-brown-800 mb-6 p-2 z-10"
       v-model="customer"
       :options="paginated"
       @search="query => (search = query)"
@@ -20,12 +20,12 @@
     <button
       title="Guardar cliente"
       v-if="customerName.length == 0"
-      class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+      class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto border-brown-300"
       @click.prevent="addCustomer"
     >Guardar cliente</button>
     <nuxt-link title="Continuar"
       v-if="customerName.length > 0"
-      class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto"
+      class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto border-brown-300"
       to="/form"
     >Continuar</nuxt-link>
   </section>
