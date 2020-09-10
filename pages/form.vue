@@ -6,13 +6,13 @@
     </h1>
     <form class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full">
       <!--Producto-->
-      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3 z-10">
+      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3 z-20">
         <label
-          class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2 z-10"
+          class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2 z-20"
           for="product"
         >Seleccione un producto</label>
         <v-select
-          class="block appearance-none w-full bg-brown-200 border  font-semibold border-brown-800 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-brown-400 mb-4 p-2 z-10"
+          class="block appearance-none w-full bg-brown-200 border  font-semibold border-brown-800 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-brown-400 mb-4 p-2 z-20"
           v-model="productSelected"
           :options="paginated"
           @search="query => (search = query)"
@@ -25,14 +25,14 @@
           id="product"
           name="product"
         >
-          <li slot="list-footer" class="flex">
+          <li slot="list-footer" class="flex z-30">
             <button
-              class="flex-grow hover:pointer text-brown-800 py-1 font-semibold"
+              class="flex-grow hover:pointer text-brown-800 py-1 font-semibold border-t border-brown-800"
               @click.prevent="offset -= 5"
               :disabled="!hasPrevPage"
             >Previo</button>
             <button
-              class="flex-grow hover:pointer text-brown-800 py-1 font-semibold"
+              class="flex-grow hover:pointer text-brown-800 py-1 font-semibold border-l border-t border-brown-800"
               @click.prevent="offset += 5"
               :disabled="!hasNextPage"
             >Siguiente</button>
@@ -150,7 +150,7 @@
             </td>
             <td class="text-center">
               <button
-                class="rounded my-0 mx-auto py-1 px-3 cursor-pointer text-lg text-red-500 hover:text-red-700 font-bold focus:border-0 hover:border-0"
+                class="rounded my-0 mx-auto py-1 px-3 cursor-pointer text-lg text-red-500 hover:text-red-700 font-bold focus:border-0 hover:border-0 outline-none hover:outline-none focus:outline-none"
                 @click="removeEach(index)"
                 title="eliminar"
               >X</button>
@@ -475,7 +475,7 @@ input::-webkit-inner-spin-button {
  @apply hidden;
 }
 .vs__dropdown-menu {
-   @apply z-20;
+   @apply z-30 p-0 border border-brown-800;
 }
 tr:nth-child(even) img {
    @apply bg-brown-400;
