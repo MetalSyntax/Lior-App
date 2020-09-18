@@ -26,7 +26,7 @@
     <nuxt-link title="Continuar"
       v-if="customerName.length > 0"
       class="block bg-brown-700 text-brown-300 border-transparent border py-2 px-4 rounded cursor-pointer uppercase text-sm my-0 mx-auto border-brown-300"
-      to="/form"
+      to="/pedidos/form"
     >Continuar</nuxt-link>
   </section>
 </template>

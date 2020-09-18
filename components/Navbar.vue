@@ -1,6 +1,6 @@
 <template>
   <nav class="flex items-center flex-wrap bg-brown-200 px-6 pt-0 pb-2 shadow-lg w-full z-10 sticky top-0 justify-between lg:justify-center border-b border-brown-400 z-50">
-    <nuxt-link title="Lior Cosmetics" to="/">
+    <nuxt-link title="Lior Cosmetics" to="/pedidos/">
       <span class="block w-full text-brown-700 text-4xl text-center h-10">LIOR</span>
       <span class="block w-full text-brown-700 text-xs text-center">COSMETICS</span>
     </nuxt-link>
@@ -18,7 +18,7 @@
     <div :class="open ? 'block': 'hidden'"
           class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
       <div class="text-sm lg:flex-grow">
-        <nuxt-link title="Nuevo Cliente" to="/" class="text-brown-800 float-right font-semibold">
+        <nuxt-link title="Nuevo Cliente" to="/pedidos/" class="text-brown-800 float-right font-semibold">
         Nuevo Cliente</nuxt-link>
       </div>
     </div>

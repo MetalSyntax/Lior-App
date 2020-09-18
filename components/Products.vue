@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import productsDataJson from "../data/products.json";
+import productsDataJson from "~/data/products.json";
 
 export default {
   name: "Products",
