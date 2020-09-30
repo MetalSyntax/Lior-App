@@ -1,6 +1,6 @@
 <template>
   <main
-    class="flex flex-wrap items-center content-center self-center md:w-10/12 lg:w-full lg:px-48 xl:px-64 w-full my-0 mx-auto overflow-hidden"
+    class="index flex flex-wrap items-center content-center self-center md:w-10/12 lg:w-full lg:px-48 xl:px-64 w-full my-0 mx-auto overflow-hidden"
   >
     <form
       class="flex flex-wrap justify-center md:self-center md:items-center md:content-center items-center content-start self-center w-full my-0 mx-auto h-full"
@@ -62,11 +62,11 @@ export default {
 </script>
 
 <style>
-main {
+.index {
   height: 80vh;
 }
 @media (min-width: 1024px) {
-  main {
+  .index {
     background: linear-gradient(to top, transparent 50%, #604728 50%);
   }
 }

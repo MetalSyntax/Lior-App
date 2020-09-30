@@ -69,7 +69,7 @@ export default {
       short_name: "Lior Pedidos",
       background_color: "#F0C581",
       description: "Aplicación web para generar pedidos en Lior Cosmetics.",
-      start_url: '../pedidos/?standalone=true',
+      start_url: '/pedidos/?standalone=true',
       display: "standalone"
     },
     icon: {
