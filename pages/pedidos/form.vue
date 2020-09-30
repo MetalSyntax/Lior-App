@@ -144,6 +144,7 @@
               </div>
               <div class="w-10/12 lg:w-11/12 ml-1">
               <span class="w-full block font-bold text-brown-800">{{ allProduct.name }}</span>
+              <span class="w-full uppercase text-brown-800">Precio: {{ allProduct.unitedPrice }}$ -</span>
               <span class="w-full uppercase text-brown-800">Unidades: {{ allProduct.quantity }} -</span>
               <span class="w-full uppercase text-brown-800">Subtotal: {{ allProduct.subtotalformatted }}$</span>
               </div>

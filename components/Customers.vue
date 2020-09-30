@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-wrap w-full px-3 my-2 lg:my-3 z-10">
+  <section class="flex flex-wrap w-full px-3 py-2 lg:py-8 z-10">
     <label
       class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-4 z-10"
       for="code"
