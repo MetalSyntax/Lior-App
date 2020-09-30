@@ -73,7 +73,7 @@ export default {
       display: "standalone"
     },
     icon: {
-      purpose: "maskable"
+      purpose: ['any', 'maskable']
     }
   },
   /*

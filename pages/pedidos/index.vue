@@ -19,11 +19,13 @@
           href="https://metalsyntax.now.sh/"
           target="_blank"
           class="text-brown-800 font-bold"
+          rel="noreferrer noopener"
         >MetalSyntax</a> para
         <a
           href="http://www.liorcosmetics.com/"
           target="_blank"
           class="text-brown-800 font-bold"
+          rel="noreferrer noopener"
         >Lior Cosmetics</a>.
       </p>
     </footer>
