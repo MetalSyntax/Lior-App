@@ -7,7 +7,7 @@
     <div class="flex lg:hidden">
       <button
         @click="toggle"
-        class="flex items-center px-3 py-2 border rounded text-brown-800 border-brown-800 hover:text-brown-400 hover:border-brown-400 focus:outline-none hove:outline-none"
+        class="flex items-center px-3 py-2 border rounded text-brown-800 border-brown-800 hover:text-brown-200 hover:border-brown-200 hover:bg-brown-800 focus:outline-none hove:outline-none"
       >
         <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <title>Menu</title>

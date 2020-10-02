@@ -1,25 +1,32 @@
 <template>
-  <main class="container flex items-center flex-wrap w-full my-0 mx-auto overflow-hidden">
-    <h1 class="block w-full text-brown-800 text-center text-lg bold py-2 uppercase">
+  <main
+    class="container flex items-center flex-wrap w-full my-0 mx-auto overflow-hidden"
+  >
+    <h1
+      class="block w-full text-brown-800 text-center text-lg bold py-2 uppercase"
+    >
       Bienvenido!,
       <span class="block w-full font-bold">{{ customerName }}</span>
     </h1>
-    <form class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full">
+    <form
+      class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full"
+    >
       <!--Producto-->
       <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3 z-20">
         <label
           class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2 z-20"
           for="product"
-        >Seleccione un producto</label>
+          >Seleccione un producto</label
+        >
         <v-select
-          class="block appearance-none w-full bg-brown-200 border  font-semibold border-brown-800 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-brown-400 mb-4 p-2 z-20"
+          class="block appearance-none w-full bg-brown-200 border font-semibold border-brown-800 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-brown-400 mb-4 p-2 z-20"
           v-model="productSelected"
           :options="paginated"
-          @search="query => (search = query)"
+          @search="(query) => (search = query)"
           :filterable="false"
           :value="paginated.name"
           :clearable="false"
-          :selectable="options => options.value != false"
+          :selectable="(options) => options.value != false"
           label="name"
           placeholder="INGRESE NOMBRE"
           id="product"
@@ -30,12 +37,16 @@
               class="flex-grow hover:pointer text-brown-800 py-1 font-semibold border-t border-brown-800"
               @click.prevent="offset -= 5"
               :disabled="!hasPrevPage"
-            >Previo</button>
+            >
+              Previo
+            </button>
             <button
               class="flex-grow hover:pointer text-brown-800 py-1 font-semibold border-l border-t border-brown-800"
               @click.prevent="offset += 5"
               :disabled="!hasNextPage"
-            >Siguiente</button>
+            >
+              Siguiente
+            </button>
           </li>
         </v-select>
       </section>
@@ -44,9 +55,10 @@
         <label
           class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2 z-10"
           for="quantity"
-        >Ingrese cantidad</label>
+          >Ingrese cantidad</label
+        >
         <input
-          class="appearance-none block w-full bg-brown-200 text-brown-800 text-sm border rounded py-3 px-4 leading-tight focus:outline-none font-semibold  border-brown-400 focus:bg-brown-200 focus:text-brown-800 mb-4 z-10"
+          class="appearance-none block w-full bg-brown-200 text-brown-800 text-sm border rounded py-3 px-4 leading-tight focus:outline-none font-semibold border-brown-400 focus:bg-brown-200 focus:text-brown-800 mb-4 z-10"
           id="quantity"
           type="number"
           placeholder="0"
@@ -63,7 +75,8 @@
         <label
           class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2"
           for="grid-code"
-        >Resumen parcial</label>
+          >Resumen parcial</label
+        >
         <div
           class="appearance-none flex w-full bg-brown-700 text-brown-300 border rounded py-3 px-4 leading-tight border-brown-300"
         >
@@ -72,7 +85,8 @@
             <span
               v-if="productSelected.price > 0"
               class="text-xl text-white w-full font-bold"
-            >{{ unitPriceFormat }}$</span>
+              >{{ unitPriceFormat }}$</span
+            >
             <span v-else class="text-xl text-white w-full font-bold">0$</span>
           </div>
           <div class="flex flex-wrap w-1/2">
@@ -80,73 +94,108 @@
             <span
               v-if="productSelected.price > 0"
               class="text-xl text-white w-full font-bold"
-            >{{ subtotalFormat }}$</span>
+              >{{ subtotalFormat }}$</span
+            >
             <span v-else class="text-xl text-white w-full font-bold">0$</span>
           </div>
         </div>
       </section>
     </form>
     <!--Resumen-->
-    <section v-if="allProducts.length > 0" class="flex flex-wrap w-full lg:w-4/5 px-2 justify-center pb-20 my-0 mx-auto">
+    <section
+      v-if="allProducts.length > 0"
+      class="flex flex-wrap w-full lg:w-4/5 px-2 justify-center pb-20 my-0 mx-auto"
+    >
       <div
         class="appearance-none flex flex-wrap w-full bg-white text-brown-800 border border-brown-200 rounded py-2 px-2 leading-tight shadow-md"
       >
         <span
           class="block w-full uppercase tracking-wide text-center color-blue-custom text-lg font-bold mb-2"
-        >Resumen del Pedido</span>
+          >Resumen del Pedido</span
+        >
         <div class="flex flex-wrap w-1/2 text-center">
-          <span class="uppercase text-brown-400  text-xs font-bold w-full">Total:</span>
-          <span class="text-brown-700  font-bold text-2xl w-full">{{ totalPriceFormatted }}$</span>
+          <span class="uppercase text-brown-400 text-xs font-bold w-full"
+            >Total:</span
+          >
+          <span class="text-brown-700 font-bold text-2xl w-full"
+            >{{ totalPriceFormatted }}$</span
+          >
         </div>
         <div class="flex flex-wrap w-1/2 text-center">
-          <span class="uppercase text-brown-400  text-xs font-bold w-full">Colecciones:</span>
-          <span class="text-brown-700  font-bold text-2xl w-full">
-            {{
-            collectionsFormatted
-            }}
+          <span class="uppercase text-brown-400 text-xs font-bold w-full"
+            >Colecciones:</span
+          >
+          <span class="text-brown-700 font-bold text-2xl w-full">
+            {{ collectionsFormatted }}
           </span>
         </div>
       </div>
       <div
         class="appearance-none flex flex-wrap w-full bg-white text-brown-700 py-2 px-2 leading-tight mt-4 mb-4"
       >
-      <span
+        <span
           class="block w-full uppercase tracking-wide text-center text-sm font-bold mb-2"
-        >Calculo de colecciones</span>
+          >Calculo de colecciones</span
+        >
         <div class="flex flex-wrap w-full text-center justify-center">
-          <span class="uppercase text-brown-200 text-sm font-semibold pr-1 pb-1">Sobrante: </span>
-          <span class="text-brown-700 text-sm font-bold">{{surplusFormatted}}$</span>
+          <span class="uppercase text-brown-200 text-sm font-semibold pr-1 pb-1"
+            >Sobrante:
+          </span>
+          <span class="text-brown-700 text-sm font-bold"
+            >{{ surplusFormatted }}$</span
+          >
         </div>
         <div class="flex flex-wrap w-full text-center justify-center">
-          <span class="uppercase text-brown-200 text-sm font-semibold pr-1 pb-1">Proxima:</span>
+          <span class="uppercase text-brown-200 text-sm font-semibold pr-1 pb-1"
+            >Proxima:</span
+          >
           <span class="text-brown-700 text-sm font-bold">
-            {{nextFormatted}}$
+            {{ nextFormatted }}$
           </span>
-      </div>
+        </div>
       </div>
       <span
         class="block uppercase tracking-wide text-brown-800 text-lg font-bold my-3"
-      >Listado de productos</span>
+        >Listado de productos</span
+      >
       <table name="listado" class="w-full table-auto">
         <thead class="border border-brown-800 bg-brown-800">
           <tr>
-            <th class="px-2 py-1 text-xs md:text-sm uppercase text-left text-white">Producto</th>
+            <th
+              class="px-2 py-1 text-xs md:text-sm uppercase text-left text-white"
+            >
+              Producto
+            </th>
             <th class="px-2 py-1 text-xs md:text-sm uppercase"></th>
           </tr>
         </thead>
         <tbody class="border border-brown-400">
-          <tr v-for="(allProduct, index) in allProducts" v-bind:key="index" class="my-2">
+          <tr
+            v-for="(allProduct, index) in allProducts"
+            v-bind:key="index"
+            class="my-2"
+          >
             <td class="flex px-1 py-1 text-left text-xs md:text-sm">
               <div class="flex justify-center self-center w-2/12 lg:w-1/12">
-              <img class="rounded-full border h-10 lg:h-12"
-              :src="require(`@/assets/img/icons/${allProduct.img}`)"
-              :alt="allProduct.name">
+                <img
+                  class="rounded-full border h-10 lg:h-12"
+                  :src="require(`@/assets/img/icons/${allProduct.img}`)"
+                  :alt="allProduct.name"
+                />
               </div>
               <div class="w-10/12 lg:w-11/12 ml-1">
-              <span class="w-full block font-bold text-brown-800">{{ allProduct.name }}</span>
-              <span class="w-full uppercase text-brown-800">Precio: {{ allProduct.unitedPrice }}$ -</span>
-              <span class="w-full uppercase text-brown-800">Unidades: {{ allProduct.quantity }} -</span>
-              <span class="w-full uppercase text-brown-800">Subtotal: {{ allProduct.subtotalformatted }}$</span>
+                <span class="w-full block font-bold text-brown-800">{{
+                  allProduct.name
+                }}</span>
+                <span class="w-full uppercase text-brown-800"
+                  >P.V.P: {{ allProduct.unitedPrice }}$</span
+                >
+                <span class="w-full uppercase text-brown-800"
+                  >Uds: {{ allProduct.quantity }}</span
+                >
+                <span class="w-full uppercase text-brown-800"
+                  >Sub: {{ allProduct.subtotalformatted }}$</span
+                >
               </div>
             </td>
             <td class="text-center">
@@ -154,7 +203,9 @@
                 class="rounded my-0 mx-auto py-1 px-3 cursor-pointer text-lg text-red-500 hover:text-red-700 font-bold focus:border-0 hover:border-0 outline-none hover:outline-none focus:outline-none"
                 @click="removeEach(index)"
                 title="eliminar"
-              >X</button>
+              >
+                X
+              </button>
             </td>
           </tr>
         </tbody>
@@ -168,12 +219,16 @@
         class="bg-white text-brown-700 border-brown-700 hover:text-brown-400 hover:border-brown-400 border-2 mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="saveArchive"
         title="Guardar"
-      >Guardar</button>
+      >
+        Guardar
+      </button>
       <button
-        class="bg-brown-700 text-brown-300 border-brown-700 hover:border-brown-200  border-2 mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        class="bg-brown-700 text-brown-300 border-brown-700 hover:border-brown-200 border-2 mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="addQuantity"
         title="Agregar"
-      >Agregar</button>
+      >
+        Agregar
+      </button>
     </section>
   </main>
 </template>
@@ -223,7 +278,7 @@ export default {
   mounted() {
     this.productsData.forEach((data) => {
       data.value = true;
-    })
+    });
     //Muestra los datos seleccionados de los productos
     if (localStorage.getItem("allProducts")) {
       try {
@@ -255,9 +310,7 @@ export default {
       this.next = JSON.parse(localStorage.getItem("next"));
     }
     if (localStorage.getItem("nextFormatted")) {
-      this.nextFormatted = JSON.parse(
-        localStorage.getItem("nextFormatted")
-      );
+      this.nextFormatted = JSON.parse(localStorage.getItem("nextFormatted"));
     }
     // Muestra el precio total
     if (localStorage.getItem("surplus")) {
@@ -296,11 +349,17 @@ export default {
       this.totalPriceFormatted = parseFloat(this.totalPrice).toFixed(2);
       this.collectionsFormatted = parseFloat(this.collections).toFixed(2);
 
-      this.next = (1-(this.collections-parseInt(this.collections)))*50;
-      this.nextFormatted = ((1-(this.collections-parseInt(this.collections)))*50).toFixed(2);
+      this.next = (1 - (this.collections - parseInt(this.collections))) * 50;
+      this.nextFormatted = (
+        (1 - (this.collections - parseInt(this.collections))) *
+        50
+      ).toFixed(2);
 
-      this.surplus = (this.collections-parseInt(this.collections))*50;
-      this.surplusFormatted = ((this.collections-parseInt(this.collections))*50).toFixed(2);
+      this.surplus = (this.collections - parseInt(this.collections)) * 50;
+      this.surplusFormatted = (
+        (this.collections - parseInt(this.collections)) *
+        50
+      ).toFixed(2);
 
       this.allProducts.push({
         code: this.productSelected.code,
@@ -368,11 +427,17 @@ export default {
       this.collections = this.totalPrice / 50;
       this.collectionsFormatted = parseFloat(this.totalPrice / 50).toFixed(2);
 
-      this.next = (1-(this.collections-parseInt(this.collections)))*50;
-      this.nextFormatted = ((1-(this.collections-parseInt(this.collections)))*50).toFixed(2);
+      this.next = (1 - (this.collections - parseInt(this.collections))) * 50;
+      this.nextFormatted = (
+        (1 - (this.collections - parseInt(this.collections))) *
+        50
+      ).toFixed(2);
 
-      this.surplus = (this.collections-parseInt(this.collections))*50;
-      this.surplusFormatted = ((this.collections-parseInt(this.collections))*50).toFixed(2);
+      this.surplus = (this.collections - parseInt(this.collections)) * 50;
+      this.surplusFormatted = (
+        (this.collections - parseInt(this.collections)) *
+        50
+      ).toFixed(2);
 
       this.productsSelected.splice(x, 1);
       this.allProducts.splice(x, 1);
@@ -388,15 +453,15 @@ export default {
               this.productsSelected,
             "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
             "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
-            "\n,Proxima Colección\n," + (this.next).toFixed(2),
-            "\n,Sobrante\n," + (this.surplus).toFixed(2),
+            "\n,Proxima Colección\n," + this.next.toFixed(2),
+            "\n,Sobrante\n," + this.surplus.toFixed(2),
           ],
           "Pedido de " +
             this.customerCode +
             " del " +
             new Date().getDate() +
             "-" +
-            (new Date().getMonth()+1) +
+            (new Date().getMonth() + 1) +
             "-" +
             new Date().getFullYear() +
             ".txt",
@@ -420,7 +485,7 @@ export default {
         this.nextFormatted = 50;
         this.surplusFormatted = 0;
         this.productsData.forEach((data) => {
-           data.value = true;
+          data.value = true;
         });
         //Salvar los valores reestrablecidos
         this.saveAll();
@@ -467,19 +532,19 @@ input::placeholder {
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-   @apply appearance-none;
+  @apply appearance-none;
 }
 .vs__dropdown-toggle {
   @apply border-0;
 }
 .vs__actions {
- @apply hidden;
+  @apply hidden;
 }
 .vs__dropdown-menu {
-   @apply z-30 p-0 border border-brown-800;
+  @apply z-30 p-0 border border-brown-800;
 }
 tr:nth-child(even) img {
-   @apply bg-brown-400;
+  @apply bg-brown-400;
 }
 tr:nth-child(odd) img {
   @apply bg-brown-200;
