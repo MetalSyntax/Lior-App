@@ -216,11 +216,26 @@
       class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200"
     >
       <button
-        class="bg-white text-brown-700 border-brown-700 hover:text-brown-400 hover:border-brown-400 border-2 mx-2 my-2 py-2 px-4 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
-        @click.prevent="saveArchive"
-        title="Guardar"
+        class="bg-white text-brown-700 border-brown-700 hover:text-brown-400 hover:border-brown-400 border-2 mx-2 my-2 py-1 px-1 lg:px-2 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        @click.prevent="saveArchiveTxt"
+        title="TXT"
       >
-        Guardar
+        <img
+          class="w-full h-6 lg:h-8"
+          :src="require(`@/assets/img/icons/${iconTxt}.png`)"
+          :alt="iconTxt"
+        />
+      </button>
+      <button
+        class="bg-white text-brown-700 border-brown-700 hover:text-brown-400 hover:border-brown-400 border-2 mx-2 my-2 py-1 px-1 lg:px-2 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
+        @click.prevent="saveArchiveCsv"
+        title="CSV"
+      >
+      <img
+          class="w-full h-6 lg:h-8"
+          :src="require(`@/assets/img/icons/${iconCSV}.png`)"
+          :alt="iconCSV"
+        />
       </button>
       <button
         class="bg-brown-700 text-brown-300 border-brown-700 hover:border-brown-200 border-2 mx-2 my-2 py-2 px-8 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
@@ -273,6 +288,8 @@ export default {
       search: "",
       offset: 0,
       limit: 5, //Limite de clientes visibles
+      iconTxt: "txt",
+      iconCSV: "csv",
     };
   },
   mounted() {
@@ -443,17 +460,17 @@ export default {
       this.allProducts.splice(x, 1);
       this.saveAll();
     },
-    saveArchive(x) {
+    saveArchiveTxt(x) {
       if (confirm("¿Deseas guardar y borrar?")) {
         this.file = new File(
           [
             ",Cliente\n," + this.customerName,
-            "\n,Código\n," + this.customerCode,
-            "\n,Código,Productos,Cantidad,Precio Unitario,Subtotal" +
+            "\n,Codigo\n," + this.customerCode,
+            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal" +
               this.productsSelected,
             "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
             "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
-            "\n,Proxima Colección\n," + this.next.toFixed(2),
+            "\n,Proxima Coleccion\n," + this.next.toFixed(2),
             "\n,Sobrante\n," + this.surplus.toFixed(2),
           ],
           "Pedido de " +
@@ -466,8 +483,7 @@ export default {
             new Date().getFullYear() +
             ".txt",
           {
-            type: "text/html;charset=utf-8,%EF%BB%BF",
-            //type: "data:text/csv;charset=utf-8,%EF%BB%BF"
+            type: "data:text/html;charset=utf-8,%EF%BB%BF;",
           }
         );
         FileSaver.saveAs(this.file);
@@ -490,7 +506,104 @@ export default {
         //Salvar los valores reestrablecidos
         this.saveAll();
       } else {
-        console.log("Tu pedido no se ha generado");
+        this.file = new File(
+          [
+            ",Cliente\n," + this.customerName,
+            "\n,Codigo\n," + this.customerCode,
+            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal" +
+              this.productsSelected,
+            "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
+            "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
+            "\n,Proxima Coleccion\n," + this.next.toFixed(2),
+            "\n,Sobrante\n," + this.surplus.toFixed(2),
+          ],
+          "Pedido de " +
+            this.customerCode +
+            " del " +
+            new Date().getDate() +
+            "-" +
+            (new Date().getMonth() + 1) +
+            "-" +
+            new Date().getFullYear() +
+            ".txt",
+          {
+            type: "data:text/html;charset=utf-8,%EF%BB%BF;",
+          }
+        );
+        FileSaver.saveAs(this.file);
+      }
+    },
+    saveArchiveCsv(x) {
+      if (confirm("¿Deseas guardar y borrar?")) {
+        this.file = new File(
+          [
+            ",Cliente\n," + this.customerName,
+            "\n,Codigo\n," + this.customerCode,
+            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal" +
+              this.productsSelected,
+            "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
+            "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
+            "\n,Proxima Coleccion\n," + this.next.toFixed(2),
+            "\n,Sobrante\n," + this.surplus.toFixed(2),
+          ],
+          "Pedido de " +
+            this.customerCode +
+            " del " +
+            new Date().getDate() +
+            "-" +
+            (new Date().getMonth() + 1) +
+            "-" +
+            new Date().getFullYear() +
+            ".csv",
+          {
+            type: 'data:text/csv;charset=iso-8859-1;',
+          }
+        );
+        FileSaver.saveAs(this.file);
+        //Borrar Visual
+        this.allProducts.splice(x);
+        //Restablecer Valores
+        this.totalPrice = 0;
+        this.collections = 0;
+        this.next = 50;
+        this.surplus = 0;
+        this.quantity = null;
+        this.productsSelected = [];
+        this.collectionsFormatted = 0;
+        this.totalPriceFormatted = 0;
+        this.nextFormatted = 50;
+        this.surplusFormatted = 0;
+        this.productsData.forEach((data) => {
+          data.value = true;
+        });
+        //Salvar los valores reestrablecidos
+        this.saveAll();
+      } else {
+        this.file = new File(
+          [
+            ",Cliente\n," + this.customerName,
+            "\n,Codigo\n," + this.customerCode,
+            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal" +
+              this.productsSelected,
+            "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
+            "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
+            "\n,Proxima Coleccion\n," + this.next.toFixed(2),
+            "\n,Sobrante\n," + this.surplus.toFixed(2),
+          ],
+          "Pedido de " +
+            this.customerCode +
+            " del " +
+            new Date().getDate() +
+            "-" +
+            (new Date().getMonth() + 1) +
+            "-" +
+            new Date().getFullYear() +
+            ".csv",
+          {
+            type: 'data:text/csv;charset=iso-8859-1;',
+          }
+        );
+        FileSaver.saveAs(this.file);
       }
     },
   },

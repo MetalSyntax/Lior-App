@@ -202,41 +202,6 @@
     "img": "gel.png"
   },
   {
-    "code": "PT-00045",
-    "name": "PRE-TRATAMIENTO CAPILAR ORO LIQUIDO",
-    "price": 4,
-    "value": true,
-    "img": "shampoo.png"
-  },
-  {
-    "code": "PT-00046",
-    "name": "POST-TRATAMIENTO ORO LIQUIDO",
-    "price": 3.5,
-    "value": true,
-    "img": "conditioner.png"
-  },
-  {
-    "code": "PT-00047",
-    "name": "BAÑO DE CREMA ORO LIQUIDO",
-    "price": 4.1,
-    "value": true,
-    "img": "beauty.png"
-  },
-  {
-    "code": "PT-00048",
-    "name": "CREMA DE PEINAR ORO LIQUIDO",
-    "price": 3.28,
-    "value": true,
-    "img": "shower-gel.png"
-  },
-  {
-    "code": "PT-00049",
-    "name": "MASCARILLA ORO ACEITE DE ARGAN, Y KERATINA 140 G",
-    "price": 3.1,
-    "value": true,
-    "img": "hand-cream.png"
-  },
-  {
     "code": "PT-00055",
     "name": "COLONIA PARA DAMA EDICION ESPECIAL 30 ML",
     "price": 5.5,
