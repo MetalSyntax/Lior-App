@@ -77,6 +77,23 @@ export default {
     }
   },
   /*
+   *
+  */
+  /*router: {
+    routes: [
+      {
+        name: 'index',
+        path: '/pedidos/',
+        component: './pages/orders.vue'
+      },
+      {
+        name: 'form',
+        path: '/pedidos/form',
+        component: './pages/form.vue'
+      },
+    ]
+  },*/
+  /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
