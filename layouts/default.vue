@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
+import Navbar from "../components/Navbar";
 export default {
-head() {
+  head() {
     return {
       link: [
         {
@@ -17,12 +17,8 @@ head() {
         }
       ]
     };
-  },
-}
+  }
+};
 </script>
 
-<style>
-
-</style>
-
-
+<style></style>

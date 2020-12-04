@@ -61,7 +61,7 @@ export default {
    */
   modules: ["nuxt-vue-select"],
   /*
-   *
+   * PWA
    */
   pwa: {
     manifest: {
@@ -77,7 +77,11 @@ export default {
     }
   },
   /*
-   *
+   * Path
+  */
+  publicPath: process.env.NODE_ENV === 'production' ? '/pedidos/' : '/',
+  /*
+   * Router
   */
   /*router: {
     routes: [

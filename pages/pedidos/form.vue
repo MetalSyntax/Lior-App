@@ -11,8 +11,28 @@
     <form
       class="flex flex-wrap justify-center py-4 w-full max-w-8xl my-0 mx-auto h-full"
     >
+      <!--Descuento-->
+      <section class="w-full lg:w-1/3 px-3 my-2 lg:my-3 z-30">
+        <label
+          class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2 z-30"
+          for="discount"
+          >Seleccione un descuento</label
+        >
+        <v-select
+          class="block appearance-none w-full bg-brown-200 border font-semibold border-brown-800 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-brown-400 mb-4 p-2 z-30"
+          v-model="discount"
+          :value="optionDiscount.name"
+          label="name"
+          :options="optionDiscount"
+          :reduce="optionDiscount => optionDiscount.value"
+          placeholder="DESCUENTO"
+          id="discount"
+          name="discount"
+        >
+        </v-select>
+      </section>
       <!--Producto-->
-      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3 z-20">
+      <section class="w-full lg:w-1/3 px-3 my-2 lg:my-3 z-20">
         <label
           class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2 z-20"
           for="product"
@@ -22,11 +42,11 @@
           class="block appearance-none w-full bg-brown-200 border font-semibold border-brown-800 text-brown-800 text-xs rounded leading-tight focus:outline-none focus:bg-white focus:border-brown-400 mb-4 p-2 z-20"
           v-model="productSelected"
           :options="paginated"
-          @search="(query) => (search = query)"
+          @search="query => (search = query)"
           :filterable="false"
           :value="paginated.name"
           :clearable="false"
-          :selectable="(options) => options.value != false"
+          :selectable="options => options.value != false"
           label="name"
           placeholder="INGRESE NOMBRE"
           id="product"
@@ -51,7 +71,7 @@
         </v-select>
       </section>
       <!--Cantidad-->
-      <section class="w-full lg:w-1/2 px-3 my-2 lg:my-3 z-10">
+      <section class="w-full lg:w-1/3 px-3 my-2 lg:my-3 z-10">
         <label
           class="block uppercase tracking-wide text-brown-800 text-xs font-bold mb-2 z-10"
           for="quantity"
@@ -188,13 +208,16 @@
                   allProduct.name
                 }}</span>
                 <span class="w-full uppercase text-brown-800"
-                  >P.V.P: {{ allProduct.unitedPrice }}$</span
+                  ><span class="font-semibold">P.V.P:</span>
+                  {{ allProduct.unitedPrice }}$</span
                 >
                 <span class="w-full uppercase text-brown-800"
-                  >Uds: {{ allProduct.quantity }}</span
+                  ><span class="font-semibold">Uds:</span>
+                  {{ allProduct.quantity }}</span
                 >
                 <span class="w-full uppercase text-brown-800"
-                  >Sub: {{ allProduct.subtotalformatted }}$</span
+                  ><span class="font-semibold">Sub:</span>
+                  {{ allProduct.subtotalformatted }}$</span
                 >
               </div>
             </td>
@@ -231,7 +254,7 @@
         @click.prevent="saveArchiveCsv"
         title="CSV"
       >
-      <img
+        <img
           class="w-full h-6 lg:h-8"
           :src="require(`@/assets/img/icons/${iconCSV}.png`)"
           :alt="iconCSV"
@@ -261,9 +284,9 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: "Formulario para generar pedidos en Lior Cosmetics",
-        },
-      ],
+          content: "Formulario para generar pedidos en Lior Cosmetics"
+        }
+      ]
     };
   },
   data() {
@@ -284,16 +307,22 @@ export default {
       surplus: 0, //
       surplusFormatted: 0, //
       quantity: null, // Cantidad
+      discount: [], // Descuento
+      optionDiscount: [
+        { name: "Normal", value: "normal" },
+        { name: "Dcto. 20%", value: "veinte" },
+        { name: "Dcto. 30%", value: "treinta" }
+      ], //
       file: null, //Data del Archivo
       search: "",
       offset: 0,
       limit: 5, //Limite de clientes visibles
       iconTxt: "txt",
-      iconCSV: "csv",
+      iconCSV: "csv"
     };
   },
   mounted() {
-    this.productsData.forEach((data) => {
+    this.productsData.forEach(data => {
       data.value = true;
     });
     //Muestra los datos seleccionados de los productos
@@ -346,6 +375,7 @@ export default {
     if (localStorage.getItem("customerCode")) {
       this.customerCode = JSON.parse(localStorage.getItem("customerCode"));
     }
+    return console.log(this.discount.value);
   },
   methods: {
     addQuantity() {
@@ -361,22 +391,57 @@ export default {
       if (!this.quantity) {
         return;
       }
+      if (!this.discount) {
+        return;
+      }
+
       this.totalPrice += this.productSelected.price * this.quantity;
-      this.collections = this.totalPrice / 50;
+
+      if (this.discount == "normal") {
+        this.collections = this.totalPrice / 50;
+        this.next = (1 - (this.collections - parseInt(this.collections))) * 50;
+        this.nextFormatted = (
+          (1 - (this.collections - parseInt(this.collections))) *
+          50
+        ).toFixed(2);
+
+        this.surplus = (this.collections - parseInt(this.collections)) * 50;
+        this.surplusFormatted = (
+          (this.collections - parseInt(this.collections)) *
+          50
+        ).toFixed(2);
+      }
+      if (this.discount == "veinte") {
+        this.collections = this.totalPrice / 63;
+        this.next = (1 - (this.collections - parseInt(this.collections))) * 63;
+        this.nextFormatted = (
+          (1 - (this.collections - parseInt(this.collections))) *
+          63
+        ).toFixed(2);
+
+        this.surplus = (this.collections - parseInt(this.collections)) * 63;
+        this.surplusFormatted = (
+          (this.collections - parseInt(this.collections)) *
+          63
+        ).toFixed(2);
+      }
+      if (this.discount == "treinta") {
+        this.collections = this.totalPrice / 72;
+        this.next = (1 - (this.collections - parseInt(this.collections))) * 72;
+        this.nextFormatted = (
+          (1 - (this.collections - parseInt(this.collections))) *
+          72
+        ).toFixed(2);
+
+        this.surplus = (this.collections - parseInt(this.collections)) * 72;
+        this.surplusFormatted = (
+          (this.collections - parseInt(this.collections)) *
+          72
+        ).toFixed(2);
+      }
+
       this.totalPriceFormatted = parseFloat(this.totalPrice).toFixed(2);
       this.collectionsFormatted = parseFloat(this.collections).toFixed(2);
-
-      this.next = (1 - (this.collections - parseInt(this.collections))) * 50;
-      this.nextFormatted = (
-        (1 - (this.collections - parseInt(this.collections))) *
-        50
-      ).toFixed(2);
-
-      this.surplus = (this.collections - parseInt(this.collections)) * 50;
-      this.surplusFormatted = (
-        (this.collections - parseInt(this.collections)) *
-        50
-      ).toFixed(2);
 
       this.allProducts.push({
         code: this.productSelected.code,
@@ -389,6 +454,7 @@ export default {
         subtotalformatted: parseFloat(
           this.productSelected.price * this.quantity
         ).toFixed(2),
+        discount: this.discount
       });
       this.productsSelected.push([
         "\n",
@@ -397,6 +463,7 @@ export default {
         parseInt(this.quantity),
         parseFloat(this.productSelected.price).toFixed(2),
         parseFloat(this.productSelected.price * this.quantity).toFixed(2),
+        this.discount
       ]);
       //Vacia el campo
       this.quantity = null;
@@ -430,7 +497,7 @@ export default {
       localStorage.setItem("surplusFormatted", surplusFormatted);
     },
     removeEach(x) {
-      this.productsData.forEach((data) => {
+      this.productsData.forEach(data => {
         if (data.code == this.allProducts[x].code) {
           data.value = true;
         }
@@ -441,20 +508,50 @@ export default {
         this.allProducts[x].subtotal
       ).toFixed(2);
 
-      this.collections = this.totalPrice / 50;
-      this.collectionsFormatted = parseFloat(this.totalPrice / 50).toFixed(2);
+      if (this.productsSelected[6] == "normal") {
+        this.collections = this.totalPrice / 50;
+        this.collectionsFormatted = parseFloat(this.totalPrice / 50).toFixed(2);
+        this.next = (1 - (this.collections - parseInt(this.collections))) * 50;
+        this.nextFormatted = (
+          (1 - (this.collections - parseInt(this.collections))) *
+          50
+        ).toFixed(2);
+        this.surplus = (this.collections - parseInt(this.collections)) * 50;
+        this.surplusFormatted = (
+          (this.collections - parseInt(this.collections)) *
+          50
+        ).toFixed(2);
+      }
 
-      this.next = (1 - (this.collections - parseInt(this.collections))) * 50;
-      this.nextFormatted = (
-        (1 - (this.collections - parseInt(this.collections))) *
-        50
-      ).toFixed(2);
+      if (this.productsSelected[6] == "veinte") {
+        this.collections = this.totalPrice / 63;
+        this.collectionsFormatted = parseFloat(this.totalPrice / 63).toFixed(2);
+        this.next = (1 - (this.collections - parseInt(this.collections))) * 63;
+        this.nextFormatted = (
+          (1 - (this.collections - parseInt(this.collections))) *
+          63
+        ).toFixed(2);
+        this.surplus = (this.collections - parseInt(this.collections)) * 63;
+        this.surplusFormatted = (
+          (this.collections - parseInt(this.collections)) *
+          63
+        ).toFixed(2);
+      }
 
-      this.surplus = (this.collections - parseInt(this.collections)) * 50;
-      this.surplusFormatted = (
-        (this.collections - parseInt(this.collections)) *
-        50
-      ).toFixed(2);
+      if (this.productsSelected[6] == "treinta") {
+        this.collections = this.totalPrice / 72;
+        this.collectionsFormatted = parseFloat(this.totalPrice / 72).toFixed(2);
+        this.next = (1 - (this.collections - parseInt(this.collections))) * 72;
+        this.nextFormatted = (
+          (1 - (this.collections - parseInt(this.collections))) *
+          72
+        ).toFixed(2);
+        this.surplus = (this.collections - parseInt(this.collections)) * 72;
+        this.surplusFormatted = (
+          (this.collections - parseInt(this.collections)) *
+          72
+        ).toFixed(2);
+      }
 
       this.productsSelected.splice(x, 1);
       this.allProducts.splice(x, 1);
@@ -466,12 +563,12 @@ export default {
           [
             ",Cliente\n," + this.customerName,
             "\n,Codigo\n," + this.customerCode,
-            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal" +
+            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal,Descuento" +
               this.productsSelected,
             "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
             "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
             "\n,Proxima Coleccion\n," + this.next.toFixed(2),
-            "\n,Sobrante\n," + this.surplus.toFixed(2),
+            "\n,Sobrante\n," + this.surplus.toFixed(2)
           ],
           "Pedido de " +
             this.customerCode +
@@ -483,7 +580,7 @@ export default {
             new Date().getFullYear() +
             ".txt",
           {
-            type: "data:text/html;charset=utf-8,%EF%BB%BF;",
+            type: "data:text/html;charset=utf-8,%EF%BB%BF;"
           }
         );
         FileSaver.saveAs(this.file);
@@ -500,7 +597,7 @@ export default {
         this.totalPriceFormatted = 0;
         this.nextFormatted = 50;
         this.surplusFormatted = 0;
-        this.productsData.forEach((data) => {
+        this.productsData.forEach(data => {
           data.value = true;
         });
         //Salvar los valores reestrablecidos
@@ -510,12 +607,12 @@ export default {
           [
             ",Cliente\n," + this.customerName,
             "\n,Codigo\n," + this.customerCode,
-            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal" +
+            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal,Descuento" +
               this.productsSelected,
             "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
             "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
             "\n,Proxima Coleccion\n," + this.next.toFixed(2),
-            "\n,Sobrante\n," + this.surplus.toFixed(2),
+            "\n,Sobrante\n," + this.surplus.toFixed(2)
           ],
           "Pedido de " +
             this.customerCode +
@@ -527,7 +624,7 @@ export default {
             new Date().getFullYear() +
             ".txt",
           {
-            type: "data:text/html;charset=utf-8,%EF%BB%BF;",
+            type: "data:text/html;charset=utf-8,%EF%BB%BF;"
           }
         );
         FileSaver.saveAs(this.file);
@@ -539,12 +636,12 @@ export default {
           [
             ",Cliente\n," + this.customerName,
             "\n,Codigo\n," + this.customerCode,
-            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal" +
+            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal,Descuento" +
               this.productsSelected,
             "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
             "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
             "\n,Proxima Coleccion\n," + this.next.toFixed(2),
-            "\n,Sobrante\n," + this.surplus.toFixed(2),
+            "\n,Sobrante\n," + this.surplus.toFixed(2)
           ],
           "Pedido de " +
             this.customerCode +
@@ -556,7 +653,7 @@ export default {
             new Date().getFullYear() +
             ".csv",
           {
-            type: 'data:text/csv;charset=iso-8859-1;',
+            type: "data:text/csv;charset=iso-8859-1;"
           }
         );
         FileSaver.saveAs(this.file);
@@ -573,7 +670,7 @@ export default {
         this.totalPriceFormatted = 0;
         this.nextFormatted = 50;
         this.surplusFormatted = 0;
-        this.productsData.forEach((data) => {
+        this.productsData.forEach(data => {
           data.value = true;
         });
         //Salvar los valores reestrablecidos
@@ -583,12 +680,12 @@ export default {
           [
             ",Cliente\n," + this.customerName,
             "\n,Codigo\n," + this.customerCode,
-            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal" +
+            "\n,Codigo,Productos,Cantidad,Precio Unitario,Subtotal,Descuento" +
               this.productsSelected,
             "\n,Precio Total\n," + parseFloat(this.totalPrice).toFixed(2),
             "\n,Colecciones\n," + parseFloat(this.collections).toFixed(2),
             "\n,Proxima Coleccion\n," + this.next.toFixed(2),
-            "\n,Sobrante\n," + this.surplus.toFixed(2),
+            "\n,Sobrante\n," + this.surplus.toFixed(2)
           ],
           "Pedido de " +
             this.customerCode +
@@ -600,16 +697,16 @@ export default {
             new Date().getFullYear() +
             ".csv",
           {
-            type: 'data:text/csv;charset=iso-8859-1;',
+            type: "data:text/csv;charset=iso-8859-1;"
           }
         );
         FileSaver.saveAs(this.file);
       }
-    },
+    }
   },
   computed: {
     filtered() {
-      return this.productsData.filter((productSelected) =>
+      return this.productsData.filter(productSelected =>
         productSelected.name.match(new RegExp(this.search, "gi"))
       );
     },
@@ -633,9 +730,9 @@ export default {
     },
     subtotalFormat() {
       return (this.productSelected.price * this.quantity).toFixed(2);
-    },
+    }
   },
-  watch: {},
+  watch: {}
 };
 </script>
 

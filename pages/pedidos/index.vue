@@ -5,10 +5,19 @@
     <form
       class="flex flex-wrap justify-center md:self-center md:items-center md:content-center items-center content-start self-center w-full my-0 mx-auto h-full"
     >
-      <!--<img class="h-40 w-40" src="../assets/img/LC-Logo.png"/>-->
-      <h1 class="text-center block w-full text-6xl h-20 text-brown-700 mt-10 z-10 lg:border-t lg:border-r lg:border-l lg:border-brown-400 bg-white">LIOR</h1>
-      <h2 class="text-center block w-full text-lg pb-6 text-brown-700 z-10 lg:border-r lg:border-l lg:border-brown-400 bg-white">COSMETICS</h2>
-      <Customers class="lg:border-r lg:border-l lg:border-b lg:border-brown-400 bg-white"/>
+      <h1
+        class="text-center block w-full text-6xl h-20 text-brown-700 mt-10 z-10 lg:border-t lg:border-r lg:border-l lg:border-brown-400 bg-white"
+      >
+        LIOR
+      </h1>
+      <h2
+        class="text-center block w-full text-lg pb-6 text-brown-700 z-10 lg:border-r lg:border-l lg:border-brown-400 bg-white"
+      >
+        COSMETICS
+      </h2>
+      <Customers
+        class="lg:border-r lg:border-l lg:border-b lg:border-brown-400 bg-white"
+      />
     </form>
     <footer
       class="absolute left-0 w-full text-center text-xs uppercase bottom-0 p-1 text-brown-800 content-end self-end"
@@ -20,13 +29,16 @@
           target="_blank"
           class="text-brown-800 font-bold"
           rel="noreferrer noopener"
-        >MetalSyntax</a> para
+          >MetalSyntax</a
+        >
+        para
         <a
           href="http://www.liorcosmetics.com/"
           target="_blank"
           class="text-brown-800 font-bold"
           rel="noreferrer noopener"
-        >Lior Cosmetics</a>.
+          >Lior Cosmetics</a
+        >.
       </p>
     </footer>
   </main>
