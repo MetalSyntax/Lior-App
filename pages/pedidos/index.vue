@@ -3,7 +3,7 @@
     class="index flex flex-wrap items-center content-center self-center md:w-10/12 lg:w-full w-full my-0 mx-auto overflow-hidden"
   >
     <form
-      class="flex flex-wrap justify-center items-center content-end self-center lg:self-center lg:items-center lg:content-center my-0 h-full w-full lg:w-1/2 mt-24 lg:mt-0 px-10"
+      class="flex flex-wrap justify-center items-center content-end self-center lg:self-center lg:items-center lg:content-center my-0 h-full w-full lg:w-1/2 mt-48 lg:mt-0 px-0 lg:px-10"
     >
       <h1
         class="text-center block w-full text-5xl lg:text-6xl text-brown-700 mt-6 z-10 bg-white leading-none"
@@ -18,11 +18,11 @@
       <Customers
         class="bg-white"
       />
-      <a class="mt-10" href="https://wa.me/584122311303?text=No%20puedo%20ingresar%20a%20la%20plataforma%20de%20pedidos.">¿Tienes problemas para ingresar pedidos? ¡Escríbenos!</a>
+      <a class="mt-10 text-xs text-center uppercase" href="https://wa.me/584122311303?text=No%20puedo%20ingresar%20a%20la%20plataforma%20de%20pedidos.">¿Tienes problemas para ingresar pedidos? ¡Escríbenos!</a>
     </form>
     <img class="w-1/2 h-full invisible lg:visible" src="../../static/img-index.jpg">
     <footer
-      class="fixed left-0 w-full text-center text-xs uppercase bottom-0 p-1 text-brown-800 content-end self-end"
+      class="sticky z-0 left-0 w-full text-center text-xs uppercase bottom-0 p-1 text-brown-800 content-end self-end"
     >
       <p class>
         Todos los derechos reservados © 2020. Creado por
