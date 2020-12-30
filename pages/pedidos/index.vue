@@ -1,26 +1,28 @@
 <template>
   <main
-    class="index flex flex-wrap items-center content-center self-center md:w-10/12 lg:w-full lg:px-48 xl:px-64 w-full my-0 mx-auto overflow-hidden"
+    class="index flex flex-wrap items-center content-center self-center md:w-10/12 lg:w-full w-full my-0 mx-auto overflow-hidden"
   >
     <form
-      class="flex flex-wrap justify-center md:self-center md:items-center md:content-center items-center content-start self-center w-full my-0 mx-auto h-full"
+      class="flex flex-wrap justify-center items-center content-end self-center lg:self-center lg:items-center lg:content-center my-0 h-full w-full lg:w-1/2 mt-24 lg:mt-0 px-10"
     >
       <h1
-        class="text-center block w-full text-6xl h-20 text-brown-700 mt-10 z-10 lg:border-t lg:border-r lg:border-l lg:border-brown-400 bg-white"
+        class="text-center block w-full text-5xl lg:text-6xl text-brown-700 mt-6 z-10 bg-white leading-none"
       >
         LIOR
       </h1>
-      <h2
-        class="text-center block w-full text-lg pb-6 text-brown-700 z-10 lg:border-r lg:border-l lg:border-brown-400 bg-white"
+     <h2
+        class="text-center block w-full text-lg pb-6 text-brown-700 z-10 bg-white"
       >
-        COSMETICS
+        PEDIDOS
       </h2>
       <Customers
-        class="lg:border-r lg:border-l lg:border-b lg:border-brown-400 bg-white"
+        class="bg-white"
       />
+      <a class="mt-10" href="https://wa.me/584122311303?text=No%20puedo%20ingresar%20a%20la%20plataforma%20de%20pedidos.">¿Tienes problemas para ingresar pedidos? ¡Escríbenos!</a>
     </form>
+    <img class="w-1/2 h-full invisible lg:visible" src="../../static/img-index.jpg">
     <footer
-      class="absolute left-0 w-full text-center text-xs uppercase bottom-0 p-1 text-brown-800 content-end self-end"
+      class="fixed left-0 w-full text-center text-xs uppercase bottom-0 p-1 text-brown-800 content-end self-end"
     >
       <p class>
         Todos los derechos reservados © 2020. Creado por
@@ -75,11 +77,12 @@ export default {
 
 <style>
 .index {
-  height: 80vh;
+  height: 100vh;
 }
 @media (min-width: 1024px) {
   .index {
-    background: linear-gradient(to top, transparent 50%, #604728 50%);
+    height: 83vh;
+    /*background: linear-gradient(to top, transparent 50%, #604728 50%);*/
   }
 }
 

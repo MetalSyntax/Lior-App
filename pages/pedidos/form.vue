@@ -238,6 +238,7 @@
     <section
       class="flex flex-wrap w-full px-2 justify-center fixed bottom-0 left-0 bg-white mx-auto my-0 max-w-8xl space-between border-t border-gray-200"
     >
+      <p class="text-brown-700 font-semibold flex-wrap items-center hidden lg:flex">Deseas guardar en </p>
       <button
         class="bg-white text-brown-700 border-brown-700 hover:text-brown-400 hover:border-brown-400 border-2 mx-2 my-2 py-1 px-1 lg:px-2 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="saveArchiveTxt"
@@ -249,6 +250,7 @@
           :alt="iconTxt"
         />
       </button>
+      <p class="text-brown-700 font-semibold flex-wrap items-center hidden lg:flex">o</p>
       <button
         class="bg-white text-brown-700 border-brown-700 hover:text-brown-400 hover:border-brown-400 border-2 mx-2 my-2 py-1 px-1 lg:px-2 rounded cursor-pointer uppercase text-sm focus:outline-none hove:outline-none"
         @click.prevent="saveArchiveCsv"
