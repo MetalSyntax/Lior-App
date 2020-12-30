@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex items-center flex-wrap bg-brown-200 px-6 pt-0 shadow-lg w-full sticky top-0 justify-between lg:justify-center border-b border-brown-400 z-50">
+  <nav class="flex items-center flex-wrap bg-brown-200 px-2 lg:px-6 pt-0 shadow-lg w-full sticky top-0 justify-between lg:justify-center border-b border-brown-400 z-50">
     <nuxt-link title="Lior Cosmetics" to="/pedidos/">
       <img class="w-20 lg:w-24" src="../static/Logo.png">
       <!--<span class="block w-full text-brown-700 text-4xl text-center h-10">LIOR</span>
