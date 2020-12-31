@@ -80,7 +80,12 @@ export default {
   height: calc(100vh - 96px);
 }
 .form-height {
-  height: calc(100vh - 81px);
+  height: calc(100vh + 81px);
+}
+@media (min-width: 1024px) {
+  .form-height {
+    height: calc(100vh - 96px);
+  }
 }
 /*.index {
   height: 100vh;
