@@ -3,7 +3,7 @@
     class="flex flex-wrap items-center content-center self-center md:w-10/12 xl:w-full w-full my-0 mx-auto overflow-hidden"
   >
     <form
-      class="flex flex-wrap justify-center items-center content-center self-center xl:self-center xl:items-center xl:content-center my-0 h-screen xl:h-full w-full xl:w-7/12 lg:mt-0 px-0 xl:px-10"
+      class="flex flex-wrap justify-center items-center content-center self-center xl:self-center xl:items-center xl:content-center my-0 form-height xl:h-full w-full xl:w-7/12 lg:mt-0 px-0 xl:px-10"
     >
       <h1
         class="text-center block w-full text-5xl lg:text-6xl text-brown-700 mt-6 z-10 bg-white leading-none"
@@ -22,7 +22,7 @@
     </form>
     <img class="w-5/12 image-height hidden xl:flex" src="../../static/img-index.jpg">
     <footer
-      class="sticky z-0 left-0 w-full text-center text-xs uppercase bottom-0 p-1 text-brown-800 content-end self-end"
+      class="relative z-0 left-0 w-full text-center text-xs uppercase bottom-0 p-1 text-brown-800 content-end self-end"
     >
       <p class>
         Todos los derechos reservados © 2020. Creado por
@@ -78,6 +78,9 @@ export default {
 <style>
 .image-height {
   height: calc(100vh - 96px);
+}
+.form-height {
+  height: calc(100vh - 81px);
 }
 /*.index {
   height: 100vh;
