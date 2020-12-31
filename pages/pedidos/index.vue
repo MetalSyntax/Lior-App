@@ -1,9 +1,9 @@
 <template>
   <main
-    class="index flex flex-wrap items-center content-center self-center md:w-10/12 lg:w-full w-full my-0 mx-auto overflow-hidden"
+    class="flex flex-wrap items-center content-center self-center md:w-10/12 xl:w-full w-full my-0 mx-auto overflow-hidden"
   >
     <form
-      class="flex flex-wrap justify-center items-center content-end self-center lg:self-center lg:items-center lg:content-center my-0 h-full w-full lg:w-1/2 mt-48 lg:mt-0 px-0 lg:px-10"
+      class="flex flex-wrap justify-center items-center content-center self-center xl:self-center xl:items-center xl:content-center my-0 h-screen xl:h-full w-full xl:w-7/12 lg:mt-0 px-0 xl:px-10"
     >
       <h1
         class="text-center block w-full text-5xl lg:text-6xl text-brown-700 mt-6 z-10 bg-white leading-none"
@@ -20,7 +20,7 @@
       />
       <a class="mt-10 text-xs text-center uppercase" href="https://wa.me/584122311303?text=No%20puedo%20ingresar%20a%20la%20plataforma%20de%20pedidos.">¿Tienes problemas para ingresar pedidos? ¡Escríbenos!</a>
     </form>
-    <img class="w-1/2 h-full invisible lg:visible" src="../../static/img-index.jpg">
+    <img class="w-5/12 image-height hidden xl:flex" src="../../static/img-index.jpg">
     <footer
       class="sticky z-0 left-0 w-full text-center text-xs uppercase bottom-0 p-1 text-brown-800 content-end self-end"
     >
@@ -76,16 +76,18 @@ export default {
 </script>
 
 <style>
-.index {
+.image-height {
+  height: calc(100vh - 96px);
+}
+/*.index {
   height: 100vh;
 }
 @media (min-width: 1024px) {
   .index {
-    height: 83vh;
-    /*background: linear-gradient(to top, transparent 50%, #604728 50%);*/
+    height: 80vh;
+    background: linear-gradient(to top, transparent 50%, #604728 50%);
   }
-}
-
+}*/
 .fade-in {
   animation: fadeIn linear 1.5s;
   -webkit-animation: fadeIn linear 1.5s;
@@ -101,7 +103,6 @@ export default {
     opacity: 1;
   }
 }
-
 @-moz-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -110,7 +111,6 @@ export default {
     opacity: 1;
   }
 }
-
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -119,7 +119,6 @@ export default {
     opacity: 1;
   }
 }
-
 @-o-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -128,7 +127,6 @@ export default {
     opacity: 1;
   }
 }
-
 @-ms-keyframes fadeIn {
   0% {
     opacity: 0;
