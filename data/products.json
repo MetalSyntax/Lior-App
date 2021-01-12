@@ -457,7 +457,7 @@
   {
     "code": "PT-00114",
     "name": "GEL DE BAÑO MAGNOLIA - COCO",
-    "price": 3.9,
+    "price": 4.0,
     "value": true,
     "img": "shower-gel.png"
   },
@@ -474,6 +474,13 @@
     "price": 4.5,
     "value": true,
     "img": "spray-bottle.png"
+  },
+  {
+    "code": "PT-00117",
+    "name": "GEL DE BAÑO ROSA GARDENIA",
+    "price": 4.0,
+    "value": true,
+    "img": "shower-gel.png"
   },
   {
     "code": "PT-00118",
@@ -684,5 +691,19 @@
     "price": 10,
     "value": true,
     "img": "special.png"
+  },
+  {
+    "code": "PT-00155",
+    "name": "SPLASH CORPORAL IN LOVE 250ML",
+    "price": 5.5,
+    "value": true,
+    "img": "spray-bottle.png"
+  },
+  {
+    "code": "PT-00156",
+    "name": "SPLASH CORPORAL FRAGATTA 250ML",
+    "price": 5.5,
+    "value": true,
+    "img": "spray-bottle.png"
   }
 ]
